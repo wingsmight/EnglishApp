@@ -41,6 +41,7 @@ struct ContentView: View {
                 ColorfulBadgeList(tabBadges: tabBadges, geometry: geometry)
             }
         }
+        .ignoresSafeArea(.keyboard)
     }
 }
 

@@ -52,7 +52,6 @@ struct ColorfulBadge: View {
         .frame(minWidth: 20, maxWidth: 40, minHeight: 20, maxHeight: 20)
         .offset(x: calcOffset(tabIndex, geometry.size.width, tabCount), y: -26)
         .opacity(tabBadge.count <= 0 ? 0 : 1)
-        .ignoresSafeArea(.keyboard)
         .allowsHitTesting(false)
     }
 }
