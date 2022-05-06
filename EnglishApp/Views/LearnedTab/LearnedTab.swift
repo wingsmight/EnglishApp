@@ -14,46 +14,62 @@ struct LearnedTab: View {
     ]
     
     var body: some View {
-        VStack {
-            Header()
-            
-            if wordPairs.isEmpty {
-                Spacer()
+        NavigationView {
+            VStack {
+                Header()
                 
-                Text("Вы еще не выучили\nни одного слова 🤔")
-                    .multilineTextAlignment(.center)
-                    .padding()
-                
-                Spacer()
-            } else {
-                List {
-                    ForEach(wordPairs) { wordPair in
-                        WordPairRow(wordPair: wordPair)
+                if wordPairs.isEmpty {
+                    Spacer()
+                    
+                    Text("Вы еще не выучили\nни одного слова 🤔")
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    
+                    Spacer()
+                } else {
+                    List {
+                        ForEach(wordPairs) { wordPair in
+                            LearnedWordPairRow(wordPair: wordPair)
+                                .padding(.vertical, -10)
+                        }
                     }
-                }
-                .listStyle(.inset)
-                
-                Button {
-                    // Action
-                } label: {
+                    .listStyle(.inset)
+                    
                     RepeatWordsButton()
+                        .padding()
                 }
-                .buttonStyle(RoundedRectangleButtonStyle(color: .green))
-                .padding()
+            }
+            .navigationBarTitle("Выученные")
+            .navigationBarHidden(true)
+        }
+    }
+    
+    struct LearnedWordPairRow: View {
+        var wordPair: WordPair
+        
+        
+        var body: some View {
+            NavigationLink(destination: WordCard(wordPair: wordPair)) {
+                WordPairRow(wordPair: wordPair)
             }
         }
     }
     
     struct RepeatWordsButton: View {
         var body: some View {
-            HStack {
-                Spacer()
-                Image(systemName: "checkmark.circle")
-                    .font(.title)
-                Text("Повторить слова")
-                    .bold()
-                Spacer()
+            Button {
+                // Action
+            } label: {
+                HStack {
+                    Spacer()
+                    Image(systemName: "checkmark.circle")
+                        .font(.title)
+                    Text("Повторить слова")
+                        .bold()
+                    Spacer()
+                }
             }
+            .buttonStyle(RoundedRectangleButtonStyle(color: .green))
         }
     }
     
