@@ -45,23 +45,6 @@ struct ContentView: View {
     }
 }
 
-extension View {
-    func colorBadge(count: Int) -> some View {
-        overlay(
-            ZStack {
-                if count != 0 {
-                    Circle()
-                        .fill(Color.red)
-                    Text("\(count)")
-                        .foregroundColor(.white)
-                        .font(.caption)
-                }
-            }
-                .offset(x: 12, y: -12)
-                .frame(width: 24, height: 24)
-            , alignment: .topTrailing)
-    }
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

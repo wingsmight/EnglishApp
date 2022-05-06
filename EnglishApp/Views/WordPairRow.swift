@@ -15,6 +15,8 @@ struct WordPairRow: View {
     ]
     
     
+    @State private var linkActive = false
+    
     var wordPair: WordPair
     
     
@@ -30,6 +32,9 @@ struct WordPairRow: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
+        .background(NavigationLink(destination: WordCard(wordPair: wordPair), isActive: $linkActive) {
+            EmptyView()
+        }.opacity(0.0))
     }
 }
 

@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @State var isSettingsTabShowing = false
+    
+    
     var body: some View {
-        Image(systemName: "gearshape")
-            .padding()
-            .font(.title)
-            .foregroundColor(.secondary)
+        NavigationLink(destination: SettingsTab()) {
+            Image(systemName: "gearshape")
+                .font(.title)
+                .foregroundColor(.secondary)
+                .padding()
+                .background(NavigationLink(destination: SettingsTab(), isActive: $isSettingsTabShowing) {
+                    EmptyView()
+                })
+        }
     }
 }
 

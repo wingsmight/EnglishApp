@@ -7,11 +7,9 @@
 
 import Foundation
 
-struct WordPair : Hashable, Identifiable {
+struct WordPair : Hashable, Identifiable, Codable {
     private var original: String! = ""
     private var translation: String! = ""
-    
-    let id = UUID()
     
     
     internal init(original: String?, translation: String?) {
@@ -29,5 +27,8 @@ struct WordPair : Hashable, Identifiable {
     }
     public var Translation: String! {
         translation
+    }
+    var id: String {
+        original
     }
 }

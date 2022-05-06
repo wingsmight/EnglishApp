@@ -7,32 +7,31 @@
 
 import SwiftUI
 
-struct LearningTab: View {
-    @State var wordPairs: [WordPair] = [
-        WordPair(original: "Bag", translation: "Сумка"),
-        WordPair(original: "Very big bag", translation: "Очень большая сумка"),
-    ]
-    
+struct LearningTab: View {    
     var body: some View {
-        VStack {
-            Header()
-            
-            if wordPairs.isEmpty {
-                Spacer()
+        NavigationView {
+            VStack {
+                Header()
                 
-                Text("Добавьте слова из словаря\nдля начала изучения 💡")
-                    .multilineTextAlignment(.center)
-                    .padding()
-                
-                Spacer()
-            } else {
-                List {
-                    ForEach(wordPairs, id: \.Original) { wordPair in
-                        LearningWordPairRow(wordPair: wordPair)
+                if Shared.instance.learningWordPairs.isEmpty {
+                    Spacer()
+                    
+                    Text("Добавьте слова из словаря\nдля начала изучения 💡")
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    
+                    Spacer()
+                } else {
+                    List {
+                        ForEach(Shared.instance.learningWordPairs, id: \.id) { wordPair in
+                            LearningWordPairRow(wordPair: wordPair)
+                        }
                     }
+                    .listStyle(.plain)
                 }
-                .listStyle(.plain)
             }
+            .navigationBarTitle("На изучении")
+            .navigationBarHidden(true)
         }
     }
     

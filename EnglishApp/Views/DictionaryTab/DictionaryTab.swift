@@ -24,20 +24,26 @@ struct DictionaryTab: View {
     ]
     
     var body: some View {
-        VStack {
-            Header()
-            LanguagePair()
-                .padding()
-            WordInput(word: $word)
-                .padding()
-            
-            ForEach(categories, id: \.Label.TitleText) { category in
-                CategoryView(data: category)
-                    .padding(.vertical, 4.0)
-                    .padding(.horizontal)
+        NavigationView {
+            ScrollView([]) {
+                Header()
+                
+                LanguagePair()
+                    .padding()
+                
+                WordInput(word: $word)
+                    .padding()
+                
+                ForEach(categories, id: \.Label.TitleText) { category in
+                    CategoryView(data: category)
+                        .padding(.vertical, 4.0)
+                        .padding(.horizontal)
+                }
+                
+                Spacer()
             }
-            
-            Spacer()
+            .navigationBarTitle("Словарь")
+            .navigationBarHidden(true)
         }
     }
     
@@ -108,7 +114,7 @@ struct DictionaryTab: View {
         
         
         var body: some View {
-            NavigationLink(destination: CategoryWordsTab(wordPairs: data.WordPairs)) {
+            NavigationLink(destination: CategoryWordsTab(categoryLabel: data.Label.TitleText, wordPairs: data.WordPairs)) {
                 ZStack {
                     HStack {
                         Image(data.Label.IconName)

@@ -7,17 +7,12 @@
 
 import SwiftUI
 
-struct TestSettingsView: View {
+struct TestSettingsTab: View {
     @State private var isReversedTranslation: Bool = true
     
     
     var body: some View {
         VStack {
-            Text("Настройки теста")
-                .font(.title)
-                .bold()
-                .multilineTextAlignment(.center)
-            
             List {
                 KeyValueView("Последние выученные", "20 слов")
                 KeyValueView("Ранее выученные", "15 слов")
@@ -31,11 +26,12 @@ struct TestSettingsView: View {
             
             Spacer()
         }
+        .navigationTitle("Настройки")
     }
 }
 
 struct TestSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        TestSettingsView()
+        TestSettingsTab()
     }
 }

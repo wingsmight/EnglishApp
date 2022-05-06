@@ -10,11 +10,6 @@ import SwiftUI
 struct SettingsTab: View {
     var body: some View {
         VStack {
-            Text("Настройки")
-                .font(.title)
-                .bold()
-                .multilineTextAlignment(.center)
-            
             DividedVStack(alignment: .leading, spacing: 13) {
                 KeyValueView("Ваш часовой пояс", "+3 GMC Новосибирск")
                 KeyValueView("Слов в одном уведомлении", "2 ")
@@ -66,6 +61,7 @@ struct SettingsTab: View {
             
             Spacer()
         }
+        .navigationTitle("Настройки")
     }
 }
 

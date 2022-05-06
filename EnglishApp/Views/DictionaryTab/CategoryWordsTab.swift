@@ -8,35 +8,39 @@
 import SwiftUI
 
 struct CategoryWordsTab: View {
+    var categoryLabel: String
     var wordPairs: [WordPair]
     
     
     var body: some View {
-        NavigationView {
-            if wordPairs.isEmpty {
-                Spacer()
-                
-                Text("Добавьте слова из словаря\nдля начала изучения 💡")
-                    .multilineTextAlignment(.center)
-                    .padding()
-                
-                Spacer()
-            } else {
-                List {
-                    ForEach(wordPairs, id: \.Original) { wordPair in
-                        CategoryWordPairRow(wordPair: wordPair)
-                            .id(wordPair.id)
-                    }
-                }
-                .listStyle(.inset)
+        List {
+            ForEach(wordPairs, id: \.Original) { wordPair in
+                CategoryWordPairRow(wordPair: wordPair)
+                    .id(wordPair.id)
             }
+        }
+        .listStyle(.inset)
+        .navigationTitle(categoryLabel)
+    }
+}
+
+struct EmptyListView: View {
+    var body: some View {
+        VStack {
+            Spacer()
+            
+            Text("Добавьте слова из словаря\nдля начала изучения 💡")
+                .multilineTextAlignment(.center)
+                .padding()
+            
+            Spacer()
         }
     }
 }
 
 struct CategoryWordPairRow: View {
     var wordPair: WordPair
-
+    
     
     var body: some View {
         HStack {
@@ -63,6 +67,6 @@ struct CategoryTab_Previews: PreviewProvider {
     
     
     static var previews: some View {
-        CategoryWordsTab(wordPairs: wordPairs)
+        CategoryWordsTab(categoryLabel: "ТОП 100", wordPairs: wordPairs)
     }
 }

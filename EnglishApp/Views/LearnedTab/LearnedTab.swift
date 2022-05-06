@@ -7,18 +7,13 @@
 
 import SwiftUI
 
-struct LearnedTab: View {
-    @State var wordPairs: [WordPair] = [
-        WordPair(original: "Bag", translation: "Сумка"),
-        WordPair(original: "Very big bag", translation: "Очень большая сумка"),
-    ]
-    
+struct LearnedTab: View {   
     var body: some View {
         NavigationView {
             VStack {
                 Header()
                 
-                if wordPairs.isEmpty {
+                if Shared.instance.learnedWordPairs.isEmpty {
                     Spacer()
                     
                     Text("Вы еще не выучили\nни одного слова 🤔")
@@ -28,10 +23,11 @@ struct LearnedTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(wordPairs) { wordPair in
+                        ForEach(Shared.instance.learnedWordPairs) { wordPair in
                             LearnedWordPairRow(wordPair: wordPair)
                                 .padding(.vertical, -10)
                         }
+                        .onDelete(perform: moveWordToLearingList)
                     }
                     .listStyle(.inset)
                     
@@ -44,14 +40,22 @@ struct LearnedTab: View {
         }
     }
     
+    
+    func moveWordToLearingList(at offsets: IndexSet) {
+        offsets.forEach { (i) in
+            Shared.instance.learningWordPairs.append(Shared.instance.learnedWordPairs[i])
+        }
+        
+        Shared.instance.learnedWordPairs.remove(at: offsets);
+    }
+    
+    
     struct LearnedWordPairRow: View {
         var wordPair: WordPair
         
         
         var body: some View {
-            NavigationLink(destination: WordCard(wordPair: wordPair)) {
-                WordPairRow(wordPair: wordPair)
-            }
+            WordPairRow(wordPair: wordPair)
         }
     }
     
@@ -85,9 +89,13 @@ struct LearnedTab: View {
     }
     struct SettingsView: View {
         var body: some View {
-            Image(systemName: "slider.horizontal.3")
-                .padding()
-                .font(.title)
+            NavigationLink(destination: TestSettingsTab()) {
+                Image(systemName: "slider.horizontal.3")
+                    .font(.title)
+                    .padding()
+                    .navigationBarTitle("Выученные")
+            }
+            .buttonStyle(PlainButtonStyle())
         }
     }
 }
