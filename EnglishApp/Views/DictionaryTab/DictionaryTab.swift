@@ -22,6 +22,7 @@ struct DictionaryTab: View {
             label: LearningCategory.Label(iconName: "CategoryIcon2", titleText: "ТОП 3000", headlineText: "прогрессивный уровнь", backgroundColor: Color("AppAmber")),
             wordPairs: [WordPair("Test 0", "Тест 0"), WordPair("Test 1", "Тест 1")]),
     ]
+    public static var testSynonymLists: [[String]] = []
     
     var body: some View {
         NavigationView {
@@ -34,12 +35,16 @@ struct DictionaryTab: View {
                 WordInput(word: $word)
                     .padding()
                 
-                ForEach(categories, id: \.Label.TitleText) { category in
-                    CategoryView(data: category)
-                        .padding(.vertical, 4.0)
-                        .padding(.horizontal)
+                if word.isEmpty {
+                    ForEach(categories, id: \.Label.TitleText) { category in
+                        CategoryView(data: category)
+                            .padding(.vertical, 4.0)
+                            .padding(.horizontal)
+                    }
+                } else {
+                    WordInfoView(word: $word)
                 }
-                
+
                 Spacer()
             }
             .navigationBarTitle("Словарь")
@@ -89,21 +94,23 @@ struct DictionaryTab: View {
                     .frame(height: 110)
                     .background(Color(.systemGray5))
                     .cornerRadius(10)
-                .font(.title2)
+                    .font(.title)
                 
                 HStack {
                     Spacer()
                     
-                    VStack(spacing: 32) {
-                        Image(systemName: "xmark")
-                            .resizable()
-                            .frame(width: 22, height: 22)
-                        
-                        Image("Speaker")
-                            .resizable()
-                            .frame(width: 22, height: 22)
+                    if !word.isEmpty {
+                        VStack(spacing: 32) {
+                            Image(systemName: "xmark")
+                                .resizable()
+                                .frame(width: 22, height: 22)
+                            
+                            Image("Speaker")
+                                .resizable()
+                                .frame(width: 22, height: 22)
+                        }
+                        .padding()
                     }
-                    .padding()
                 }
             }
         }

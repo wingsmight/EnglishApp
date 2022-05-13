@@ -6,17 +6,12 @@
 //
 
 import SwiftUI
-import WrappingHStack
 
 
 struct WordInfoView: View {
-    @State private var selectedOption: Option = .translation
-    private var wordPairs: [[WordPair]]
+    @State private var selectedOption: Option = .examples
     
-    
-    internal init(wordPairs: [[WordPair]]) {
-        self.wordPairs = wordPairs
-    }
+    @Binding public var word: String
     
     
     var body: some View {
@@ -35,61 +30,19 @@ struct WordInfoView: View {
             }
             .padding(.horizontal)
             .padding(.top)
-
-            ForEach(0..<wordPairs.count) { i in
-                SubTranslationList(i + 1, wordPairs: wordPairs[i])
+            
+            switch selectedOption {
+            case .synonyms:
+                SynonymListView(word: $word)
+            case .examples:
+                ExampleListView(word: $word)
             }
         }
         .padding(.leading)
     }
     
-    struct SubTranslationList: View {
-        private var number: Int
-        private var wordPairs: [WordPair]
-        
-        
-        internal init(_ number: Int, wordPairs: [WordPair]) {
-            self.number = number
-            self.wordPairs = wordPairs
-        }
-        
-        
-        var body: some View {
-            if wordPairs.count > 0 {
-                VStack {
-                    HStack {
-                        Text(number.description)
-                            .font(Font.body)
-                            .foregroundColor(.secondary)
-
-                        WrappingHStack(0..<wordPairs.count, id:\.self) {
-                            Text(wordPairs[$0].Original)
-                                .padding(.trailing, 3)
-                        }
-
-                        Spacer()
-                    }
-                    .padding()
-
-                    HStack {
-                        WrappingHStack(0..<wordPairs.count, id: \.self) {
-                            Text(wordPairs[$0].Translation + ($0 != wordPairs.count - 1 ? "," : ""))
-                        }
-                        
-                        Spacer()
-                    }
-                    .padding(.leading)
-                }
-            } else {
-                Text("Дополнительные переводы отсутствуют")
-                    .font(.subheadline)
-                    .padding()
-            }
-        }
-    }
-    
     enum Option: String, CaseIterable, Equatable {
-        case translation = "Перевод"
+        case synonyms = "Синонимы"
         case examples = "Примеры"
         
         
@@ -103,13 +56,7 @@ struct WordInfoView: View {
 }
 
 struct WordInfoView_Previews: PreviewProvider {
-    private static let exampleWordPairs: [[WordPair]] = [
-        [WordPair(original: "сумка", translation: "handbag"), WordPair(original: "чехол", translation: "case"), WordPair(original: "сумочка", translation: "case")],
-        [WordPair(original: "мешок", translation: "pouch"), WordPair(original: "пакет", translation: "package"), WordPair(original: "чемодан", translation: "suitcase"), WordPair(original: "пакетик", translation: "packet"),  WordPair(original: "пакетик", translation: "packet"), WordPair(original: "пакетик", translation: "packet")],
-    ]
-    
-    
     static var previews: some View {
-        WordInfoView(wordPairs: exampleWordPairs)
+        WordInfoView(word: .constant("Apple"))
     }
 }

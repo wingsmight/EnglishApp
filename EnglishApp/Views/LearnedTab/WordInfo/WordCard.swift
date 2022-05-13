@@ -22,7 +22,7 @@ struct WordCard: View {
             VStack {
                 OriginalWordBlock(word: wordPair.Original)
                     .padding(.top, 100)
-                TranslationBlock(word: wordPair.Translation)
+                TranslationBlock(word: .constant(wordPair.Translation))
                 Spacer()
             }
             .navigationBarTitle("")
@@ -60,12 +60,7 @@ struct WordCard: View {
     }
     
     struct TranslationBlock: View {
-        private static var exampleWordPairs: [[WordPair]] = [
-            [WordPair(original: "сумка", translation: "handbag"), WordPair(original: "чехол", translation: "case"), WordPair(original: "сумочка", translation: "case")],
-            [WordPair(original: "мешок", translation: "pouch"), WordPair(original: "пакет", translation: "package"), WordPair(original: "чемодан", translation: "suitcase"), WordPair(original: "пакетик", translation: "packet"),  WordPair(original: "пакетик", translation: "packet"), WordPair(original: "пакетик", translation: "packet")],
-        ]
-        
-        var word: String
+        @Binding var word: String
         
         
         var body: some View {
@@ -78,7 +73,7 @@ struct WordCard: View {
                 }
                 .padding(.leading)
 
-                WordInfoView(wordPairs: TranslationBlock.exampleWordPairs)
+                WordInfoView(word: $word)
             }
         }
     }

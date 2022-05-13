@@ -10,6 +10,8 @@ import SwiftUI
 struct RepeatCard: View {
     @State private var isWatchingAnswer: Bool = false
     
+    @Binding public var word: String
+    
     
     var body: some View {
         ZStack {
@@ -19,9 +21,9 @@ struct RepeatCard: View {
             Header()
             
             if isWatchingAnswer {
-                WatchingBody(word: "Сумка")
+                WatchingBody(word: $word)
             } else {
-                UnwatchingBody(word: "Сумка")
+                UnwatchingBody(word: word)
             }
             
             Footer(isWatchingAnswer: $isWatchingAnswer)
@@ -29,19 +31,13 @@ struct RepeatCard: View {
     }
     
     struct WatchingBody: View {
-        var word: String
-        
-        private let exampleWordPairs: [[WordPair]] = [
-            [WordPair(original: "сумка", translation: "handbag"), WordPair(original: "чехол", translation: "case"), WordPair(original: "сумочка", translation: "case")],
-            [WordPair(original: "мешок", translation: "pouch"), WordPair(original: "пакет", translation: "package"), WordPair(original: "чемодан", translation: "suitcase"), WordPair(original: "пакетик", translation: "packet"),  WordPair(original: "пакетик", translation: "packet"), WordPair(original: "пакетик", translation: "packet")],
-        ]
-        
+        @Binding var word: String
         
         var body: some View {
             VStack {
-                WordPreview(word: self.word)
+                WordPreview(word: word)
                 
-                WordInfoView(wordPairs: exampleWordPairs)
+                WordInfoView(word: $word)
                 
                 Spacer()
             }
@@ -143,6 +139,6 @@ struct RepeatCard: View {
 
 struct RepeatCard_Previews: PreviewProvider {
     static var previews: some View {
-        RepeatCard()
+        RepeatCard(word: .constant("TestWord"))
     }
 }
