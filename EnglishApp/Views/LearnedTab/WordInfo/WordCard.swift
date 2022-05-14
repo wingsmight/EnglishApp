@@ -20,7 +20,7 @@ struct WordCard: View {
             }
             
             VStack {
-                OriginalWordBlock(word: .constant(wordPair.Original))
+                OriginalWordBlock(wordPair: .constant(wordPair))
                     .padding(.top, 100)
                 WordInfoView(word: .constant(wordPair.Translation))
                 Spacer()
@@ -32,18 +32,18 @@ struct WordCard: View {
     }
     
     struct OriginalWordBlock: View {
-        @Binding var word: String
+        @Binding var wordPair: WordPair
         
         
         var body: some View {
             HStack {
-                Text(word)
+                Text(wordPair.Original)
                     .font(.largeTitle)
                     .padding()
                 
                 Spacer()
                 
-                WordControlPanel(word: $word)
+                WordControlPanel(wordPair: .constant(WordPair(wordPair.Original, wordPair.Translation)))
                     .padding()
             }
         }

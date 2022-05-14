@@ -8,18 +8,15 @@
 import SwiftUI
 
 struct ToggleCircleImage: View {
-    @State private var isEnabled: Bool = false
+    @Binding var isEnabled: Bool
     
     var image: Image
     var enabledColor: Color
-    var action: (Bool) -> Void
     
     
     var body: some View {
         Button {
             self.isEnabled.toggle()
-            
-            action(isEnabled)
         } label: {
             ZStack {
                 if isEnabled {
@@ -42,8 +39,6 @@ struct ToggleCircleImage: View {
 
 struct ToggleCircleImage_Previews: PreviewProvider {
     static var previews: some View {
-        ToggleCircleImage(image: Image("Checkmark"), enabledColor: Color("AppGreen"), action: { _ in
-            // Action
-        })
+        ToggleCircleImage(isEnabled: .constant(true), image: Image("Checkmark"), enabledColor: Color("AppGreen"))
     }
 }

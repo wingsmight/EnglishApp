@@ -24,19 +24,6 @@ struct CategoryWordsTab: View {
     }
 }
 
-struct EmptyListView: View {
-    var body: some View {
-        VStack {
-            Spacer()
-            
-            Text("Добавьте слова из словаря\nдля начала изучения 💡")
-                .multilineTextAlignment(.center)
-                .padding()
-            
-            Spacer()
-        }
-    }
-}
 
 struct CategoryWordPairRow: View {
     var wordPair: WordPair
@@ -46,15 +33,11 @@ struct CategoryWordPairRow: View {
         HStack {
             WordPairRow(wordPair: wordPair)
             
-            ToggleCircleImage(image: Image("Bell"), enabledColor: Color("AppYellow"), action: { _ in
-                // Action
-            })
-            .padding(.horizontal, 2)
+            ToggleLearningWordButton(wordPair: wordPair)
+                .padding(.horizontal, 2)
             
-            ToggleCircleImage(image: Image(systemName: "checkmark"), enabledColor: Color("AppGreen"), action: { _ in
-                // Action
-            })
-            .padding(.horizontal, 2)
+            ToggleLearnedWordButton(wordPair: wordPair)
+                .padding(.horizontal, 2)
         }
     }
 }

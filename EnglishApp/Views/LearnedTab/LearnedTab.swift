@@ -23,7 +23,7 @@ struct LearnedTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(Shared.instance.learnedWordPairs) { wordPair in
+                        ForEach(Shared.instance.learnedWordPairs, id: \.id) { wordPair in
                             LearnedWordPairRow(wordPair: wordPair)
                                 .padding(.vertical, -10)
                         }

@@ -8,26 +8,22 @@
 import SwiftUI
 
 struct WordControlPanel: View {
-    @Binding var word: String
+    @Binding var wordPair: WordPair?
     
     
     var body: some View {
         VStack {
-            WordSpeakerView(word: $word)
+            WordSpeakerView(word: .constant(wordPair?.Original ?? ""))
             
-            ToggleCircleImage(image: Image("Checkmark"), enabledColor: Color("AppGreen"), action: { _ in
-                // Action
-            })
+            ToggleLearnedWordButton(wordPair: wordPair)
             
-            ToggleCircleImage(image: Image("Bell"), enabledColor: Color("AppYellow"), action: { _ in
-                // Action
-            })
+            ToggleLearningWordButton(wordPair: wordPair)
         }
     }
 }
 
 struct WordControlPanel_Previews: PreviewProvider {
     static var previews: some View {
-        WordControlPanel(word: .constant("Word"))
+        WordControlPanel(wordPair: .constant(WordPair("Word", "Слово")))
     }
 }

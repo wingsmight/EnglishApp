@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension RangeReplaceableCollection where Self: MutableCollection, Index == Int {
     mutating func remove(at indexes : IndexSet) {
@@ -18,5 +19,14 @@ extension RangeReplaceableCollection where Self: MutableCollection, Index == Int
             formIndex(after: &j)
         }
         removeSubrange(i...)
+    }
+}
+
+extension RangeReplaceableCollection where Element: Equatable
+{
+    mutating func appendIfNotContains(_ element: Element) {
+        if !contains(element) {
+            append(element)
+        }
     }
 }

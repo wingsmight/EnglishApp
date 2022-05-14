@@ -10,7 +10,9 @@ import AVFoundation
 
 
 struct DictionaryTab: View {
-    @State private var word: String = ""
+    @State private var inputWord: String = ""
+    @State private var translatedWord: String? = nil
+    @State private var wordPair: WordPair? = nil
     @State private var inputLanguage: Language = .english
     @State private var outputLanguage: Language = .russian
     
@@ -35,10 +37,10 @@ struct DictionaryTab: View {
                 LanguagePair(inputLanguage: $inputLanguage, outputLanguage: $outputLanguage)
                     .padding()
                 
-                WordInput(word: $word)
+                WordInput(word: $inputWord)
                     .padding()
                 
-                if word.isEmpty {
+                if inputWord.isEmpty {
                     ForEach(categories, id: \.Label.TitleText) { category in
                         CategoryView(data: category)
                             .padding(.vertical, 4.0)
@@ -46,12 +48,22 @@ struct DictionaryTab: View {
                     }
                 } else {
                     ZStack {
-                        WordInfoView(word: $word)
+                        VStack {
+                            WordInfoView(word: $inputWord)
+                            
+                            Spacer()
+                        }
                         
                         HStack {
                             Spacer()
                             
-                            WordControlPanel(word: $word)
+                            VStack {
+                                WordControlPanel(wordPair: $wordPair)
+                                    .padding(.horizontal)
+                                    .disabled(wordPair == nil)
+                                
+                                Spacer()
+                            }
                         }
                     }
                 }

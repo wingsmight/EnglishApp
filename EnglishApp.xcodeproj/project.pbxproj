@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		CE05B117282F6966007AC708 /* WordControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B116282F6966007AC708 /* WordControlPanel.swift */; };
 		CE05B119282F8755007AC708 /* WordSpeakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B118282F8755007AC708 /* WordSpeakerView.swift */; };
+		CE05B11B282F9ABB007AC708 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B11A282F9ABB007AC708 /* ViewExt.swift */; };
+		CE05B11D282F9D45007AC708 /* ToggleLearningWordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B11C282F9D45007AC708 /* ToggleLearningWordButton.swift */; };
+		CE05B11F282F9D5D007AC708 /* ToggleLearnedWordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B11E282F9D5D007AC708 /* ToggleLearnedWordButton.swift */; };
 		CE2E847E282E5ED700E8D43A /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E847D282E5ED700E8D43A /* Language.swift */; };
 		CE6D106728226370004B2769 /* ViewExtractor in Frameworks */ = {isa = PBXBuildFile; productRef = CE6D106628226370004B2769 /* ViewExtractor */; };
 		CE6D1069282263F8004B2769 /* DividedVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D1068282263F8004B2769 /* DividedVStack.swift */; };
@@ -56,6 +59,9 @@
 /* Begin PBXFileReference section */
 		CE05B116282F6966007AC708 /* WordControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordControlPanel.swift; sourceTree = "<group>"; };
 		CE05B118282F8755007AC708 /* WordSpeakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSpeakerView.swift; sourceTree = "<group>"; };
+		CE05B11A282F9ABB007AC708 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
+		CE05B11C282F9D45007AC708 /* ToggleLearningWordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleLearningWordButton.swift; sourceTree = "<group>"; };
+		CE05B11E282F9D5D007AC708 /* ToggleLearnedWordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleLearnedWordButton.swift; sourceTree = "<group>"; };
 		CE2E847D282E5ED700E8D43A /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		CE6D1068282263F8004B2769 /* DividedVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividedVStack.swift; sourceTree = "<group>"; };
 		CE7066022822F40A00ACE3A5 /* ToggleCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCircleImage.swift; sourceTree = "<group>"; };
@@ -120,6 +126,7 @@
 				CE75D7852826B7EF00A6C2BD /* StringExt.swift */,
 				CE96E8F5282A862500126B37 /* URLSessionExt.swift */,
 				CE87C078282C1F2D00B43572 /* BindingExt.swift */,
+				CE05B11A282F9ABB007AC708 /* ViewExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -208,6 +215,8 @@
 				CEFC7A802822A1BE0054DD9A /* WordPairRow.swift */,
 				CE05B116282F6966007AC708 /* WordControlPanel.swift */,
 				CE05B118282F8755007AC708 /* WordSpeakerView.swift */,
+				CE05B11C282F9D45007AC708 /* ToggleLearningWordButton.swift */,
+				CE05B11E282F9D5D007AC708 /* ToggleLearnedWordButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -383,6 +392,7 @@
 				CEB3E79F2825A17700D6B686 /* UrlExt.swift in Sources */,
 				CE96E8EE282A66F900126B37 /* SynonymsApi.swift in Sources */,
 				CEE9082A281FB4CA00E4EC8B /* ContentView.swift in Sources */,
+				CE05B11D282F9D45007AC708 /* ToggleLearningWordButton.swift in Sources */,
 				CE96E8F9282A8B0000126B37 /* UrlError.swift in Sources */,
 				CE75468A2821047E0066917D /* WordCard.swift in Sources */,
 				CE75D7862826B7EF00A6C2BD /* StringExt.swift in Sources */,
@@ -392,12 +402,14 @@
 				CEAAEBB32821A55B00FFA3B9 /* KeyValueView.swift in Sources */,
 				CEE9084C281FFD3900E4EC8B /* SettingsView.swift in Sources */,
 				CEAAEBB62821A94100FFA3B9 /* SettingsTab.swift in Sources */,
+				CE05B11F282F9D5D007AC708 /* ToggleLearnedWordButton.swift in Sources */,
 				CEE90848281FFC3800E4EC8B /* LearningTab.swift in Sources */,
 				CEAAEBAD28219DBA00FFA3B9 /* WordInfoView.swift in Sources */,
 				CEAAEBA7282168F700FFA3B9 /* RepeatCard.swift in Sources */,
 				CEFC7A812822A1BE0054DD9A /* WordPairRow.swift in Sources */,
 				CEFC7A7F28229F1F0054DD9A /* CategoryWordsTab.swift in Sources */,
 				CE7546882821028F0066917D /* RoundedRectangleButtonStyle.swift in Sources */,
+				CE05B11B282F9ABB007AC708 /* ViewExt.swift in Sources */,
 				CE96E8F2282A67D000126B37 /* HtmlRequestError.swift in Sources */,
 				CEE9083C281FB6A900E4EC8B /* Tab.swift in Sources */,
 				CEE9084A281FFC4300E4EC8B /* LearnedTab.swift in Sources */,
