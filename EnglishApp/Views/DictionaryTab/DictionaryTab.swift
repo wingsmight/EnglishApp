@@ -45,7 +45,15 @@ struct DictionaryTab: View {
                             .padding(.horizontal)
                     }
                 } else {
-                    WordInfoView(word: $word)
+                    ZStack {
+                        WordInfoView(word: $word)
+                        
+                        HStack {
+                            Spacer()
+                            
+                            WordControlPanel(word: $word)
+                        }
+                    }
                 }
 
                 Spacer()
@@ -126,29 +134,13 @@ struct DictionaryTab: View {
                                     .frame(width: 22, height: 22)
                             }
                             .buttonStyle(.plain)
-
-                            Button {
-                                speak(word: word)
-                            } label: {
-                                Image("Speaker")
-                                    .resizable()
-                                    .frame(width: 22, height: 22)
-                            }
-                            .buttonStyle(.plain)
+                            
+                            WordSpeakerView(word: $word)
                         }
                         .padding()
                     }
                 }
             }
-        }
-        
-        
-        func speak(word: String) {
-            let utterance = AVSpeechUtterance(string: word)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-
-            let synthesizer = AVSpeechSynthesizer()
-            synthesizer.speak(utterance)
         }
     }
 

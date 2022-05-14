@@ -30,14 +30,9 @@ struct ExampleListView: View {
                     .padding()
             }
         }
-        .task {
+        .task(id: word) {
             await api.loadExamples(word: word)
         }
-        .onChange(of: word, perform: { newValue in
-            Task {
-                await api.loadExamples(word: newValue)
-            }
-        })
     }
     
     

@@ -20,9 +20,9 @@ struct WordCard: View {
             }
             
             VStack {
-                OriginalWordBlock(word: wordPair.Original)
+                OriginalWordBlock(word: .constant(wordPair.Original))
                     .padding(.top, 100)
-                TranslationBlock(word: .constant(wordPair.Translation))
+                WordInfoView(word: .constant(wordPair.Translation))
                 Spacer()
             }
             .navigationBarTitle("")
@@ -32,7 +32,7 @@ struct WordCard: View {
     }
     
     struct OriginalWordBlock: View {
-        var word: String
+        @Binding var word: String
         
         
         var body: some View {
@@ -43,42 +43,13 @@ struct WordCard: View {
                 
                 Spacer()
                 
-                VStack {
-                    ToggleCircleImage(image: Image("Speaker"), enabledColor: Color("AppCyan"), action: { _ in
-                        // Action
-                    })
-                    ToggleCircleImage(image: Image("Checkmark"), enabledColor: Color("AppGreen"), action: { _ in
-                        // Action
-                    })
-                    ToggleCircleImage(image: Image("Bell"), enabledColor: Color("AppYellow"), action: { _ in
-                        // Action
-                    })
-                }
-                .padding()
+                WordControlPanel(word: $word)
+                    .padding()
             }
         }
     }
     
-    struct TranslationBlock: View {
-        @Binding var word: String
-        
-        
-        var body: some View {
-            VStack {
-                HStack {
-                    Text(word)
-                        .font(.title2)
-                        .padding()
-                    Spacer()
-                }
-                .padding(.leading)
-
-                WordInfoView(word: $word)
-            }
-        }
-    }
-    
-    struct Header: View {
+    struct Header: View { 
         @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
         
         

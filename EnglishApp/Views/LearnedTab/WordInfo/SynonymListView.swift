@@ -44,14 +44,9 @@ struct SynonymListView: View {
                     .padding()
             }
         }
-        .task {
+        .task(id: word) {
             await api.loadSynonyms(word: word)
         }
-        .onChange(of: word, perform: { newValue in
-            Task {
-                await api.loadSynonyms(word: newValue)
-            }
-        })
     }
     
     

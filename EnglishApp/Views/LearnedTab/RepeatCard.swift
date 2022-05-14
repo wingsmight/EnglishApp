@@ -23,7 +23,7 @@ struct RepeatCard: View {
             if isWatchingAnswer {
                 WatchingBody(word: $word)
             } else {
-                UnwatchingBody(word: word)
+                UnwatchingBody(word: $word)
             }
             
             Footer(isWatchingAnswer: $isWatchingAnswer)
@@ -35,7 +35,7 @@ struct RepeatCard: View {
         
         var body: some View {
             VStack {
-                WordPreview(word: word)
+                WordPreview(word: $word)
                 
                 WordInfoView(word: $word)
                 
@@ -45,12 +45,12 @@ struct RepeatCard: View {
     }
     
     struct UnwatchingBody: View {
-        var word: String
+        @Binding var word: String
         
         
         var body: some View {
             VStack {
-                WordPreview(word: self.word)
+                WordPreview(word: $word)
                 
                 Spacer()
             }
@@ -58,7 +58,7 @@ struct RepeatCard: View {
     }
     
     struct WordPreview: View {
-        var word: String
+        @Binding var word: String
         
         
         var body: some View {
@@ -67,9 +67,7 @@ struct RepeatCard: View {
                     Text(word)
                         .font(.largeTitle)
                     
-                    Image("Speaker")
-                        .resizable()
-                        .frame(width: 23, height: 23)
+                    WordSpeakerView(word: $word)
                 }
                 .padding(.top, 180)
             }
@@ -139,6 +137,6 @@ struct RepeatCard: View {
 
 struct RepeatCard_Previews: PreviewProvider {
     static var previews: some View {
-        RepeatCard(word: .constant("TestWord"))
+        RepeatCard(word: .constant("Word"))
     }
 }

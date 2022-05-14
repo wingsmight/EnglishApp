@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE05B117282F6966007AC708 /* WordControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B116282F6966007AC708 /* WordControlPanel.swift */; };
+		CE05B119282F8755007AC708 /* WordSpeakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B118282F8755007AC708 /* WordSpeakerView.swift */; };
 		CE2E847E282E5ED700E8D43A /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E847D282E5ED700E8D43A /* Language.swift */; };
 		CE6D106728226370004B2769 /* ViewExtractor in Frameworks */ = {isa = PBXBuildFile; productRef = CE6D106628226370004B2769 /* ViewExtractor */; };
 		CE6D1069282263F8004B2769 /* DividedVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D1068282263F8004B2769 /* DividedVStack.swift */; };
@@ -52,6 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE05B116282F6966007AC708 /* WordControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordControlPanel.swift; sourceTree = "<group>"; };
+		CE05B118282F8755007AC708 /* WordSpeakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSpeakerView.swift; sourceTree = "<group>"; };
 		CE2E847D282E5ED700E8D43A /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		CE6D1068282263F8004B2769 /* DividedVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividedVStack.swift; sourceTree = "<group>"; };
 		CE7066022822F40A00ACE3A5 /* ToggleCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCircleImage.swift; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 				CEE90829281FB4CA00E4EC8B /* ContentView.swift */,
 				CEE9084B281FFD3900E4EC8B /* SettingsView.swift */,
 				CEFC7A802822A1BE0054DD9A /* WordPairRow.swift */,
+				CE05B116282F6966007AC708 /* WordControlPanel.swift */,
+				CE05B118282F8755007AC708 /* WordSpeakerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -381,6 +387,7 @@
 				CE75468A2821047E0066917D /* WordCard.swift in Sources */,
 				CE75D7862826B7EF00A6C2BD /* StringExt.swift in Sources */,
 				CEE90828281FB4CA00E4EC8B /* EnglishAppApp.swift in Sources */,
+				CE05B119282F8755007AC708 /* WordSpeakerView.swift in Sources */,
 				CEB3E7A32825A48900D6B686 /* ArrayExt.swift in Sources */,
 				CEAAEBB32821A55B00FFA3B9 /* KeyValueView.swift in Sources */,
 				CEE9084C281FFD3900E4EC8B /* SettingsView.swift in Sources */,
@@ -398,6 +405,7 @@
 				CE96E8F6282A862500126B37 /* URLSessionExt.swift in Sources */,
 				CEF31928282BE1E200C8287C /* SynonymListView.swift in Sources */,
 				CEE90843281FED7600E4EC8B /* LearningCategory.swift in Sources */,
+				CE05B117282F6966007AC708 /* WordControlPanel.swift in Sources */,
 				CE6D1069282263F8004B2769 /* DividedVStack.swift in Sources */,
 				CE7066052822FB8300ACE3A5 /* ColorfulBadge.swift in Sources */,
 			);

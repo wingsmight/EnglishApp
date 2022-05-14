@@ -16,6 +16,25 @@ struct WordInfoView: View {
     
     var body: some View {
         VStack {
+            TranslatedWordView(originalWord: $word)
+            
+            WordDetailPicker(selectedOption: $selectedOption)
+            
+            switch selectedOption {
+            case .synonyms:
+                SynonymListView(word: $word)
+            case .examples:
+                ExampleListView(word: $word)
+            }
+        }
+        .padding(.leading)
+    }
+    
+    struct WordDetailPicker: View {
+        @Binding public var selectedOption: Option
+        
+        
+        var body: some View {
             HStack {
                 Picker(selection: $selectedOption, label: EmptyView()) {
                     ForEach(Option.allCases, id: \.self) { option in
@@ -30,15 +49,22 @@ struct WordInfoView: View {
             }
             .padding(.horizontal)
             .padding(.top)
-            
-            switch selectedOption {
-            case .synonyms:
-                SynonymListView(word: $word)
-            case .examples:
-                ExampleListView(word: $word)
+        }
+    }
+    
+    struct TranslatedWordView: View {
+        @Binding public var originalWord: String
+        
+        
+        var body: some View {
+            HStack {
+                Text(originalWord)
+                    .font(.title2)
+                    .padding()
+                
+                Spacer()
             }
         }
-        .padding(.leading)
     }
     
     enum Option: String, CaseIterable, Equatable {
