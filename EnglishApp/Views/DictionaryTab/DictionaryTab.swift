@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 
 struct DictionaryTab: View {
@@ -127,7 +128,7 @@ struct DictionaryTab: View {
                             .buttonStyle(.plain)
 
                             Button {
-                                // Action
+                                speak(word: word)
                             } label: {
                                 Image("Speaker")
                                     .resizable()
@@ -139,6 +140,15 @@ struct DictionaryTab: View {
                     }
                 }
             }
+        }
+        
+        
+        func speak(word: String) {
+            let utterance = AVSpeechUtterance(string: word)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
         }
     }
 
