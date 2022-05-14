@@ -9,7 +9,9 @@ import SwiftUI
 
 
 struct DictionaryTab: View {
-    @State var word: String = ""
+    @State private var word: String = ""
+    @State private var inputLanguage: Language = .english
+    @State private var outputLanguage: Language = .russian
     
     private let categories: [LearningCategory] = [
         LearningCategory(
@@ -22,14 +24,14 @@ struct DictionaryTab: View {
             label: LearningCategory.Label(iconName: "CategoryIcon2", titleText: "ТОП 3000", headlineText: "прогрессивный уровнь", backgroundColor: Color("AppAmber")),
             wordPairs: [WordPair("Test 0", "Тест 0"), WordPair("Test 1", "Тест 1")]),
     ]
-    public static var testSynonymLists: [[String]] = []
+
     
     var body: some View {
         NavigationView {
             ScrollView([]) {
                 Header()
                 
-                LanguagePair()
+                LanguagePair(inputLanguage: $inputLanguage, outputLanguage: $outputLanguage)
                     .padding()
                 
                 WordInput(word: $word)
@@ -67,18 +69,32 @@ struct DictionaryTab: View {
     }
 
     struct LanguagePair: View {
+        @State private var isPairChanged = false
+        
+        @Binding public var inputLanguage: Language
+        @Binding public var outputLanguage: Language
+        
+        
         var body: some View {
             HStack {
-                Spacer()
-                Spacer()
-                Text("Английский")
-                Spacer()
-                Image(systemName: "arrow.left.arrow.right")
+                Text(inputLanguage.localizedName)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                
+                Button {
+                    let savedInputLanguage = inputLanguage
+                    inputLanguage = outputLanguage
+                    outputLanguage = savedInputLanguage
                     
-                Spacer()
-                Text("Русский")
-                Spacer()
-                Spacer()
+                    isPairChanged.toggle()
+                } label: {
+                    Image(systemName: "arrow.left.arrow.right")
+                        .rotationEffect(.degrees(isPairChanged ? 180 : 0))
+                        .animation(.easeInOut, value: isPairChanged)
+                }
+                .buttonStyle(.plain)
+                
+                Text(outputLanguage.localizedName)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             .font(.title3)
         }
@@ -101,13 +117,23 @@ struct DictionaryTab: View {
                     
                     if !word.isEmpty {
                         VStack(spacing: 32) {
-                            Image(systemName: "xmark")
-                                .resizable()
-                                .frame(width: 22, height: 22)
-                            
-                            Image("Speaker")
-                                .resizable()
-                                .frame(width: 22, height: 22)
+                            Button {
+                                word = ""
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .resizable()
+                                    .frame(width: 22, height: 22)
+                            }
+                            .buttonStyle(.plain)
+
+                            Button {
+                                // Action
+                            } label: {
+                                Image("Speaker")
+                                    .resizable()
+                                    .frame(width: 22, height: 22)
+                            }
+                            .buttonStyle(.plain)
                         }
                         .padding()
                     }

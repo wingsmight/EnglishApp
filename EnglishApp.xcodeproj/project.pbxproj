@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE2E847E282E5ED700E8D43A /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E847D282E5ED700E8D43A /* Language.swift */; };
 		CE6D106728226370004B2769 /* ViewExtractor in Frameworks */ = {isa = PBXBuildFile; productRef = CE6D106628226370004B2769 /* ViewExtractor */; };
 		CE6D1069282263F8004B2769 /* DividedVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D1068282263F8004B2769 /* DividedVStack.swift */; };
 		CE7066032822F40A00ACE3A5 /* ToggleCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7066022822F40A00ACE3A5 /* ToggleCircleImage.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE2E847D282E5ED700E8D43A /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		CE6D1068282263F8004B2769 /* DividedVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividedVStack.swift; sourceTree = "<group>"; };
 		CE7066022822F40A00ACE3A5 /* ToggleCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCircleImage.swift; sourceTree = "<group>"; };
 		CE7066042822FB8300ACE3A5 /* ColorfulBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulBadge.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				CEE90842281FED7600E4EC8B /* LearningCategory.swift */,
 				CEE9084D2820017600E4EC8B /* WordPair.swift */,
 				CE96E8F3282A6BE600126B37 /* Word.swift */,
+				CE2E847D282E5ED700E8D43A /* Language.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				CE7066032822F40A00ACE3A5 /* ToggleCircleImage.swift in Sources */,
 				CE96E8F0282A670700126B37 /* ExamplesApi.swift in Sources */,
 				CEAAEBAF2821A3AA00FFA3B9 /* RepeatingFinish.swift in Sources */,
+				CE2E847E282E5ED700E8D43A /* Language.swift in Sources */,
 				CEE90838281FB65600E4EC8B /* Theme.swift in Sources */,
 				CEE9084E2820017600E4EC8B /* WordPair.swift in Sources */,
 				CEF31926282BE1BF00C8287C /* ExampleListView.swift in Sources */,
