@@ -9,7 +9,9 @@ import SwiftUI
 
 
 struct WordCard: View {
-    var wordPair: WordPair
+    public let wordPair: WordPair
+    @Binding public var learnedWordPairs: [WordPair]
+    @Binding public var learningWordPairs: [WordPair]
     
     
     var body: some View {
@@ -20,7 +22,7 @@ struct WordCard: View {
             }
             
             VStack {
-                OriginalWordBlock(wordPair: .constant(wordPair))
+                OriginalWordBlock(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
                     .padding(.top, 100)
                 WordInfoView(word: .constant(wordPair.Translation))
                 Spacer()
@@ -32,7 +34,9 @@ struct WordCard: View {
     }
     
     struct OriginalWordBlock: View {
-        @Binding var wordPair: WordPair
+        public let wordPair: WordPair
+        @Binding public var learnedWordPairs: [WordPair]
+        @Binding public var learningWordPairs: [WordPair]
         
         
         var body: some View {
@@ -43,7 +47,7 @@ struct WordCard: View {
                 
                 Spacer()
                 
-                WordControlPanel(wordPair: .constant(WordPair(wordPair.Original, wordPair.Translation)))
+                WordControlPanel(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
                     .padding()
             }
         }
@@ -68,10 +72,10 @@ struct WordCard: View {
         }
     }
 }
-
-struct WordCard_Previews: PreviewProvider {
-    private static let wordPair = WordPair("Bag", "Сумка")
-    static var previews: some View {
-        WordCard(wordPair: wordPair)
-    }
-}
+//
+//struct WordCard_Previews: PreviewProvider {
+//    private static let wordPair = WordPair("Bag", "Сумка")
+//    static var previews: some View {
+//        WordCard(wordPair: wordPair)
+//    }
+//}

@@ -20,6 +20,9 @@
 		CE7546882821028F0066917D /* RoundedRectangleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7546872821028F0066917D /* RoundedRectangleButtonStyle.swift */; };
 		CE75468A2821047E0066917D /* WordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7546892821047E0066917D /* WordCard.swift */; };
 		CE75D7862826B7EF00A6C2BD /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75D7852826B7EF00A6C2BD /* StringExt.swift */; };
+		CE7EB1FE2830EE1F0017C824 /* LearningWordPairStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EB1FD2830EE1F0017C824 /* LearningWordPairStore.swift */; };
+		CE7EB2012830F5170017C824 /* LearnedWordPairStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EB2002830F5170017C824 /* LearnedWordPairStore.swift */; };
+		CE7EB2032830F5260017C824 /* PushedWordPairStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EB2022830F5260017C824 /* PushedWordPairStore.swift */; };
 		CE87C079282C1F2D00B43572 /* BindingExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87C078282C1F2D00B43572 /* BindingExt.swift */; };
 		CE96E8EE282A66F900126B37 /* SynonymsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8ED282A66F900126B37 /* SynonymsApi.swift */; };
 		CE96E8F0282A670700126B37 /* ExamplesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8EF282A670700126B37 /* ExamplesApi.swift */; };
@@ -35,7 +38,6 @@
 		CEAAEBB32821A55B00FFA3B9 /* KeyValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAAEBB22821A55B00FFA3B9 /* KeyValueView.swift */; };
 		CEAAEBB62821A94100FFA3B9 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAAEBB52821A94100FFA3B9 /* SettingsTab.swift */; };
 		CEB3E79F2825A17700D6B686 /* UrlExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB3E79E2825A17700D6B686 /* UrlExt.swift */; };
-		CEB3E7A12825A21000D6B686 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB3E7A02825A21000D6B686 /* Shared.swift */; };
 		CEB3E7A32825A48900D6B686 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB3E7A22825A48900D6B686 /* ArrayExt.swift */; };
 		CEC2CC0D282132D800824926 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = CEC2CC0C282132D800824926 /* WrappingHStack */; };
 		CEE90828281FB4CA00E4EC8B /* EnglishAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90827281FB4CA00E4EC8B /* EnglishAppApp.swift */; };
@@ -69,6 +71,9 @@
 		CE7546872821028F0066917D /* RoundedRectangleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButtonStyle.swift; sourceTree = "<group>"; };
 		CE7546892821047E0066917D /* WordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCard.swift; sourceTree = "<group>"; };
 		CE75D7852826B7EF00A6C2BD /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
+		CE7EB1FD2830EE1F0017C824 /* LearningWordPairStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningWordPairStore.swift; sourceTree = "<group>"; };
+		CE7EB2002830F5170017C824 /* LearnedWordPairStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedWordPairStore.swift; sourceTree = "<group>"; };
+		CE7EB2022830F5260017C824 /* PushedWordPairStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushedWordPairStore.swift; sourceTree = "<group>"; };
 		CE87C078282C1F2D00B43572 /* BindingExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExt.swift; sourceTree = "<group>"; };
 		CE96E8ED282A66F900126B37 /* SynonymsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymsApi.swift; sourceTree = "<group>"; };
 		CE96E8EF282A670700126B37 /* ExamplesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesApi.swift; sourceTree = "<group>"; };
@@ -84,7 +89,6 @@
 		CEAAEBB22821A55B00FFA3B9 /* KeyValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueView.swift; sourceTree = "<group>"; };
 		CEAAEBB52821A94100FFA3B9 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		CEB3E79E2825A17700D6B686 /* UrlExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlExt.swift; sourceTree = "<group>"; };
-		CEB3E7A02825A21000D6B686 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		CEB3E7A22825A48900D6B686 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		CEE90824281FB4CA00E4EC8B /* EnglishApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnglishApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE90827281FB4CA00E4EC8B /* EnglishAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishAppApp.swift; sourceTree = "<group>"; };
@@ -138,6 +142,16 @@
 				CE96E8F7282A8AE900126B37 /* Errors */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		CE7EB1FF2830F1B00017C824 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EB1FD2830EE1F0017C824 /* LearningWordPairStore.swift */,
+				CE7EB2002830F5170017C824 /* LearnedWordPairStore.swift */,
+				CE7EB2022830F5260017C824 /* PushedWordPairStore.swift */,
+			);
+			path = Stores;
 			sourceTree = "<group>";
 		};
 		CE96E8F7282A8AE900126B37 /* Errors */ = {
@@ -228,7 +242,6 @@
 				CE6D106228226175004B2769 /* Extensions */,
 				CEE9083A281FB69C00E4EC8B /* Views */,
 				CEE90837281FB65600E4EC8B /* Theme.swift */,
-				CEB3E7A02825A21000D6B686 /* Shared.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -250,6 +263,7 @@
 		CEE90841281FED6600E4EC8B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CE7EB1FF2830F1B00017C824 /* Stores */,
 				CEE90842281FED7600E4EC8B /* LearningCategory.swift */,
 				CEE9084D2820017600E4EC8B /* WordPair.swift */,
 				CE96E8F3282A6BE600126B37 /* Word.swift */,
@@ -377,10 +391,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEB3E7A12825A21000D6B686 /* Shared.swift in Sources */,
 				CE96E8F4282A6BE600126B37 /* Word.swift in Sources */,
 				CE7066032822F40A00ACE3A5 /* ToggleCircleImage.swift in Sources */,
 				CE96E8F0282A670700126B37 /* ExamplesApi.swift in Sources */,
+				CE7EB2032830F5260017C824 /* PushedWordPairStore.swift in Sources */,
 				CEAAEBAF2821A3AA00FFA3B9 /* RepeatingFinish.swift in Sources */,
 				CE2E847E282E5ED700E8D43A /* Language.swift in Sources */,
 				CEE90838281FB65600E4EC8B /* Theme.swift in Sources */,
@@ -391,6 +405,7 @@
 				CEAAEBA928216DF300FFA3B9 /* VerticalLabelStyle.swift in Sources */,
 				CEB3E79F2825A17700D6B686 /* UrlExt.swift in Sources */,
 				CE96E8EE282A66F900126B37 /* SynonymsApi.swift in Sources */,
+				CE7EB2012830F5170017C824 /* LearnedWordPairStore.swift in Sources */,
 				CEE9082A281FB4CA00E4EC8B /* ContentView.swift in Sources */,
 				CE05B11D282F9D45007AC708 /* ToggleLearningWordButton.swift in Sources */,
 				CE96E8F9282A8B0000126B37 /* UrlError.swift in Sources */,
@@ -408,6 +423,7 @@
 				CEAAEBA7282168F700FFA3B9 /* RepeatCard.swift in Sources */,
 				CEFC7A812822A1BE0054DD9A /* WordPairRow.swift in Sources */,
 				CEFC7A7F28229F1F0054DD9A /* CategoryWordsTab.swift in Sources */,
+				CE7EB1FE2830EE1F0017C824 /* LearningWordPairStore.swift in Sources */,
 				CE7546882821028F0066917D /* RoundedRectangleButtonStyle.swift in Sources */,
 				CE05B11B282F9ABB007AC708 /* ViewExt.swift in Sources */,
 				CE96E8F2282A67D000126B37 /* HtmlRequestError.swift in Sources */,

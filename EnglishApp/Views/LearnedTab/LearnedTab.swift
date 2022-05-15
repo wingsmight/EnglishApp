@@ -7,13 +7,20 @@
 
 import SwiftUI
 
-struct LearnedTab: View {   
+struct LearnedTab: View {
+    @Binding public var learnedWordPairs: [WordPair]
+    @Binding public var learningWordPairs: [WordPair]
+    public let saveAction: () -> Void
+    
+    @Environment(\.scenePhase) private var scenePhase
+    
+    
     var body: some View {
         NavigationView {
             VStack {
                 Header()
                 
-                if Shared.instance.learnedWordPairs.isEmpty {
+                if learnedWordPairs.isEmpty {
                     Spacer()
                     
                     Text("Вы еще не выучили\nни одного слова 🤔")
@@ -23,8 +30,8 @@ struct LearnedTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(Shared.instance.learnedWordPairs, id: \.id) { wordPair in
-                            LearnedWordPairRow(wordPair: wordPair)
+                        ForEach(learnedWordPairs, id: \.id) { wordPair in
+                            LearnedWordPairRow(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
                                 .padding(.vertical, -10)
                         }
                         .onDelete(perform: moveWordToLearingList)
@@ -38,24 +45,31 @@ struct LearnedTab: View {
             .navigationBarTitle("Выученные")
             .navigationBarHidden(true)
         }
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive {
+                saveAction()
+            }
+        }
     }
     
     
     func moveWordToLearingList(at offsets: IndexSet) {
         offsets.forEach { (i) in
-            Shared.instance.learningWordPairs.append(Shared.instance.learnedWordPairs[i])
+            learningWordPairs.append(learnedWordPairs[i])
         }
         
-        Shared.instance.learnedWordPairs.remove(at: offsets);
+        learnedWordPairs.remove(at: offsets);
     }
     
     
     struct LearnedWordPairRow: View {
-        var wordPair: WordPair
+        public let wordPair: WordPair
+        @Binding public var learnedWordPairs: [WordPair]
+        @Binding public var learningWordPairs: [WordPair]
         
         
         var body: some View {
-            WordPairRow(wordPair: wordPair)
+            WordPairRow(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
         }
     }
     
@@ -99,9 +113,9 @@ struct LearnedTab: View {
         }
     }
 }
-
-struct LearnedTab_Previews: PreviewProvider {
-    static var previews: some View {
-        LearnedTab()
-    }
-}
+//
+//struct LearnedTab_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LearnedTab()
+//    }
+//}

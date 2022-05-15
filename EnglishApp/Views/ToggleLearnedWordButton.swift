@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct ToggleLearnedWordButton: View {
-    var wordPair: WordPair?
-    
-    
+    public let wordPair: WordPair?
+    @Binding public var learnedWordPairs: [WordPair]
+
     @State private var isEnabled: Bool
     
     
-    init(wordPair: WordPair?) {
+    
+    init(wordPair: WordPair?, learnedWordPairs: Binding<[WordPair]>) {
         self.wordPair = wordPair
+        self._learnedWordPairs = learnedWordPairs
         
         if let wordPair = wordPair {
-            self.isEnabled = Shared.instance.learnedWordPairs.contains(wordPair)
+            self.isEnabled = learnedWordPairs.wrappedValue.contains(wordPair)
         } else {
             self.isEnabled = false
         }
@@ -30,18 +32,12 @@ struct ToggleLearnedWordButton: View {
             .onChanged(of: isEnabled, perform: { newValue in
                 if let wordPair = wordPair {
                     if newValue {
-                        Shared.instance.learnedWordPairs.appendIfNotContains(wordPair)
+                        learnedWordPairs.appendIfNotContains(wordPair)
                     } else {
-                        Shared.instance.learnedWordPairs.removeAll(where: { $0 == wordPair })
+                        learnedWordPairs.removeAll(where: { $0 == wordPair })
                     }
                 }
             })
             .disabled(wordPair == nil)
-    }
-}
-
-struct ToggleLearnedWordButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ToggleLearnedWordButton(wordPair: WordPair(original: "Word", translation: "Слово"))
     }
 }

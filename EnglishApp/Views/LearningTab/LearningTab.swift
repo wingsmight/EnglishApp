@@ -7,13 +7,21 @@
 
 import SwiftUI
 
-struct LearningTab: View {    
+struct LearningTab: View {
+    @Binding public var learningWordPairs: [WordPair]
+    @Binding public var learnedWordPairs: [WordPair]
+    @Binding public var pushedWordPairs: [WordPair]
+    public let saveAction: () -> Void
+    
+    @Environment(\.scenePhase) private var scenePhase
+    
+    
     var body: some View {
         NavigationView {
             VStack {
                 Header()
                 
-                if Shared.instance.learningWordPairs.isEmpty {
+                if learningWordPairs.isEmpty {
                     Spacer()
                     
                     Text("Добавьте слова из словаря\nдля начала изучения 💡")
@@ -23,8 +31,14 @@ struct LearningTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(Shared.instance.learningWordPairs, id: \.id) { wordPair in
-                            LearningWordPairRow(wordPair: wordPair)
+                        ForEach(pushedWordPairs, id: \.id) { wordPair in
+                            LearningWordPairRow(wordPair: wordPair, pushedWordPairs: $pushedWordPairs, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
+                        }
+                        
+                        ForEach(learningWordPairs.filter({ wordPair in
+                            !pushedWordPairs.contains(wordPair)
+                        }), id: \.id) { wordPair in
+                            LearningWordPairRow(wordPair: wordPair, pushedWordPairs: $pushedWordPairs, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
                         }
                     }
                     .listStyle(.plain)
@@ -33,28 +47,67 @@ struct LearningTab: View {
             .navigationBarTitle("На изучении")
             .navigationBarHidden(true)
         }
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive {
+                saveAction()
+            }
+        }
     }
     
     struct LearningWordPairRow: View {
-        var wordPair: WordPair
+        public let wordPair: WordPair
+        @Binding public var pushedWordPairs: [WordPair]
+        @Binding public var learnedWordPairs: [WordPair]
+        @Binding public var learningWordPairs: [WordPair]
+        
+        @State private var isPushed: Bool
+        
+        
+        init(wordPair: WordPair, pushedWordPairs: Binding<[WordPair]>, learnedWordPairs: Binding<[WordPair]>, learningWordPairs: Binding<[WordPair]>) {
+            self.wordPair = wordPair
+            self._pushedWordPairs = pushedWordPairs
+            self._learnedWordPairs = learnedWordPairs
+            self._learningWordPairs = learningWordPairs
+            
+            self.isPushed = pushedWordPairs.wrappedValue.contains(wordPair)
+        }
 
         
         var body: some View {
             HStack {
-                WordPairRow(wordPair: wordPair)
+                WordPairRow(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
                 
                 Spacer()
                 
-                Image(systemName: "play")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 22)
-                    .padding(.horizontal, 5)
-                Image("Checkmark")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 20)
-                    .padding(.horizontal, 5)
+                MoveWordPairToPushButton(isEnabled: $isPushed)
+                    .onChanged(of: isPushed) { newValue in
+                        if newValue {
+                            pushedWordPairs.append(wordPair)
+                        } else {
+                            pushedWordPairs.removeAll(where: { $0 == wordPair })
+                        }
+                    }
+                
+                ToggleLearnedWordButton(wordPair: wordPair, learnedWordPairs: $learnedWordPairs)
+            }
+        }
+        
+        struct MoveWordPairToPushButton: View {
+            @Binding var isEnabled: Bool
+            
+            
+            var body: some View {
+                Button {
+                    isEnabled.toggle()
+                } label: {
+                    Image(systemName: isEnabled ? "play.fill" : "play")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 22)
+                        .padding(.horizontal, 5)
+                        .foregroundColor(isEnabled ? Color("AppGreen") : .primary)
+                }
+                .buttonStyle(.plain)
             }
         }
     }
@@ -71,8 +124,8 @@ struct LearningTab: View {
     }
 }
 
-struct LearningTab_Previews: PreviewProvider {
-    static var previews: some View {
-        LearningTab()
-    }
-}
+//struct LearningTab_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LearningTab(learningWordPairs: <#Binding<[WordPair]>#>, pushedWordPairs: <#Binding<[WordPair]>#>, saveAction: <#() -> Void#>)
+//    }
+//}

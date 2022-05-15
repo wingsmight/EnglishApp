@@ -10,12 +10,16 @@ import AVFoundation
 
 
 struct DictionaryTab: View {
+    @Binding public var learningWordPairs: [WordPair]
+    @Binding public var learnedWordPairs: [WordPair]
+    public let saveAction: () -> Void
+    
+    @Environment(\.scenePhase) private var scenePhase
     @State private var inputWord: String = ""
     @State private var translatedWord: String? = nil
-    @State private var wordPair: WordPair? = nil
+    @State private var gainedWordPair: WordPair? = nil
     @State private var inputLanguage: Language = .english
     @State private var outputLanguage: Language = .russian
-    
     private let categories: [LearningCategory] = [
         LearningCategory(
             label: LearningCategory.Label(iconName: "CategoryIcon0", titleText: "ТОП 100", headlineText: "для начинающих", backgroundColor: Color("AppGreen")),
@@ -42,7 +46,7 @@ struct DictionaryTab: View {
                 
                 if inputWord.isEmpty {
                     ForEach(categories, id: \.Label.TitleText) { category in
-                        CategoryView(data: category)
+                        CategoryView(data: category, learningWordPairs: $learningWordPairs, learnedWordPairs: $learnedWordPairs)
                             .padding(.vertical, 4.0)
                             .padding(.horizontal)
                     }
@@ -58,9 +62,9 @@ struct DictionaryTab: View {
                             Spacer()
                             
                             VStack {
-                                WordControlPanel(wordPair: $wordPair)
+                                WordControlPanel(wordPair: gainedWordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
                                     .padding(.horizontal)
-                                    .disabled(wordPair == nil)
+                                    .disabled(gainedWordPair == nil)
                                 
                                 Spacer()
                             }
@@ -72,6 +76,11 @@ struct DictionaryTab: View {
             }
             .navigationBarTitle("Словарь")
             .navigationBarHidden(true)
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive {
+                saveAction()
+            }
         }
     }
     
@@ -157,11 +166,13 @@ struct DictionaryTab: View {
     }
 
     struct CategoryView: View {
-        var data: LearningCategory
+        public let data: LearningCategory
+        @Binding public var learningWordPairs: [WordPair]
+        @Binding public var learnedWordPairs: [WordPair]
         
         
         var body: some View {
-            NavigationLink(destination: CategoryWordsTab(categoryLabel: data.Label.TitleText, wordPairs: data.WordPairs)) {
+            NavigationLink(destination: CategoryWordsTab(categoryLabel: data.Label.TitleText, wordPairs: data.WordPairs, learningWordPairs: $learningWordPairs, learnedWordPairs: $learnedWordPairs)) {
                 ZStack {
                     HStack {
                         Image(data.Label.IconName)
@@ -191,8 +202,8 @@ struct DictionaryTab: View {
     }
 }
 
-struct DictionaryTab_Previews: PreviewProvider {
-    static var previews: some View {
-        DictionaryTab()
-    }
-}
+//struct DictionaryTab_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DictionaryTab()
+//    }
+//}
