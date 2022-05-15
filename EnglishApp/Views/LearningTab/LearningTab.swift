@@ -31,19 +31,14 @@ struct LearningTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(pushedWordPairs, id: \.id) { wordPair in
-                            LearningWordPairRow(wordPair: wordPair, pushedWordPairs: $pushedWordPairs, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
-                        }
-                        
-                        ForEach(learningWordPairs.filter({ wordPair in
-                            !pushedWordPairs.contains(wordPair)
-                        }), id: \.id) { wordPair in
+                        ForEach(filteredWordPairs, id: \.self) { wordPair in
                             LearningWordPairRow(wordPair: wordPair, pushedWordPairs: $pushedWordPairs, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
                         }
                     }
                     .listStyle(.plain)
                 }
             }
+            .animation(Animation.easeInOut(duration: 0.3), value: filteredWordPairs)
             .navigationBarTitle("На изучении")
             .navigationBarHidden(true)
         }
@@ -121,6 +116,11 @@ struct LearningTab: View {
                 }
             }
         }
+    }
+    
+    
+    private var filteredWordPairs: [WordPair] {
+        pushedWordPairs + learningWordPairs.filter( { !pushedWordPairs.contains($0) } )
     }
 }
 
