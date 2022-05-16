@@ -9,15 +9,13 @@ import SwiftUI
 
 struct CategoryWordsTab: View {
     public var categoryLabel: String
-    public var wordPairs: [WordPair]
-    @Binding public var learningWordPairs: [WordPair]
-    @Binding public var learnedWordPairs: [WordPair]
+    @Binding public var wordPairs: [WordPair]
     
     
     var body: some View {
         List {
-            ForEach(wordPairs, id: \.Original) { wordPair in
-                CategoryWordPairRow(wordPair: wordPair, learningWordPairs: $learningWordPairs, learnedWordPairs: $learnedWordPairs)
+            ForEach($wordPairs, id: \.Original) { wordPair in
+                CategoryWordPairRow(wordPair: wordPair)
                     .id(wordPair.id)
             }
         }
@@ -28,19 +26,17 @@ struct CategoryWordsTab: View {
 
 
 struct CategoryWordPairRow: View {
-    public let wordPair: WordPair
-    @Binding public var learningWordPairs: [WordPair]
-    @Binding public var learnedWordPairs: [WordPair]
+    @Binding public var wordPair: WordPair
     
     
     var body: some View {
         HStack {
-            WordPairRow(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
+            WordPairRow(wordPair: $wordPair)
             
-            ToggleLearningWordButton(wordPair: wordPair, learningWordPairs: $learningWordPairs)
+            ToggleLearningWordButton(wordPair: Binding<WordPair?>($wordPair))
                 .padding(.horizontal, 2)
             
-            ToggleLearnedWordButton(wordPair: wordPair, learnedWordPairs: $learnedWordPairs)
+            ToggleLearnedWordButton(wordPair: Binding<WordPair?>($wordPair))
                 .padding(.horizontal, 2)
         }
     }

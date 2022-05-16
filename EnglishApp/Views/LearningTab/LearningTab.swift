@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct LearningTab: View {
-    @Binding public var learningWordPairs: [WordPair]
-    @Binding public var learnedWordPairs: [WordPair]
-    @Binding public var pushedWordPairs: [WordPair]
-    public let saveAction: () -> Void
-    
-    @Environment(\.scenePhase) private var scenePhase
+    @Binding public var wordPairs: [WordPair]
     
     
     var body: some View {
@@ -21,7 +16,7 @@ struct LearningTab: View {
             VStack {
                 Header()
                 
-                if learningWordPairs.isEmpty {
+                if wordPairs.learningOnly.isEmpty {
                     Spacer()
                     
                     Text("Добавьте слова из словаря\nдля начала изучения 💡")
@@ -31,59 +26,51 @@ struct LearningTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(filteredWordPairs, id: \.self) { wordPair in
-                            LearningWordPairRow(wordPair: wordPair, pushedWordPairs: $pushedWordPairs, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
+                        ForEach($wordPairs, id: \.self) { wordPair in
+                            if wordPair.wrappedValue.isPushed {
+                                LearningWordPairRow(wordPair: wordPair)
+                            }
+                        }
+                        ForEach($wordPairs, id: \.self) { wordPair in
+                            if wordPair.wrappedValue.state == .learning {
+                                LearningWordPairRow(wordPair: wordPair)
+                            }
                         }
                     }
                     .listStyle(.plain)
                 }
             }
-            .animation(Animation.easeInOut(duration: 0.3), value: filteredWordPairs)
+            .animation(Animation.easeInOut(duration: 0.3), value: wordPairs)
             .navigationBarTitle("На изучении")
             .navigationBarHidden(true)
         }
-        .onChange(of: scenePhase) { phase in
-            if phase == .inactive {
-                saveAction()
-            }
-        }
     }
     
+    
     struct LearningWordPairRow: View {
-        public let wordPair: WordPair
-        @Binding public var pushedWordPairs: [WordPair]
-        @Binding public var learnedWordPairs: [WordPair]
-        @Binding public var learningWordPairs: [WordPair]
+        @Binding public var wordPair: WordPair
         
         @State private var isPushed: Bool
         
         
-        init(wordPair: WordPair, pushedWordPairs: Binding<[WordPair]>, learnedWordPairs: Binding<[WordPair]>, learningWordPairs: Binding<[WordPair]>) {
-            self.wordPair = wordPair
-            self._pushedWordPairs = pushedWordPairs
-            self._learnedWordPairs = learnedWordPairs
-            self._learningWordPairs = learningWordPairs
-            
-            self.isPushed = pushedWordPairs.wrappedValue.contains(wordPair)
+        init(wordPair: Binding<WordPair>) {
+            self._wordPair = wordPair
+            self.isPushed = wordPair.wrappedValue.isPushed
         }
 
         
         var body: some View {
             HStack {
-                WordPairRow(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
+                WordPairRow(wordPair: $wordPair)
                 
                 Spacer()
                 
                 MoveWordPairToPushButton(isEnabled: $isPushed)
                     .onChanged(of: isPushed) { newValue in
-                        if newValue {
-                            pushedWordPairs.append(wordPair)
-                        } else {
-                            pushedWordPairs.removeAll(where: { $0 == wordPair })
-                        }
+                        wordPair.isPushed = newValue
                     }
                 
-                ToggleLearnedWordButton(wordPair: wordPair, learnedWordPairs: $learnedWordPairs)
+                ToggleLearnedWordButton(wordPair: Binding<WordPair?>($wordPair))
             }
         }
         
@@ -116,11 +103,6 @@ struct LearningTab: View {
                 }
             }
         }
-    }
-    
-    
-    private var filteredWordPairs: [WordPair] {
-        pushedWordPairs + learningWordPairs.filter( { !pushedWordPairs.contains($0) } )
     }
 }
 

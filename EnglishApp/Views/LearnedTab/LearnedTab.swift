@@ -7,12 +7,9 @@
 
 import SwiftUI
 
+
 struct LearnedTab: View {
-    @Binding public var learnedWordPairs: [WordPair]
-    @Binding public var learningWordPairs: [WordPair]
-    public let saveAction: () -> Void
-    
-    @Environment(\.scenePhase) private var scenePhase
+    @Binding public var wordPairs: [WordPair]
     
     
     var body: some View {
@@ -20,7 +17,7 @@ struct LearnedTab: View {
             VStack {
                 Header()
                 
-                if learnedWordPairs.isEmpty {
+                if wordPairs.learnedOnly.isEmpty {
                     Spacer()
                     
                     Text("Вы еще не выучили\nни одного слова 🤔")
@@ -30,9 +27,11 @@ struct LearnedTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(learnedWordPairs, id: \.id) { wordPair in
-                            LearnedWordPairRow(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
-                                .padding(.vertical, -10)
+                        ForEach($wordPairs, id: \.id) { wordPair in
+                            if wordPair.wrappedValue.state == .learning {
+                                LearnedWordPairRow(wordPair: wordPair)
+                                    .padding(.vertical, -10)
+                            }
                         }
                         .onDelete(perform: moveWordToLearingList)
                     }
@@ -45,31 +44,22 @@ struct LearnedTab: View {
             .navigationBarTitle("Выученные")
             .navigationBarHidden(true)
         }
-        .onChange(of: scenePhase) { phase in
-            if phase == .inactive {
-                saveAction()
-            }
-        }
     }
     
     
     func moveWordToLearingList(at offsets: IndexSet) {
         offsets.forEach { (i) in
-            learningWordPairs.append(learnedWordPairs[i])
+            wordPairs[i].state = .learning
         }
-        
-        learnedWordPairs.remove(at: offsets);
     }
     
     
     struct LearnedWordPairRow: View {
-        public let wordPair: WordPair
-        @Binding public var learnedWordPairs: [WordPair]
-        @Binding public var learningWordPairs: [WordPair]
+        @Binding public var wordPair: WordPair
         
         
         var body: some View {
-            WordPairRow(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
+            WordPairRow(wordPair: $wordPair)
         }
     }
     

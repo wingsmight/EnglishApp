@@ -6,8 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct WordPair : Hashable, Identifiable, Codable, Equatable {
+    public var state: State = .none
+    public var isPushed: Bool = false
+    
     private var original: String! = ""
     private var translation: String! = ""
     
@@ -26,8 +30,8 @@ struct WordPair : Hashable, Identifiable, Codable, Equatable {
     }
     public static func == (lhs: WordPair, rhs: WordPair) -> Bool {
         return
-            lhs.Original == rhs.Original &&
-            lhs.Translation == rhs.Translation
+            lhs.Original.lowercased() == rhs.Original.lowercased() &&
+            lhs.Translation.lowercased() == rhs.Translation.lowercased()
     }
     
     
@@ -39,5 +43,29 @@ struct WordPair : Hashable, Identifiable, Codable, Equatable {
     }
     public var id: String {
         original
+    }
+    
+    
+    public enum State: Int, Codable {
+        case none,
+             learning,
+             learned
+        
+        
+        public init(from decoder: Decoder) throws {
+            self = try State(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .none
+        }
+    }
+}
+
+extension Array where Element == WordPair {
+    var learningOnly: [WordPair] {
+        filter( { $0.state == .learning } )
+    }
+    var learnedOnly: [WordPair] {
+        filter( { $0.state == .learned } )
+    }
+    var pushedOnly: [WordPair] {
+        filter( { $0.isPushed } )
     }
 }

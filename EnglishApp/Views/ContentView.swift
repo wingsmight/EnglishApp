@@ -10,11 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var colorScheme = Theme.colorScheme
     @State private var selectedTabIndex = 1
-    
-    @StateObject private var learningWordPairStore = LearningWordPairStore()
-    @StateObject private var learnedWordPairStore = LearnedWordPairStore()
-    @StateObject private var pushedWordPairStore = PushedWordPairStore()
-    
+    @StateObject private var wordPairStore = WordPairStore()
+    @Environment(\.scenePhase) private var scenePhase
     private let tabBadges: [TabBadge] = [
         TabBadge(count: 0, backgroundColor: Color("AppCyan")),
         TabBadge(count: 22, backgroundColor: Color("AppYellow")),
@@ -26,59 +23,17 @@ struct ContentView: View {
         GeometryReader { geometry in
             ZStack(alignment: .bottomLeading) {
                 TabView(selection: $selectedTabIndex) {
-                    DictionaryTab(learningWordPairs: $learningWordPairStore.wordPairs, learnedWordPairs: $learnedWordPairStore.wordPairs, saveAction: {
-                        LearningWordPairStore.save(wordPairs: learningWordPairStore.wordPairs) { result in
-                            if case .failure(let error) = result {
-                                fatalError(error.localizedDescription)
-                            }
-                        }
-                        
-                        LearnedWordPairStore.save(wordPairs: learnedWordPairStore.wordPairs) { result in
-                            if case .failure(let error) = result {
-                                fatalError(error.localizedDescription)
-                            }
-                        }
-                    })
+                    DictionaryTab(wordPairs: $wordPairStore.wordPairs)
                         .tabItem {
                             Label("Словарь", image: "CategoryTabIcon")
                         }
                     
-                    LearningTab(learningWordPairs: $learningWordPairStore.wordPairs, learnedWordPairs: $learnedWordPairStore.wordPairs, pushedWordPairs: $pushedWordPairStore.wordPairs, saveAction: {
-                        LearningWordPairStore.save(wordPairs: learningWordPairStore.wordPairs) { result in
-                            if case .failure(let error) = result {
-                                fatalError(error.localizedDescription)
-                            }
-                        }
-                        
-                        LearnedWordPairStore.save(wordPairs: learnedWordPairStore.wordPairs) { result in
-                            if case .failure(let error) = result {
-                                fatalError(error.localizedDescription)
-                            }
-                        }
-                        
-                        PushedWordPairStore.save(wordPairs: pushedWordPairStore.wordPairs) { result in
-                            if case .failure(let error) = result {
-                                fatalError(error.localizedDescription)
-                            }
-                        }
-                    })
+                    LearningTab(wordPairs: $wordPairStore.wordPairs)
                         .tabItem {
                             Label("На изучении", image: "LearningTabIcon")
                         }
                     
-                    LearnedTab(learnedWordPairs: $learnedWordPairStore.wordPairs, learningWordPairs: $learningWordPairStore.wordPairs, saveAction: {
-                        LearnedWordPairStore.save(wordPairs: learnedWordPairStore.wordPairs) { result in
-                            if case .failure(let error) = result {
-                                fatalError(error.localizedDescription)
-                            }
-                        }
-                        
-                        LearningWordPairStore.save(wordPairs: learningWordPairStore.wordPairs) { result in
-                            if case .failure(let error) = result {
-                                fatalError(error.localizedDescription)
-                            }
-                        }
-                    })
+                    LearnedTab(wordPairs: $wordPairStore.wordPairs)
                         .tabItem {
                             Label("Выученные", image: "LearnedTabIcon")
                         }
@@ -89,30 +44,21 @@ struct ContentView: View {
         }
         .ignoresSafeArea(.keyboard)
         .onAppear {
-            LearningWordPairStore.load { result in
+            WordPairStore.load { result in
                 switch result {
                 case .failure(let error):
                     fatalError(error.localizedDescription)
                 case .success(let wordPairs):
-                    learningWordPairStore.wordPairs = wordPairs
+                    wordPairStore.wordPairs = wordPairs
                 }
             }
-            
-            LearnedWordPairStore.load { result in
-                switch result {
-                case .failure(let error):
-                    fatalError(error.localizedDescription)
-                case .success(let wordPairs):
-                    learnedWordPairStore.wordPairs = wordPairs
-                }
-            }
-            
-            PushedWordPairStore.load { result in
-                switch result {
-                case .failure(let error):
-                    fatalError(error.localizedDescription)
-                case .success(let wordPairs):
-                    pushedWordPairStore.wordPairs = wordPairs
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive {
+                WordPairStore.save(wordPairs: wordPairStore.wordPairs) { result in
+                    if case .failure(let error) = result {
+                        fatalError(error.localizedDescription)
+                    }
                 }
             }
         }

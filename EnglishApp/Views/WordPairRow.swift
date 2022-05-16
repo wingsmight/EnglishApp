@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct WordPairRow: View {
-    public let wordPair: WordPair
-    @Binding public var learnedWordPairs: [WordPair]
-    @Binding public var learningWordPairs: [WordPair]
+    @Binding public var wordPair: WordPair
     
     private let heightRatio = 0.5
     private let columns = [
@@ -32,7 +30,7 @@ struct WordPairRow: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(NavigationLink(destination: WordCard(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs), isActive: $linkActive) {
+        .background(NavigationLink(destination: WordCard(wordPair: $wordPair), isActive: $linkActive) {
             EmptyView()
         }.opacity(0.0))
     }

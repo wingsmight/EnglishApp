@@ -7,20 +7,19 @@
 
 import SwiftUI
 
+
 struct ToggleLearnedWordButton: View {
-    public let wordPair: WordPair?
-    @Binding public var learnedWordPairs: [WordPair]
+    @Binding public var wordPair: WordPair?
 
     @State private var isEnabled: Bool
     
     
     
-    init(wordPair: WordPair?, learnedWordPairs: Binding<[WordPair]>) {
-        self.wordPair = wordPair
-        self._learnedWordPairs = learnedWordPairs
+    init(wordPair: Binding<WordPair?>) {
+        self._wordPair = wordPair
         
-        if let wordPair = wordPair {
-            self.isEnabled = learnedWordPairs.wrappedValue.contains(wordPair)
+        if let wordPair = wordPair.wrappedValue {
+            self.isEnabled = wordPair.state == .learned
         } else {
             self.isEnabled = false
         }
@@ -30,11 +29,11 @@ struct ToggleLearnedWordButton: View {
     var body: some View {
         ToggleCircleImage(isEnabled: $isEnabled, image: Image("Checkmark"), enabledColor: Color("AppGreen"))
             .onChanged(of: isEnabled, perform: { newValue in
-                if let wordPair = wordPair {
+                if wordPair != nil {
                     if newValue {
-                        learnedWordPairs.appendIfNotContains(wordPair)
+                        self.wordPair!.state = .learned
                     } else {
-                        learnedWordPairs.removeAll(where: { $0 == wordPair })
+                        self.wordPair!.state = .none
                     }
                 }
             })

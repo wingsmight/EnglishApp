@@ -8,13 +8,22 @@
 import Foundation
 import SwiftUI
 
-class LearningWordPairStore: ObservableObject {
-    private static let fileName = "learningWordPairs.data"
+class WordPairStore: ObservableObject {
+    private static let fileName = "wordPairs.data"
     
     @Published public var wordPairs: [WordPair] = []
     
     
-    public static func load(completion: @escaping (Result<[WordPair], Error>)->Void) {
+    public var learningWordPairs: [WordPair] {
+        wordPairs.filter( { $0.state == .learning } )
+    }
+    public var learnedWordPairs: [WordPair] {
+        wordPairs.filter( { $0.state == .learned } )
+    }
+    public var pushedWordPairs: [WordPair] {
+        wordPairs.filter( { $0.isPushed } )
+    }
+    public static func load(completion: @escaping (Result<[WordPair], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
                 let fileURL = try fileURL()
@@ -35,7 +44,7 @@ class LearningWordPairStore: ObservableObject {
             }
         }
     }
-    public static func save(wordPairs: [WordPair], completion: @escaping (Result<Int, Error>)->Void) {
+    public static func save(wordPairs: [WordPair], completion: @escaping (Result<Int, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
                 let data = try JSONEncoder().encode(wordPairs)

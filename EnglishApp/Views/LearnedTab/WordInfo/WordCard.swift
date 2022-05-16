@@ -9,9 +9,7 @@ import SwiftUI
 
 
 struct WordCard: View {
-    public let wordPair: WordPair
-    @Binding public var learnedWordPairs: [WordPair]
-    @Binding public var learningWordPairs: [WordPair]
+    @Binding public var wordPair: WordPair
     
     
     var body: some View {
@@ -22,7 +20,7 @@ struct WordCard: View {
             }
             
             VStack {
-                OriginalWordBlock(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
+                OriginalWordBlock(wordPair: $wordPair)
                     .padding(.top, 100)
                 WordInfoView(word: .constant(wordPair.Translation))
                 Spacer()
@@ -34,9 +32,7 @@ struct WordCard: View {
     }
     
     struct OriginalWordBlock: View {
-        public let wordPair: WordPair
-        @Binding public var learnedWordPairs: [WordPair]
-        @Binding public var learningWordPairs: [WordPair]
+        @Binding public var wordPair: WordPair
         
         
         var body: some View {
@@ -47,7 +43,7 @@ struct WordCard: View {
                 
                 Spacer()
                 
-                WordControlPanel(wordPair: wordPair, learnedWordPairs: $learnedWordPairs, learningWordPairs: $learningWordPairs)
+                WordControlPanel(wordPair: Binding<WordPair?>($wordPair))
                     .padding()
             }
         }

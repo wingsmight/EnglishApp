@@ -8,18 +8,16 @@
 import SwiftUI
 
 struct WordControlPanel: View {
-    public let wordPair: WordPair?
-    @Binding public var learnedWordPairs: [WordPair]
-    @Binding public var learningWordPairs: [WordPair]
+    @Binding public var wordPair: WordPair?
     
     
     var body: some View {
         VStack {
             WordSpeakerView(word: .constant(wordPair?.Original ?? ""))
             
-            ToggleLearnedWordButton(wordPair: wordPair, learnedWordPairs: $learnedWordPairs)
+            ToggleLearnedWordButton(wordPair: $wordPair)
             
-            ToggleLearningWordButton(wordPair: wordPair, learningWordPairs: $learningWordPairs)
+            ToggleLearningWordButton(wordPair: $wordPair)
         }
     }
 }

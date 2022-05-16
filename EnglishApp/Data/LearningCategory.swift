@@ -8,22 +8,16 @@
 import Foundation
 import SwiftUI
 
-struct LearningCategory {
-    private var label: Label
-    private var wordPairs: [WordPair]
+class LearningCategory: ObservableObject {
+    public var label: Label
+    @Published public var wordPairs: [WordPair]
     
     
-    internal init(label: LearningCategory.Label, wordPairs: [WordPair]) {
+    internal init(label: LearningCategory.Label, wordPairs: [WordPair], generalWordPairs: Binding<[WordPair]>) {
         self.label = label
-        self.wordPairs = wordPairs
-    }
-    
-    
-    public var Label: Label {
-        label
-    }
-    public var WordPairs: [WordPair] {
-        wordPairs
+        
+        self.wordPairs = generalWordPairs.wrappedValue.filter( { wordPairs.contains($0) } )
+        self.wordPairs += wordPairs.filter( { !generalWordPairs.wrappedValue.contains($0) } )
     }
     
     
