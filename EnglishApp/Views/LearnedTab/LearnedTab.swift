@@ -28,7 +28,7 @@ struct LearnedTab: View {
                 } else {
                     List {
                         ForEach($wordPairs, id: \.id) { wordPair in
-                            if wordPair.wrappedValue.state == .learning {
+                            if wordPair.wrappedValue.state == .learned {
                                 LearnedWordPairRow(wordPair: wordPair)
                                     .padding(.vertical, -10)
                             }
