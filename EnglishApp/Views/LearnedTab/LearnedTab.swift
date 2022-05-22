@@ -27,7 +27,7 @@ struct LearnedTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach($wordPairs, id: \.id) { wordPair in
+                        ForEach($wordPairs, id: \.self) { wordPair in
                             if wordPair.wrappedValue.state == .learned {
                                 LearnedWordPairRow(wordPair: wordPair)
                                     .padding(.vertical, -10)
@@ -44,6 +44,7 @@ struct LearnedTab: View {
             .navigationBarTitle("Выученные")
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(.stack)
     }
     
     

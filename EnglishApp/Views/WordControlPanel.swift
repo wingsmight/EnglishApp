@@ -13,7 +13,7 @@ struct WordControlPanel: View {
     
     var body: some View {
         VStack {
-            WordSpeakerView(word: .constant(wordPair?.Original ?? ""))
+            WordSpeakerView(word: .constant(wordPair?.original ?? ""))
             
             ToggleLearnedWordButton(wordPair: $wordPair)
             
@@ -22,8 +22,8 @@ struct WordControlPanel: View {
     }
 }
 
-//struct WordControlPanel_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WordControlPanel(wordPair: .constant(WordPair("Word", "Слово")))
-//    }
-//}
+struct WordControlPanel_Previews: PreviewProvider {
+    static var previews: some View {
+        WordControlPanel(wordPair: .constant(WordPair("Word", "Слово")))
+    }
+}

@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct ToggleCircleImage: View {
-    @Binding var isEnabled: Bool
-    
-    var image: Image
-    var enabledColor: Color
+    @Binding public var isEnabled: Bool
+    public var image: Image
+    public var enabledColor: Color
+    public var onTap: (Bool) -> Void
     
     
     var body: some View {
         Button {
             self.isEnabled.toggle()
+            
+            onTap(self.isEnabled)
         } label: {
             ZStack {
-                if isEnabled {
+                if self.isEnabled {
                     Circle()
                         .foregroundColor(enabledColor)
                         .frame(width: 33, height: 33)
@@ -39,6 +41,8 @@ struct ToggleCircleImage: View {
 
 struct ToggleCircleImage_Previews: PreviewProvider {
     static var previews: some View {
-        ToggleCircleImage(isEnabled: .constant(true), image: Image("Checkmark"), enabledColor: Color("AppGreen"))
+        ToggleCircleImage(isEnabled: .constant(true), image: Image("Checkmark"), enabledColor: Color("AppGreen")) { newValue in
+            
+        }
     }
 }

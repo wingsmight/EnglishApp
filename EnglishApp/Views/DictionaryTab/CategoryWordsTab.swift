@@ -9,14 +9,16 @@ import SwiftUI
 
 struct CategoryWordsTab: View {
     public var categoryLabel: String
+    @Binding public var categoryWordPairs: [WordPair]
     @Binding public var wordPairs: [WordPair]
     
     
     var body: some View {
         List {
-            ForEach($wordPairs, id: \.Original) { wordPair in
-                CategoryWordPairRow(wordPair: wordPair)
-                    .id(wordPair.id)
+            ForEach($wordPairs, id: \.self) { wordPair in
+                if categoryWordPairs.contains(wordPair.wrappedValue) {
+                    CategoryWordPairRow(wordPair: wordPair)
+                }
             }
         }
         .listStyle(.inset)

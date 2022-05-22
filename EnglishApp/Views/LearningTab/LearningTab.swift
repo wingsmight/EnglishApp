@@ -44,13 +44,14 @@ struct LearningTab: View {
             .navigationBarTitle("На изучении")
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(.stack) 
     }
     
     
     struct LearningWordPairRow: View {
         @Binding public var wordPair: WordPair
         
-        @State private var isPushed: Bool
+        @State private var isPushed: Bool = false
         
         
         init(wordPair: Binding<WordPair>) {

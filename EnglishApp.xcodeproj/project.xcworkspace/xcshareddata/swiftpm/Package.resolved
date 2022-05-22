@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "CoreXLSX",
+        "repositoryURL": "https://github.com/CoreOffice/CoreXLSX",
+        "state": {
+          "branch": null,
+          "revision": "b7cc8d3b79c07c2a781d82db645d7cec24106e08",
+          "version": "0.14.1"
+        }
+      },
+      {
         "package": "ViewExtractor",
         "repositoryURL": "https://github.com/GeorgeElsham/ViewExtractor",
         "state": {
@@ -17,6 +26,24 @@
           "branch": null,
           "revision": "4ad53e116c4c0b526f265e3568c7cceec595699e",
           "version": "2.2.0"
+        }
+      },
+      {
+        "package": "XMLCoder",
+        "repositoryURL": "https://github.com/maxdesiatov/XMLCoder.git",
+        "state": {
+          "branch": null,
+          "revision": "ac411bd6ab342780be0dfe6f679410f791d751d9",
+          "version": "0.11.1"
+        }
+      },
+      {
+        "package": "ZIPFoundation",
+        "repositoryURL": "https://github.com/weichsel/ZIPFoundation.git",
+        "state": {
+          "branch": null,
+          "revision": "7254c74b49cec2cb81520523ba993c671f71b066",
+          "version": "0.9.14"
         }
       }
     ]

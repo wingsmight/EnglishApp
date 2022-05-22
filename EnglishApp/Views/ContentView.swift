@@ -17,13 +17,14 @@ struct ContentView: View {
         TabBadge(count: 22, backgroundColor: Color("AppYellow")),
         TabBadge(count: 33, backgroundColor: Color("AppGreen")),
     ]
+    @StateObject private var dictionaryModel = DictionaryTabModel()
     
     
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottomLeading) {
                 TabView(selection: $selectedTabIndex) {
-                    DictionaryTab(wordPairs: $wordPairStore.wordPairs)
+                    DictionaryTab(wordPairs: $wordPairStore.wordPairs, model: dictionaryModel)
                         .tabItem {
                             Label("Словарь", image: "CategoryTabIcon")
                         }
@@ -50,6 +51,8 @@ struct ContentView: View {
                     fatalError(error.localizedDescription)
                 case .success(let wordPairs):
                     wordPairStore.wordPairs = wordPairs
+                    
+                    loadLearningCategories()
                 }
             }
         }
@@ -61,6 +64,23 @@ struct ContentView: View {
                     }
                 }
             }
+        }
+    }
+    
+    func loadLearningCategories() {
+        if let asset = NSDataAsset(name: "TestLearningCategories") {
+            let data = asset.data
+            
+            dictionaryModel.categories = (try? ExcelParser.getLearningCategories(data: data)) ?? []
+            
+            print("before: \(wordPairStore.wordPairs)")
+            for category in dictionaryModel.categories {
+                for wordPair in category.wordPairs {
+                    wordPairStore.wordPairs.appendIfNotContains(wordPair)
+                }
+            }
+            print("after: \(wordPairStore.wordPairs)")
+            print("after categories[0]: \(dictionaryModel.categories[0].wordPairs)")
         }
     }
 }

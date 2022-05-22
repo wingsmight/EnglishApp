@@ -11,30 +11,14 @@ import AVFoundation
 
 struct DictionaryTab: View {
     @Binding public var wordPairs: [WordPair]
+    @ObservedObject public var model: DictionaryTabModel
     
     @State private var inputWord: String = ""
     @State private var translatedWord: String? = nil
     @State private var gainedWordPair: WordPair? = nil
     @State private var inputLanguage: Language = .english
     @State private var outputLanguage: Language = .russian
-    @State private var categories: [LearningCategory] = [
-        LearningCategory(
-            label: LearningCategory.Label(iconName: "CategoryIcon0", titleText: "ТОП 100", headlineText: "для начинающих", backgroundColor: Color("AppGreen")),
-            wordPairs: [WordPair("Test 0", "Тест 0"), WordPair("Test 1", "Тест 1")],
-            generalWordPairs: $wordPairs
-        ),
-        LearningCategory(
-            label: LearningCategory.Label(iconName: "CategoryIcon1", titleText: "ТОП 1000", headlineText: "средний уровень", backgroundColor: Color("AppCyan")),
-            wordPairs: [WordPair("Test 10", "Тест 10"), WordPair("Test 11", "Тест 11")],
-            generalWordPairs: $wordPairs
-        ),
-        LearningCategory(
-            label: LearningCategory.Label(iconName: "CategoryIcon2", titleText: "ТОП 3000", headlineText: "прогрессивный уровнь", backgroundColor: Color("AppAmber")),
-            wordPairs: [WordPair("Test 20", "Тест 20"), WordPair("Test 21", "Тест 21")],
-            generalWordPairs: $wordPairs
-        ),
-    ]
-
+    
     
     var body: some View {
         NavigationView {
@@ -48,8 +32,8 @@ struct DictionaryTab: View {
                     .padding()
                 
                 if inputWord.isEmpty {
-                    ForEach(DictionaryTab.categories, id: \.label.TitleText) { category in
-                        CategoryView(data: category)
+                    ForEach(model.categories, id: \.label.TitleText) { category in
+                        CategoryView(data: category, wordPairs: $wordPairs)
                             .padding(.vertical, 4.0)
                             .padding(.horizontal)
                     }
@@ -80,6 +64,7 @@ struct DictionaryTab: View {
             .navigationBarTitle("Словарь")
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(.stack)
     }
     
     struct Header: View {
@@ -165,10 +150,11 @@ struct DictionaryTab: View {
 
     struct CategoryView: View {
         @ObservedObject public var data: LearningCategory
+        @Binding public var wordPairs: [WordPair]
         
         
         var body: some View {
-            NavigationLink(destination: CategoryWordsTab(categoryLabel: data.label.TitleText, wordPairs: $data.wordPairs)) {
+            NavigationLink(destination: CategoryWordsTab(categoryLabel: data.label.TitleText, categoryWordPairs: $data.wordPairs, wordPairs: $wordPairs)) {
                 ZStack {
                     HStack {
                         Image(data.label.IconName)
@@ -192,8 +178,9 @@ struct DictionaryTab: View {
                 }
                 .frame(height: 85)
                 .background(data.label.BackgroundColor)
-            .cornerRadius(10)
+                .cornerRadius(10)
             }
+            .isDetailLink(false)
         }
     }
 }

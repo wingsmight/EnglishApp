@@ -8,20 +8,27 @@
 import Foundation
 import SwiftUI
 
-class LearningCategory: ObservableObject {
+class LearningCategory: ObservableObject, Hashable, Equatable {
     public var label: Label
     @Published public var wordPairs: [WordPair]
     
     
-    internal init(label: LearningCategory.Label, wordPairs: [WordPair], generalWordPairs: Binding<[WordPair]>) {
+    internal init(label: LearningCategory.Label, wordPairs: [WordPair]) {
         self.label = label
-        
-        self.wordPairs = generalWordPairs.wrappedValue.filter( { wordPairs.contains($0) } )
-        self.wordPairs += wordPairs.filter( { !generalWordPairs.wrappedValue.contains($0) } )
+        self.wordPairs = wordPairs
     }
     
     
-    struct Label {
+    public static func == (lhs: LearningCategory, rhs: LearningCategory) -> Bool {
+        return lhs.label == rhs.label
+    }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(label)
+        hasher.combine(wordPairs)
+    }
+    
+    
+    struct Label: Hashable, Equatable {
         private var iconName: String
         private var titleText: String
         private var headlineText: String
@@ -33,6 +40,11 @@ class LearningCategory: ObservableObject {
             self.titleText = titleText
             self.headlineText = headlineText
             self.backgroundColor = backgroundColor
+        }
+        
+        
+        public static func == (lhs: Label, rhs: Label) -> Bool {
+            return lhs.titleText == rhs.titleText
         }
         
         

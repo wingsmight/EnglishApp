@@ -20,11 +20,11 @@ struct WordPairRow: View {
     
     var body: some View {
         LazyVGrid(columns: columns) {
-            Text(wordPair.Translation)
+            Text(wordPair.translation)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(wordPair.Original)
+            Text(wordPair.original)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -32,15 +32,18 @@ struct WordPairRow: View {
         .padding()
         .background(NavigationLink(destination: WordCard(wordPair: $wordPair), isActive: $linkActive) {
             EmptyView()
-        }.opacity(0.0))
+        }
+            .isDetailLink(false)
+            .opacity(0.0)
+        )
     }
 }
 
-//struct WordPairRow_Previews: PreviewProvider {
-//    private static var wordPair = WordPair(original: ("Bag"), translation: "Сумка")
-//    
-//    
-//    static var previews: some View {
-//        WordPairRow(wordPair: wordPair)
-//    }
-//}
+struct WordPairRow_Previews: PreviewProvider {
+    private static var wordPair = WordPair(original: ("Bag"), translation: "Сумка")
+    
+    
+    static var previews: some View {
+        WordPairRow(wordPair: .constant(wordPair))
+    }
+}
