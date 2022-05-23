@@ -10,6 +10,9 @@ import SwiftUI
 struct LearningTab: View {
     @Binding public var wordPairs: [WordPair]
     
+    @Environment(\.scenePhase) private var scenePhase
+    @StateObject private var localNotificationManager = LocalNotificationManager()
+    
     
     var body: some View {
         NavigationView {
@@ -32,7 +35,7 @@ struct LearningTab: View {
                             }
                         }
                         ForEach($wordPairs, id: \.self) { wordPair in
-                            if wordPair.wrappedValue.state == .learning {
+                            if wordPair.wrappedValue.state == .learning && !wordPair.wrappedValue.isPushed {
                                 LearningWordPairRow(wordPair: wordPair)
                             }
                         }
@@ -44,9 +47,38 @@ struct LearningTab: View {
             .navigationBarTitle("На изучении")
             .navigationBarHidden(true)
         }
-        .navigationViewStyle(.stack) 
+        .navigationViewStyle(.stack)
+        .onChange(of: scenePhase) { newPhase in
+            print(newPhase)
+            if newPhase == .active {
+                loadLearnedWordsFromNotification()
+            } else if newPhase == .background {
+                scheduleNotifications()
+            }
+        }
     }
     
+    func loadLearnedWordsFromNotification() {
+        if let pushedWordsData = LocalNotificationManager.pushedWordsData {
+            if let pushedWordPairs = try? JSONDecoder().decode([WordPair].self, from: pushedWordsData) {
+                for (i, _) in wordPairs.enumerated() {
+                    if pushedWordPairs.contains(wordPairs[i]) {
+                        wordPairs[i].isPushed = false
+                        wordPairs[i].state = .learned
+                    }
+                }
+            }
+            LocalNotificationManager.pushedWordsData = nil
+        }
+    }
+    func scheduleNotifications() {
+        localNotificationManager.pushedWordPairs = wordPairs.pushedOnly
+        localNotificationManager.askUserPermission() { (granted, error) in
+            if granted == true && error == nil {
+                localNotificationManager.repeatPushedWordPairs()
+            } else { }
+        }
+    }
     
     struct LearningWordPairRow: View {
         @Binding public var wordPair: WordPair
@@ -66,10 +98,7 @@ struct LearningTab: View {
                 
                 Spacer()
                 
-                MoveWordPairToPushButton(isEnabled: $isPushed)
-                    .onChanged(of: isPushed) { newValue in
-                        wordPair.isPushed = newValue
-                    }
+                MoveWordPairToPushButton(isEnabled: $wordPair.isPushed)
                 
                 ToggleLearnedWordButton(wordPair: Binding<WordPair?>($wordPair))
             }

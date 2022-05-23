@@ -12,6 +12,7 @@
 		CE05B11B282F9ABB007AC708 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B11A282F9ABB007AC708 /* ViewExt.swift */; };
 		CE05B11D282F9D45007AC708 /* ToggleLearningWordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B11C282F9D45007AC708 /* ToggleLearningWordButton.swift */; };
 		CE05B11F282F9D5D007AC708 /* ToggleLearnedWordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B11E282F9D5D007AC708 /* ToggleLearnedWordButton.swift */; };
+		CE13BD48283A384700F404B7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13BD47283A384700F404B7 /* LocalNotificationManager.swift */; };
 		CE239A81283363300094F624 /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = CE239A80283363300094F624 /* CoreXLSX */; };
 		CE239A84283363B30094F624 /* ExcelParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE239A83283363B30094F624 /* ExcelParser.swift */; };
 		CE239A86283378790094F624 /* ColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE239A85283378790094F624 /* ColorExt.swift */; };
@@ -66,6 +67,7 @@
 		CE05B11A282F9ABB007AC708 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
 		CE05B11C282F9D45007AC708 /* ToggleLearningWordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleLearningWordButton.swift; sourceTree = "<group>"; };
 		CE05B11E282F9D5D007AC708 /* ToggleLearnedWordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleLearnedWordButton.swift; sourceTree = "<group>"; };
+		CE13BD47283A384700F404B7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		CE239A83283363B30094F624 /* ExcelParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcelParser.swift; sourceTree = "<group>"; };
 		CE239A85283378790094F624 /* ColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExt.swift; sourceTree = "<group>"; };
 		CE2E847D282E5ED700E8D43A /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				CE6D106228226175004B2769 /* Extensions */,
 				CEE9083A281FB69C00E4EC8B /* Views */,
 				CEE90837281FB65600E4EC8B /* Theme.swift */,
+				CE13BD47283A384700F404B7 /* LocalNotificationManager.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				CE96E8EE282A66F900126B37 /* SynonymsApi.swift in Sources */,
 				CEE9082A281FB4CA00E4EC8B /* ContentView.swift in Sources */,
 				CE05B11D282F9D45007AC708 /* ToggleLearningWordButton.swift in Sources */,
+				CE13BD48283A384700F404B7 /* LocalNotificationManager.swift in Sources */,
 				CE96E8F9282A8B0000126B37 /* UrlError.swift in Sources */,
 				CE75468A2821047E0066917D /* WordCard.swift in Sources */,
 				CE75D7862826B7EF00A6C2BD /* StringExt.swift in Sources */,
