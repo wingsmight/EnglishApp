@@ -51,7 +51,7 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         
         let taskIdentifier = identifier
         
-        let timeInterval: TimeInterval = 60 * 1
+        let timeInterval: TimeInterval = 60 * 60
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: true)
         let request = UNNotificationRequest(identifier: taskIdentifier, content: content, trigger: trigger)
         
