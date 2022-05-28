@@ -28,16 +28,19 @@ struct ContentView: View {
                         .tabItem {
                             Label("Словарь", image: "CategoryTabIcon")
                         }
+                        .tag(0)
                     
                     LearningTab(wordPairs: $wordPairStore.wordPairs)
                         .tabItem {
                             Label("На изучении", image: "LearningTabIcon")
                         }
+                        .tag(1)
                     
                     LearnedTab(wordPairs: $wordPairStore.wordPairs)
                         .tabItem {
                             Label("Выученные", image: "LearnedTabIcon")
                         }
+                        .tag(2)
                 }
                 
                 ColorfulBadgeList(tabBadges: tabBadges, geometry: geometry)
