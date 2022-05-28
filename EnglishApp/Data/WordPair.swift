@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct WordPair : Hashable, Codable, Equatable {
+struct WordPair : Hashable, Identifiable, Codable, Equatable {
     public var state: State = .none
     public var isPushed: Bool = false
     public var original: String = ""
@@ -35,6 +35,11 @@ struct WordPair : Hashable, Codable, Equatable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(original.lowercased())
         hasher.combine(translation.lowercased())
+    }
+    
+    
+    public var id: String {
+        original.lowercased() + translation.lowercased()
     }
 
 
