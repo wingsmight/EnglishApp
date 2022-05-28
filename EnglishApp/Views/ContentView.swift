@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var colorScheme = Theme.colorScheme
-    @State private var selectedTabIndex = 1
+    @State private var selectedTabIndex = 0
     @StateObject private var wordPairStore = WordPairStore()
     @Environment(\.scenePhase) private var scenePhase
     private let tabBadges: [TabBadge] = [
