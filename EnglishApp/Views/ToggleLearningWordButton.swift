@@ -16,18 +16,18 @@ struct ToggleLearningWordButton: View {
     var body: some View {
         ToggleCircleImage(isEnabled: $isEnabled, image: Image("Bell"), enabledColor: Color("AppYellow"), onTap: { newValue in
             if newValue {
-                self.wordPair!.state = .learning
-                self.wordPair!.isPushed = true
+                self.wordPair!.State = .learning
+                self.wordPair!.IsPushed = true
             } else {
-                self.wordPair!.state = .none
+                self.wordPair!.State = .none
             }
         })
-            .onChanged(of: wordPair?.state, perform: { newState in
+            .onChanged(of: wordPair?.State, perform: { newState in
                 isEnabled = newState == .learning
             })
             .onAppear() {
                 if let wordPair = wordPair {
-                    isEnabled = wordPair.state == .learning
+                    isEnabled = wordPair.State == .learning
                 }
             }
             .disabled(wordPair == nil)

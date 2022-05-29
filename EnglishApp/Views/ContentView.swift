@@ -30,13 +30,13 @@ struct ContentView: View {
                         }
                         .tag(0)
                     
-                    LearningTab(wordPairs: $wordPairStore.wordPairs)
+                    LearningTab()
                         .tabItem {
                             Label("На изучении", image: "LearningTabIcon")
                         }
                         .tag(1)
                     
-                    LearnedTab(wordPairs: $wordPairStore.wordPairs)
+                    LearnedTab()
                         .tabItem {
                             Label("Выученные", image: "LearnedTabIcon")
                         }
@@ -68,6 +68,7 @@ struct ContentView: View {
                 }
             }
         }
+        .environmentObject(wordPairStore)
     }
     
     func loadLearningCategories() {

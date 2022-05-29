@@ -38,16 +38,16 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         let content = UNMutableNotificationContent()
         content.interruptionLevel = .timeSensitive
         
-        var subtitle = pushedWordPairs[0].original + " - " + pushedWordPairs[0].translation
+        var subtitle = pushedWordPairs[0].Original + " - " + pushedWordPairs[0].Translation
         for pushedWord in pushedWordPairs.dropFirst() {
-            subtitle += ", " + pushedWord.original + " - " + pushedWord.translation
+            subtitle += ", " + pushedWord.Original + " - " + pushedWord.Translation
         }
         content.subtitle = subtitle
         
-        let identifier = pushedWordPairs[0].original + pushedWordPairs[0].translation
+        let identifier = pushedWordPairs[0].Original + pushedWordPairs[0].Translation
         content.categoryIdentifier = identifier
         content.sound = UNNotificationSound.default
-        content.userInfo = ["wordPairs" : pushedWordPairs[0].original]
+        content.userInfo = ["wordPairs" : pushedWordPairs[0].Original]
         
         let taskIdentifier = identifier
         
@@ -84,8 +84,8 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
 
                 case Action.markAsLearned.description:
                     for var pushedWordPair in pushedWordPairs {
-                        pushedWordPair.isPushed = false
-                        pushedWordPair.state = .learned
+                        pushedWordPair.IsPushed = false
+                        pushedWordPair.State = .learned
                     }
                     
                     LocalNotificationManager.pushedWordsData = try? JSONEncoder().encode(pushedWordPairs)

@@ -69,7 +69,7 @@ struct SynonymListView: View {
                         .foregroundColor(.secondary)
 
                     WrappingHStack(0..<wordPairs.count, id:\.self) {
-                        Text(wordPairs[$0].original)
+                        Text(wordPairs[$0].Original)
                             .padding(.trailing, 3)
                     }
 
@@ -79,7 +79,7 @@ struct SynonymListView: View {
 
                 HStack {
                     WrappingHStack(0..<wordPairs.count, id: \.self) {
-                        Text(wordPairs[$0].translation + ($0 != wordPairs.count - 1 ? "," : ""))
+                        Text(wordPairs[$0].Translation + ($0 != wordPairs.count - 1 ? "," : ""))
                     }
                     
                     Spacer()

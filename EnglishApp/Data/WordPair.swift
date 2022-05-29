@@ -13,6 +13,8 @@ struct WordPair : Hashable, Identifiable, Codable, Equatable {
     public var isPushed: Bool = false
     public var original: String = ""
     public var translation: String = ""
+    
+    private var changingDate: Date = Date.now
 
 
     internal init(original: String, translation: String) {
@@ -25,21 +27,60 @@ struct WordPair : Hashable, Identifiable, Codable, Equatable {
 
 
     public func containsAny(of word: String) -> Bool {
-        original.lowercased() == word.lowercased() || translation.lowercased() == word.lowercased()
+        Original.lowercased() == word.lowercased() || Translation.lowercased() == word.lowercased()
     }
     public static func == (lhs: WordPair, rhs: WordPair) -> Bool {
         return
-            lhs.original.lowercased() == rhs.original.lowercased() &&
-            lhs.translation.lowercased() == rhs.translation.lowercased()
+            lhs.Original.lowercased() == rhs.Original.lowercased() &&
+            lhs.Translation.lowercased() == rhs.Translation.lowercased()
     }
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(original.lowercased())
-        hasher.combine(translation.lowercased())
+        hasher.combine(Original.lowercased())
+        hasher.combine(Translation.lowercased())
     }
     
     
     public var id: String {
-        original.lowercased() + translation.lowercased()
+        Original.lowercased() + Translation.lowercased()
+    }
+    public var State: State {
+        get {
+            state
+        }
+        set {
+            changingDate = Date.now
+            state = newValue
+        }
+    }
+    public var IsPushed: Bool {
+        get {
+            isPushed
+        }
+        set {
+            changingDate = Date.now
+            isPushed = newValue
+        }
+    }
+    public var Original: String {
+        get {
+            original
+        }
+        set {
+            changingDate = Date.now
+            original = newValue
+        }
+    }
+    public var Translation: String {
+        get {
+            translation
+        }
+        set {
+            changingDate = Date.now
+            translation = newValue
+        }
+    }
+    public var ChangingDate: Date {
+        changingDate
     }
 
 
@@ -57,12 +98,12 @@ struct WordPair : Hashable, Identifiable, Codable, Equatable {
 
 extension Array where Element == WordPair {
     var learningOnly: [WordPair] {
-        filter( { $0.state == .learning } )
+        filter( { $0.State == .learning } )
     }
     var learnedOnly: [WordPair] {
-        filter( { $0.state == .learned } )
+        filter( { $0.State == .learned } )
     }
     var pushedOnly: [WordPair] {
-        filter( { $0.isPushed } )
+        filter( { $0.IsPushed } )
     }
 }

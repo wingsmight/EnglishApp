@@ -15,13 +15,13 @@ class WordPairStore: ObservableObject {
     
     
     public var learningWordPairs: [WordPair] {
-        wordPairs.filter( { $0.state == .learning } )
+        wordPairs.filter( { $0.State == .learning } )
     }
     public var learnedWordPairs: [WordPair] {
-        wordPairs.filter( { $0.state == .learned } )
+        wordPairs.filter( { $0.State == .learned } )
     }
     public var pushedWordPairs: [WordPair] {
-        wordPairs.filter( { $0.isPushed } )
+        wordPairs.filter( { $0.IsPushed } )
     }
     public static func load(completion: @escaping (Result<[WordPair], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {

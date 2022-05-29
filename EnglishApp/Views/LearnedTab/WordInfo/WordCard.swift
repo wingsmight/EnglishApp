@@ -22,7 +22,7 @@ struct WordCard: View {
             VStack {
                 OriginalWordBlock(wordPair: $wordPair)
                     .padding(.top, 100)
-                WordInfoView(word: $wordPair.translation)
+                WordInfoView(word: $wordPair.Translation)
                 Spacer()
             }
         }
@@ -37,7 +37,7 @@ struct WordCard: View {
         
         var body: some View {
             HStack {
-                Text(wordPair.original)
+                Text(wordPair.Original)
                     .font(.largeTitle)
                     .padding()
                 

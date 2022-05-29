@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct LearningTab: View {
-    @Binding public var wordPairs: [WordPair]
-    
+    @EnvironmentObject private var wordPairStore: WordPairStore
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var localNotificationManager = LocalNotificationManager()
-    @State var editMode: EditMode = .inactive
+    @State private var editMode: EditMode = .inactive
     
     
     var body: some View {
@@ -20,7 +19,7 @@ struct LearningTab: View {
             VStack {
                 Header(editMode: $editMode)
                 
-                if wordPairs.learningOnly.isEmpty {
+                if wordPairStore.wordPairs.learningOnly.isEmpty {
                     Spacer()
                     
                     Text("Добавьте слова из словаря\nдля начала изучения 💡")
@@ -30,15 +29,16 @@ struct LearningTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach($wordPairs, id: \.self) { wordPair in
-                            if wordPair.wrappedValue.isPushed {
+                        ForEach($wordPairStore.wordPairs, id: \.self) { wordPair in
+                            if wordPair.wrappedValue.IsPushed {
                                 LearningWordPairRow(wordPair: wordPair)
                             }
                         }
                         .onMove(perform: movePushedWords)
                         .onDelete(perform: removeWord)
-                        ForEach($wordPairs, id: \.self) { wordPair in
-                            if wordPair.wrappedValue.state == .learning && !wordPair.wrappedValue.isPushed {
+                        
+                        ForEach($wordPairStore.wordPairs, id: \.self) { wordPair in
+                            if wordPair.wrappedValue.State == .learning && !wordPair.wrappedValue.IsPushed {
                                 LearningWordPairRow(wordPair: wordPair)
                             }
                         }
@@ -49,8 +49,8 @@ struct LearningTab: View {
                     .listStyle(.plain)
                 }
             }
-            .animation(Animation.easeInOut(duration: 0.3), value: wordPairs.pushedOnly)
-            .animation(Animation.easeInOut(duration: 0.3), value: wordPairs.learningOnly)
+            .animation(Animation.easeInOut(duration: 0.3), value: wordPairStore.wordPairs.pushedOnly)
+            .animation(Animation.easeInOut(duration: 0.3), value: wordPairStore.wordPairs.learningOnly)
             .animation(.spring(), value: editMode)
             .navigationBarTitle("На изучении")
             .navigationBarHidden(true)
@@ -66,27 +66,28 @@ struct LearningTab: View {
         }
     }
     
+    
     func movePushedWords(from source: IndexSet, to destination: Int) {
-        wordPairs.move(fromOffsets: source, toOffset: destination)
+        wordPairStore.wordPairs.move(fromOffsets: source, toOffset: destination)
     }
     func moveLearningWords(from source: IndexSet, to destination: Int) {
-        wordPairs.move(fromOffsets: source, toOffset: destination)
+        wordPairStore.wordPairs.move(fromOffsets: source, toOffset: destination)
     }
     func removeWord(at offsets: IndexSet) {
         for offset in offsets{
-            if let index = wordPairs.firstIndex(of: wordPairs[offset]) {
-                wordPairs[index].isPushed = false
-                wordPairs[index].state = .none
+            if let index = wordPairStore.wordPairs.firstIndex(of: wordPairStore.wordPairs[offset]) {
+                wordPairStore.wordPairs[index].IsPushed = false
+                wordPairStore.wordPairs[index].State = .none
             }
         }
     }
     func loadLearnedWordsFromNotification() {
         if let pushedWordsData = LocalNotificationManager.pushedWordsData {
             if let pushedWordPairs = try? JSONDecoder().decode([WordPair].self, from: pushedWordsData) {
-                for (i, _) in wordPairs.enumerated() {
-                    if pushedWordPairs.contains(wordPairs[i]) {
-                        wordPairs[i].isPushed = false
-                        wordPairs[i].state = .learned
+                for (i, _) in wordPairStore.wordPairs.enumerated() {
+                    if pushedWordPairs.contains(wordPairStore.wordPairs[i]) {
+                        wordPairStore.wordPairs[i].IsPushed = false
+                        wordPairStore.wordPairs[i].State = .learned
                     }
                 }
             }
@@ -94,13 +95,14 @@ struct LearningTab: View {
         }
     }
     func scheduleNotifications() {
-        localNotificationManager.pushedWordPairs = wordPairs.pushedOnly
+        localNotificationManager.pushedWordPairs = wordPairStore.wordPairs.pushedOnly
         localNotificationManager.askUserPermission() { (granted, error) in
             if granted == true && error == nil {
                 localNotificationManager.repeatPushedWordPairs()
             } else { }
         }
     }
+    
     
     struct LearningWordPairRow: View {
         @Binding public var wordPair: WordPair
@@ -110,7 +112,7 @@ struct LearningTab: View {
         
         init(wordPair: Binding<WordPair>) {
             self._wordPair = wordPair
-            self.isPushed = wordPair.wrappedValue.isPushed
+            self.isPushed = wordPair.wrappedValue.IsPushed
         }
 
         
@@ -120,7 +122,7 @@ struct LearningTab: View {
                 
                 Spacer()
                 
-                MoveWordPairToPushButton(isEnabled: $wordPair.isPushed)
+                MoveWordPairToPushButton(isEnabled: $wordPair.IsPushed)
                 
                 ToggleLearnedWordButton(wordPair: Binding<WordPair?>($wordPair))
             }

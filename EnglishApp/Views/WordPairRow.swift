@@ -20,11 +20,11 @@ struct WordPairRow: View {
     
     var body: some View {
         LazyVGrid(columns: columns) {
-            Text(wordPair.translation)
+            Text(wordPair.Translation)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(wordPair.original)
+            Text(wordPair.Original)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }

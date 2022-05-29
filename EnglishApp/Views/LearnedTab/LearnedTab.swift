@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct LearnedTab: View {
-    @Binding public var wordPairs: [WordPair]
+    @EnvironmentObject private var wordPairStore: WordPairStore
     
     
     var body: some View {
@@ -17,7 +17,7 @@ struct LearnedTab: View {
             VStack {
                 Header()
                 
-                if wordPairs.learnedOnly.isEmpty {
+                if wordPairStore.wordPairs.learnedOnly.isEmpty {
                     Spacer()
                     
                     Text("Вы еще не выучили\nни одного слова 🤔")
@@ -27,7 +27,8 @@ struct LearnedTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach($wordPairs, id: \.self) { wordPair in
+                        ForEach($wordPairStore.wordPairs.sorted(by: { $0.wrappedValue.ChangingDate > $1.wrappedValue.ChangingDate }),
+                                id: \.id) { (wordPair: Binding<WordPair>) in
                             if wordPair.wrappedValue.state == .learned {
                                 LearnedWordPairRow(wordPair: wordPair)
                                     .padding(.vertical, -10)
@@ -50,7 +51,7 @@ struct LearnedTab: View {
     
     func moveWordToLearingList(at offsets: IndexSet) {
         offsets.forEach { (i) in
-            wordPairs[i].state = .learning
+            wordPairStore.wordPairs[i].State = .learning
         }
     }
     

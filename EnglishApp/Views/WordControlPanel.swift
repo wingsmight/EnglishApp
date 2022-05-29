@@ -13,7 +13,7 @@ struct WordControlPanel: View {
     
     var body: some View {
         VStack {
-            WordSpeakerView(word: .constant(wordPair?.original ?? ""))
+            WordSpeakerView(word: .constant(wordPair?.Original ?? ""))
             
             ToggleLearnedWordButton(wordPair: $wordPair)
             
