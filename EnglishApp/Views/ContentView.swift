@@ -24,7 +24,7 @@ struct ContentView: View {
         GeometryReader { geometry in
             ZStack(alignment: .bottomLeading) {
                 TabView(selection: $selectedTabIndex) {
-                    DictionaryTab(wordPairs: $wordPairStore.wordPairs, model: dictionaryModel)
+                    DictionaryTab(model: dictionaryModel)
                         .tabItem {
                             Label("Словарь", image: "CategoryTabIcon")
                         }

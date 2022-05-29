@@ -10,7 +10,6 @@ import AVFoundation
 
 
 struct DictionaryTab: View {
-    @Binding public var wordPairs: [WordPair]
     @ObservedObject public var model: DictionaryTabModel
     
     @State private var inputWord: String = ""
@@ -18,6 +17,7 @@ struct DictionaryTab: View {
     @State private var gainedWordPair: WordPair? = nil
     @State private var inputLanguage: Language = .english
     @State private var outputLanguage: Language = .russian
+    @EnvironmentObject private var wordPairStore: WordPairStore
     
     
     var body: some View {
@@ -33,7 +33,7 @@ struct DictionaryTab: View {
                 
                 if inputWord.isEmpty {
                     ForEach(model.categories, id: \.label.TitleText) { category in
-                        CategoryView(data: category, wordPairs: $wordPairs)
+                        CategoryView(data: category, wordPairs: $wordPairStore.wordPairs)
                             .padding(.vertical, 4.0)
                             .padding(.horizontal)
                     }
