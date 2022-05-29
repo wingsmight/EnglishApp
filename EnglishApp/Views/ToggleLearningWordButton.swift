@@ -17,6 +17,7 @@ struct ToggleLearningWordButton: View {
         ToggleCircleImage(isEnabled: $isEnabled, image: Image("Bell"), enabledColor: Color("AppYellow"), onTap: { newValue in
             if newValue {
                 self.wordPair!.state = .learning
+                self.wordPair!.isPushed = true
             } else {
                 self.wordPair!.state = .none
             }
