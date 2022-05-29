@@ -29,7 +29,8 @@ struct LearningTab: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach($wordPairStore.wordPairs, id: \.self) { wordPair in
+                        ForEach($wordPairStore.wordPairs.sorted(by: { $0.wrappedValue.ChangingDate < $1.wrappedValue.ChangingDate }),
+                                id: \.id) { wordPair in
                             if wordPair.wrappedValue.IsPushed {
                                 LearningWordPairRow(wordPair: wordPair)
                             }
@@ -37,7 +38,8 @@ struct LearningTab: View {
                         .onMove(perform: movePushedWords)
                         .onDelete(perform: removeWord)
                         
-                        ForEach($wordPairStore.wordPairs, id: \.self) { wordPair in
+                        ForEach($wordPairStore.wordPairs.sorted(by: { $0.wrappedValue.ChangingDate < $1.wrappedValue.ChangingDate }),
+                                id: \.id) { wordPair in
                             if wordPair.wrappedValue.State == .learning && !wordPair.wrappedValue.IsPushed {
                                 LearningWordPairRow(wordPair: wordPair)
                             }
