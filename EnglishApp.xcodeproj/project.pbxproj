@@ -24,6 +24,7 @@
 		CE7546882821028F0066917D /* RoundedRectangleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7546872821028F0066917D /* RoundedRectangleButtonStyle.swift */; };
 		CE75468A2821047E0066917D /* WordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7546892821047E0066917D /* WordCard.swift */; };
 		CE75D7862826B7EF00A6C2BD /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75D7852826B7EF00A6C2BD /* StringExt.swift */; };
+		CE7C5F8D28437E5E000EC36D /* EditModeExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C5F8C28437E5E000EC36D /* EditModeExt.swift */; };
 		CE7EB1FE2830EE1F0017C824 /* WordPairStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EB1FD2830EE1F0017C824 /* WordPairStore.swift */; };
 		CE87C079282C1F2D00B43572 /* BindingExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87C078282C1F2D00B43572 /* BindingExt.swift */; };
 		CE96E8EE282A66F900126B37 /* SynonymsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8ED282A66F900126B37 /* SynonymsApi.swift */; };
@@ -77,6 +78,7 @@
 		CE7546872821028F0066917D /* RoundedRectangleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButtonStyle.swift; sourceTree = "<group>"; };
 		CE7546892821047E0066917D /* WordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCard.swift; sourceTree = "<group>"; };
 		CE75D7852826B7EF00A6C2BD /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
+		CE7C5F8C28437E5E000EC36D /* EditModeExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModeExt.swift; sourceTree = "<group>"; };
 		CE7EB1FD2830EE1F0017C824 /* WordPairStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordPairStore.swift; sourceTree = "<group>"; };
 		CE87C078282C1F2D00B43572 /* BindingExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExt.swift; sourceTree = "<group>"; };
 		CE96E8ED282A66F900126B37 /* SynonymsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymsApi.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				CE87C078282C1F2D00B43572 /* BindingExt.swift */,
 				CE05B11A282F9ABB007AC708 /* ViewExt.swift */,
 				CE239A85283378790094F624 /* ColorExt.swift */,
+				CE7C5F8C28437E5E000EC36D /* EditModeExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				CE2E847E282E5ED700E8D43A /* Language.swift in Sources */,
 				CEE90838281FB65600E4EC8B /* Theme.swift in Sources */,
 				CE239A84283363B30094F624 /* ExcelParser.swift in Sources */,
+				CE7C5F8D28437E5E000EC36D /* EditModeExt.swift in Sources */,
 				CEE9084E2820017600E4EC8B /* WordPair.swift in Sources */,
 				CEF31926282BE1BF00C8287C /* ExampleListView.swift in Sources */,
 				CEAAEBB12821A48E00FFA3B9 /* TestSettingsTab.swift in Sources */,

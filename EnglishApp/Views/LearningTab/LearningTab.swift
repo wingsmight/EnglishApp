@@ -12,12 +12,13 @@ struct LearningTab: View {
     
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var localNotificationManager = LocalNotificationManager()
+    @State var editMode: EditMode = .inactive
     
     
     var body: some View {
         NavigationView {
             VStack {
-                Header()
+                Header(editMode: $editMode)
                 
                 if wordPairs.learningOnly.isEmpty {
                     Spacer()
@@ -35,19 +36,22 @@ struct LearningTab: View {
                             }
                         }
                         .onMove(perform: movePushedWords)
+                        .onDelete(perform: removeWord)
                         ForEach($wordPairs, id: \.self) { wordPair in
                             if wordPair.wrappedValue.state == .learning && !wordPair.wrappedValue.isPushed {
                                 LearningWordPairRow(wordPair: wordPair)
                             }
                         }
                         .onMove(perform: moveLearningWords)
+                        .onDelete(perform: removeWord)
                     }
-                    .environment(\.editMode, .constant(EditMode.active))
+                    .environment(\.editMode, $editMode)
                     .listStyle(.plain)
                 }
             }
             .animation(Animation.easeInOut(duration: 0.3), value: wordPairs.pushedOnly)
             .animation(Animation.easeInOut(duration: 0.3), value: wordPairs.learningOnly)
+            .animation(.spring(), value: editMode)
             .navigationBarTitle("На изучении")
             .navigationBarHidden(true)
         }
@@ -67,6 +71,14 @@ struct LearningTab: View {
     }
     func moveLearningWords(from source: IndexSet, to destination: Int) {
         wordPairs.move(fromOffsets: source, toOffset: destination)
+    }
+    func removeWord(at offsets: IndexSet) {
+        for offset in offsets{
+            if let index = wordPairs.firstIndex(of: wordPairs[offset]) {
+                wordPairs[index].isPushed = false
+                wordPairs[index].state = .none
+            }
+        }
     }
     func loadLearnedWordsFromNotification() {
         if let pushedWordsData = LocalNotificationManager.pushedWordsData {
@@ -135,11 +147,33 @@ struct LearningTab: View {
     }
     
     struct Header: View {
+        @Binding public var editMode: EditMode
+        
+        
         var body: some View {
             ZStack {
                 HStack {
                     Spacer()
+                    
+                    EditButton(editMode: $editMode)
+
                     SettingsView()
+                }
+            }
+        }
+        
+        struct EditButton: View {
+            @Binding public var editMode: EditMode
+            
+            
+            var body: some View {
+                Button {
+                    editMode.toggle()
+                } label: {
+                    Image(systemName: "pencil")
+                        .font(.title)
+                        .foregroundColor(.secondary)
+                        .padding()
                 }
             }
         }
