@@ -34,16 +34,20 @@ struct LearningTab: View {
                                 LearningWordPairRow(wordPair: wordPair)
                             }
                         }
+                        .onMove(perform: movePushedWords)
                         ForEach($wordPairs, id: \.self) { wordPair in
                             if wordPair.wrappedValue.state == .learning && !wordPair.wrappedValue.isPushed {
                                 LearningWordPairRow(wordPair: wordPair)
                             }
                         }
+                        .onMove(perform: moveLearningWords)
                     }
+                    .environment(\.editMode, .constant(EditMode.active))
                     .listStyle(.plain)
                 }
             }
-            .animation(Animation.easeInOut(duration: 0.3), value: wordPairs)
+            .animation(Animation.easeInOut(duration: 0.3), value: wordPairs.pushedOnly)
+            .animation(Animation.easeInOut(duration: 0.3), value: wordPairs.learningOnly)
             .navigationBarTitle("На изучении")
             .navigationBarHidden(true)
         }
@@ -58,6 +62,12 @@ struct LearningTab: View {
         }
     }
     
+    func movePushedWords(from source: IndexSet, to destination: Int) {
+        wordPairs.move(fromOffsets: source, toOffset: destination)
+    }
+    func moveLearningWords(from source: IndexSet, to destination: Int) {
+        wordPairs.move(fromOffsets: source, toOffset: destination)
+    }
     func loadLearnedWordsFromNotification() {
         if let pushedWordsData = LocalNotificationManager.pushedWordsData {
             if let pushedWordPairs = try? JSONDecoder().decode([WordPair].self, from: pushedWordsData) {
