@@ -20,6 +20,7 @@ struct ToggleLearnedWordButton: View {
             } else {
                 self.wordPair!.state = .none
             }
+            self.wordPair!.isPushed = false
         })
             .onChanged(of: wordPair?.state, perform: { newState in
                 isEnabled = newState == .learned
