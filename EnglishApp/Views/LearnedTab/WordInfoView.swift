@@ -12,6 +12,7 @@ struct WordInfoView: View {
     @State private var selectedOption: Option = .examples
     
     @Binding public var word: String
+    @Binding public var wordPair: WordPair
     
     
     var body: some View {
@@ -22,9 +23,9 @@ struct WordInfoView: View {
             
             switch selectedOption {
             case .synonyms:
-                SynonymListView(word: $word)
+                SynonymListView(word: $wordPair.Original)
             case .examples:
-                ExampleListView(word: $word)
+                ExampleListView(word: $wordPair.Original)
             }
         }
         .padding(.leading)
@@ -83,6 +84,6 @@ struct WordInfoView: View {
 
 struct WordInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        WordInfoView(word: .constant("Apple"))
+        WordInfoView(word: .constant("Apple"), wordPair: .constant(WordPair("Apple", "Яблоко")))
     }
 }

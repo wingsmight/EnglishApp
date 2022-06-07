@@ -22,7 +22,7 @@ struct WordCard: View {
             VStack {
                 OriginalWordBlock(wordPair: $wordPair)
                     .padding(.top, 100)
-                WordInfoView(word: $wordPair.Translation)
+                WordInfoView(word: $wordPair.Translation, wordPair: $wordPair)
                 Spacer()
             }
         }
@@ -50,20 +50,12 @@ struct WordCard: View {
     }
     
     struct Header: View { 
-        @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
-        
-        
         var body: some View {
             HStack {
                 Spacer()
-                Button {
-                    self.presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                        .font(.title)
-                        .padding()
-                }
-                .buttonStyle(.plain)
+                
+                CloseNavigationButton()
+                    .foregroundColor(.secondary)
             }
         }
     }

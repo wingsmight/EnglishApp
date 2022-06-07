@@ -66,9 +66,13 @@ struct LearnedTab: View {
     }
     
     struct RepeatWordsButton: View {
+        @EnvironmentObject private var wordPairStore: WordPairStore
+        @State private var linkActive: Bool = false
+        
+        
         var body: some View {
             Button {
-                // Action
+                linkActive.toggle()
             } label: {
                 HStack {
                     Spacer()
@@ -80,6 +84,12 @@ struct LearnedTab: View {
                 }
             }
             .buttonStyle(RoundedRectangleButtonStyle(color: .green))
+            .background(NavigationLink(destination: TestView(model: TestModel(wordPairs: wordPairStore.wordPairs)), isActive: $linkActive) {
+                EmptyView()
+            }
+                .isDetailLink(false)
+                .opacity(0.0)
+            )
         }
     }
     

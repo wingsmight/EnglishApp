@@ -40,7 +40,7 @@ struct DictionaryTab: View {
                 } else {
                     ZStack {
                         VStack {
-                            WordInfoView(word: $inputWord)
+                            WordInfoView(word: /*TODO: Translate($inputWord)*/$inputWord, wordPair: .constant(WordPair(inputWord, inputWord)))
                             
                             Spacer()
                         }

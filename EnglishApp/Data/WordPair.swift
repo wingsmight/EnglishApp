@@ -87,7 +87,8 @@ struct WordPair : Hashable, Identifiable, Codable, Equatable {
     public enum State: Int, Codable {
         case none,
              learning,
-             learned
+             learned,
+             forgotten
 
 
         public init(from decoder: Decoder) throws {
@@ -106,4 +107,8 @@ extension Array where Element == WordPair {
     var pushedOnly: [WordPair] {
         filter( { $0.IsPushed } )
     }
+    var forgottenOnly: [WordPair] {
+        filter( { $0.IsPushed } )
+    }
 }
+
