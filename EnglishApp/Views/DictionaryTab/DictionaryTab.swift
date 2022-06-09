@@ -75,7 +75,7 @@ struct DictionaryTab: View {
                 
                 HStack {
                     Spacer()
-                    SettingsView()
+                    SettingsButtonView()
                 }
             }
         }

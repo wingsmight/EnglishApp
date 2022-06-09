@@ -161,7 +161,7 @@ struct LearningTab: View {
                     
                     EditButton(editMode: $editMode)
 
-                    SettingsView()
+                    SettingsButtonView()
                 }
             }
         }

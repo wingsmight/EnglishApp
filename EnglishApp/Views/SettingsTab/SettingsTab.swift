@@ -11,7 +11,7 @@ struct SettingsTab: View {
     var body: some View {
         VStack {
             DividedVStack(alignment: .leading, spacing: 13) {
-                KeyValueView("Ваш часовой пояс", "+3 GMC Новосибирск")
+                KeyValueView("Ваш часовой пояс", timeZoneLabel)
                 KeyValueView("Слов в одном уведомлении", "2 ")
                 KeyValueView("Частота уведомлений", "Каждый час")
                 KeyValueView("Период уведомления", "10:00 – 22:00")
@@ -62,6 +62,10 @@ struct SettingsTab: View {
             Spacer()
         }
         .navigationTitle("Настройки")
+    }
+    
+    private var timeZoneLabel: String {
+        TimeZone.current.localizedName(for: .shortStandard, locale: Locale.current) ?? ""
     }
 }
 

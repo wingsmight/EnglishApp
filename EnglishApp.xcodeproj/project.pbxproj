@@ -56,7 +56,7 @@
 		CEE90843281FED7600E4EC8B /* LearningCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90842281FED7600E4EC8B /* LearningCategory.swift */; };
 		CEE90848281FFC3800E4EC8B /* LearningTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90847281FFC3800E4EC8B /* LearningTab.swift */; };
 		CEE9084A281FFC4300E4EC8B /* LearnedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90849281FFC4300E4EC8B /* LearnedTab.swift */; };
-		CEE9084C281FFD3900E4EC8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9084B281FFD3900E4EC8B /* SettingsView.swift */; };
+		CEE9084C281FFD3900E4EC8B /* SettingsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9084B281FFD3900E4EC8B /* SettingsButtonView.swift */; };
 		CEE9084E2820017600E4EC8B /* WordPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9084D2820017600E4EC8B /* WordPair.swift */; };
 		CEEFFDA02843E33F0025B3E4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFFD9F2843E33F0025B3E4 /* TestView.swift */; };
 		CEEFFDA42843E3790025B3E4 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFFDA32843E3790025B3E4 /* TestModel.swift */; };
@@ -114,7 +114,7 @@
 		CEE90842281FED7600E4EC8B /* LearningCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCategory.swift; sourceTree = "<group>"; };
 		CEE90847281FFC3800E4EC8B /* LearningTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTab.swift; sourceTree = "<group>"; };
 		CEE90849281FFC4300E4EC8B /* LearnedTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedTab.swift; sourceTree = "<group>"; };
-		CEE9084B281FFD3900E4EC8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CEE9084B281FFD3900E4EC8B /* SettingsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonView.swift; sourceTree = "<group>"; };
 		CEE9084D2820017600E4EC8B /* WordPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordPair.swift; sourceTree = "<group>"; };
 		CEEFFD9F2843E33F0025B3E4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		CEEFFDA32843E3790025B3E4 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 				CEE90845281FFC0C00E4EC8B /* LearningTab */,
 				CEE90844281FFBF900E4EC8B /* DictionaryTab */,
 				CEE90829281FB4CA00E4EC8B /* ContentView.swift */,
-				CEE9084B281FFD3900E4EC8B /* SettingsView.swift */,
+				CEE9084B281FFD3900E4EC8B /* SettingsButtonView.swift */,
 				CEFC7A802822A1BE0054DD9A /* WordPairRow.swift */,
 				CE05B116282F6966007AC708 /* WordControlPanel.swift */,
 				CE05B118282F8755007AC708 /* WordSpeakerView.swift */,
@@ -476,7 +476,7 @@
 				CEB3E7A32825A48900D6B686 /* ArrayExt.swift in Sources */,
 				CEEFFDA42843E3790025B3E4 /* TestModel.swift in Sources */,
 				CEAAEBB32821A55B00FFA3B9 /* KeyValueView.swift in Sources */,
-				CEE9084C281FFD3900E4EC8B /* SettingsView.swift in Sources */,
+				CEE9084C281FFD3900E4EC8B /* SettingsButtonView.swift in Sources */,
 				CEAAEBB62821A94100FFA3B9 /* SettingsTab.swift in Sources */,
 				CEEFFDA02843E33F0025B3E4 /* TestView.swift in Sources */,
 				CE05B11F282F9D5D007AC708 /* ToggleLearnedWordButton.swift in Sources */,
