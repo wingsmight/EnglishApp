@@ -39,7 +39,7 @@ struct SettingsTab: View {
                 }
 
                 
-                KeyValueView(Text("Слов в одном уведомлении")) {
+                KeyValueView(Text("Частота уведомлений")) {
                     Picker("Частота уведомлений", selection: $notificationFrequency) {
                         ForEach(NotificationFrequency.allCases, id: \.self) { value in
                             Text(value.localizedName)

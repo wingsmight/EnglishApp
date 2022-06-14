@@ -51,7 +51,11 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         
         let taskIdentifier = identifier
         
-        let timeInterval: TimeInterval = 60 * 60
+        var period: NotificationFrequency = .everyHour
+        if let rawPeriod = UserDefaults.standard.string(forKey: "notificationFrequency") {
+            period = NotificationFrequency(rawValue: rawPeriod) ?? .everyHour
+        }
+        let timeInterval: TimeInterval = TimeInterval(period.seconds)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: true)
         let request = UNNotificationRequest(identifier: taskIdentifier, content: content, trigger: trigger)
         
