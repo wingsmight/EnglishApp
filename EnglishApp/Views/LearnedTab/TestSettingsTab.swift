@@ -14,9 +14,9 @@ struct TestSettingsTab: View {
     var body: some View {
         VStack {
             List {
-                KeyValueView("Последние выученные", "20 слов")
-                KeyValueView("Ранее выученные", "15 слов")
-                KeyValueView("Повтор забытых (раз)", "3")
+                KeyValueText("Последние выученные", "20 слов")
+                KeyValueText("Ранее выученные", "15 слов")
+                KeyValueText("Повтор забытых (раз)", "3")
                 Toggle("Обратный перевод в тесте", isOn: $isReversedTranslation)
             }
             .listStyle(.inset)

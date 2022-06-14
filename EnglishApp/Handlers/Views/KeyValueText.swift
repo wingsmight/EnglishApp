@@ -8,7 +8,28 @@
 import SwiftUI
 
 
-struct KeyValueView: View {
+struct KeyValueView<Content>: View where Content: View {
+    private let key: Text
+    private let value: Content
+    
+    
+    init(_ key: Text, @ViewBuilder value: () -> Content) {
+      self.key = key
+      self.value = value()
+    }
+    
+    var body: some View {
+        HStack {
+            key
+            
+            Spacer()
+            
+            value
+        }
+    }
+}
+
+struct KeyValueText: View {
     private var pair: Pair
     
     
@@ -45,10 +66,10 @@ struct KeyValueView: View {
 }
 
 struct KeyValueView_Previews: PreviewProvider {
-    private static let exampleKey = KeyValueView.Pair("Key", "Value")
+    private static let exampleKey = KeyValueText.Pair("Key", "Value")
     
     
     static var previews: some View {
-        KeyValueView(exampleKey)
+        KeyValueText(exampleKey)
     }
 }
