@@ -124,28 +124,9 @@ struct LearningTab: View {
                 
                 Spacer()
                 
-                MoveWordPairToPushButton(isEnabled: $wordPair.IsPushed)
+                NotificationToggle(isEnabled: $wordPair.IsPushed)
                 
                 ToggleLearnedWordButton(wordPair: Binding<WordPair?>($wordPair))
-            }
-        }
-        
-        struct MoveWordPairToPushButton: View {
-            @Binding var isEnabled: Bool
-            
-            
-            var body: some View {
-                Button {
-                    isEnabled.toggle()
-                } label: {
-                    Image(systemName: isEnabled ? "play.fill" : "play")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 22)
-                        .padding(.horizontal, 5)
-                        .foregroundColor(isEnabled ? Color("AppGreen") : .primary)
-                }
-                .buttonStyle(.plain)
             }
         }
     }

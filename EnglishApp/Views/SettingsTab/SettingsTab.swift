@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct SettingsTab: View {
-    @AppStorage("pushWordCount") private var pushWordCount: Int = 4
+    private let minNotificationWordCount = 2
+    private let maxNotificationWordCount = 10
+    
+    
+    @AppStorage("notificationWordCount") private var notificationWordCount: Int = 4
     @AppStorage("notificationFrequency") private var notificationFrequency: NotificationFrequency = .everyHour
     @AppStorage("notificationStartTime") private var notificationStartTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
     @AppStorage("notificationFinishTime") private var notificationFinishTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
     
+    @State private var selectedNotificationWordCountIndex = 0
     @State private var isNotificationPeriodShowing = false
     
     
@@ -22,10 +27,14 @@ struct SettingsTab: View {
                 KeyValueText("Ваш часовой пояс", timeZoneLabel)
                 
                 KeyValueView(Text("Слов в одном уведомлении")) {
-                    Picker("Слов в одном уведомлении", selection: $pushWordCount) {
-                        ForEach(2..<(10 + 1)) {
+                    Picker("Слов в одном уведомлении", selection: $selectedNotificationWordCountIndex) {
+                        ForEach(minNotificationWordCount..<(maxNotificationWordCount + 1)) {
                             Text("\($0)")
                         }
+                    }
+                    .onChanged(of: selectedNotificationWordCountIndex) { newIndex in
+                        notificationWordCount = minNotificationWordCount + newIndex
+                        print("notificationWordCount = \(notificationWordCount)")
                     }
                 }
 
@@ -47,18 +56,16 @@ struct SettingsTab: View {
                 }
                 
                 Button {
-                    // Action
+                    // TODO: Action
                 } label: {
                     Text("Настройка теста")
                 }
                 
                 Button {
-                    // Action
+                    // TODO: Action
                 } label: {
                     Text("Поделиться")
                 }
-                
-                EmptyView()
             }
             .padding()
             
@@ -95,6 +102,9 @@ struct SettingsTab: View {
         .sheet(isPresented: $isNotificationPeriodShowing) {
             TimeIntervalPickerView(startTime: $notificationStartTime, finishTime: $notificationFinishTime, isShowing: $isNotificationPeriodShowing)
          }
+        .onAppear() {
+            selectedNotificationWordCountIndex = notificationWordCount - minNotificationWordCount
+        }
     }
     
     

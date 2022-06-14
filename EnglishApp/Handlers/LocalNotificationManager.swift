@@ -67,7 +67,7 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         
         self.center.add(request) { (error : Error?) in
             if let error = error {
-                // Handle any errors
+                // TODO: Handle any errors
             }
         }
     }
