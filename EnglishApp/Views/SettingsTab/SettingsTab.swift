@@ -55,11 +55,7 @@ struct SettingsTab: View {
                     }
                 }
                 
-                Button {
-                    // TODO: Action
-                } label: {
-                    Text("Настройка теста")
-                }
+                TestSettingsButton()
                 
                 Button {
                     shareApp()
@@ -70,7 +66,7 @@ struct SettingsTab: View {
             .padding()
             
             Button {
-                // Action
+                // TODO: Action
             } label: {
                 Label {
                     Text("Купить подписку")
@@ -84,7 +80,7 @@ struct SettingsTab: View {
             .padding()
             
             Button {
-                // Action
+                // TODO: Action
             } label: {
                 Label {
                     Text("Оплата в условиях ограничений")
@@ -108,6 +104,15 @@ struct SettingsTab: View {
     }
     
     
+    struct TestSettingsButton: View {
+        var body: some View {
+            NavigationLink(destination: TestSettingsTab()) {
+                Text("Настройка теста")
+            }
+        }
+    }
+    
+    
     private func shareApp() {
         guard let urlShare = URL(string: "https://www.apple.com/app-store/") else { return }
         let activityVC = UIActivityViewController(activityItems: [urlShare], applicationActivities: nil)
@@ -122,23 +127,6 @@ struct SettingsTab: View {
     
     private var timeZoneLabel: String {
         TimeZone.current.localizedName(for: .shortStandard, locale: Locale.current) ?? ""
-    }
-    
-    
-    var customLabel: some View {
-        HStack {
-            Image(systemName: "paperplane")
-            Text(String(1))
-            Spacer()
-            Text("⌵")
-                .offset(y: -4)
-        }
-        .foregroundColor(.white)
-        .font(.title)
-        .padding()
-        .frame(height: 32)
-        .background(Color.blue)
-        .cornerRadius(16)
     }
 }
 
