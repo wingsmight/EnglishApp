@@ -62,7 +62,7 @@ struct SettingsTab: View {
                 }
                 
                 Button {
-                    // TODO: Action
+                    shareApp()
                 } label: {
                     Text("Поделиться")
                 }
@@ -104,6 +104,18 @@ struct SettingsTab: View {
          }
         .onAppear() {
             selectedNotificationWordCountIndex = notificationWordCount - minNotificationWordCount
+        }
+    }
+    
+    
+    private func shareApp() {
+        guard let urlShare = URL(string: "https://developer.apple.com/xcode/swiftui/") else { return }
+        let activityVC = UIActivityViewController(activityItems: [urlShare], applicationActivities: nil)
+        
+        if #available(iOS 15.0, *) {
+            UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+        } else {
+            UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
         }
     }
     
