@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TestSettingsTab: View {
-    @State private var isReversedTranslation: Bool = true
+    @AppStorage("isReversedTranslation") private var isReversedTranslation: Bool = true
     
     
     var body: some View {

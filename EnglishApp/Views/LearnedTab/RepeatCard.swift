@@ -26,6 +26,7 @@ struct RepeatCard: View {
     @State private var offset = CGSize.zero
     @State private var isOriginalWordShowing = false
     @State private var isSwipedOut = false
+    @AppStorage("isReversedTranslation") private var isReversedTranslation: Bool = true
     
     
     var body: some View {
@@ -34,9 +35,9 @@ struct RepeatCard: View {
                 .cornerRadius(20)
             
             if isWatchingAnswer {
-                WatchingBody(wordPair: $wordPair, isOriginalWordShowing: $isOriginalWordShowing)
+                WatchingBody(wordPair: $wordPair, isOriginalWordShowing: IsOriginalWordShowing)
             } else {
-                UnwatchingBody(word: isOriginalWordShowing ? $wordPair.Original : $wordPair.Translation)
+                UnwatchingBody(word: IsOriginalWordShowing.wrappedValue ? $wordPair.Original : $wordPair.Translation)
             }
             
             Footer(isWatchingAnswer: $isWatchingAnswer, swipeCard: swipeCard)
@@ -61,7 +62,7 @@ struct RepeatCard: View {
     }
     
     
-    func swipeCard(width: CGFloat) {
+    private func swipeCard(width: CGFloat) {
         switch width {
         case -swipeAwayBorder...(-effectBorder):
             print("\(wordPair) forgotten")
@@ -84,12 +85,14 @@ struct RepeatCard: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             isOriginalWordShowing.toggle()
+            isWatchingAnswer = false
             index -= 1
             withAnimation(Animation.easeInOut(duration: swipeOutDuration)) {
                 offset = CGSize(width: 0, height: 0)
             }
         }
     }
+    
     private var backgroundColor: Color {
         switch offset.width {
         case -swipeAwayBorder...(-fillColorBorder):
@@ -99,6 +102,18 @@ struct RepeatCard: View {
         default:
             return Color("RepeatCardBackgroundColor")
         }
+    }
+    private var IsOriginalWordShowing: Binding<Bool> { Binding (
+        get: {
+            if isReversedTranslation {
+                return isOriginalWordShowing
+            } else {
+                return true
+            }
+        },
+        set: {
+            isOriginalWordShowing = $0
+        })
     }
     
     
