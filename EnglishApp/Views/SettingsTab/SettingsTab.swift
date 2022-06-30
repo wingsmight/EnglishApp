@@ -109,11 +109,11 @@ struct SettingsTab: View {
     
     
     private func shareApp() {
-        guard let urlShare = URL(string: "https://developer.apple.com/xcode/swiftui/") else { return }
+        guard let urlShare = URL(string: "https://www.apple.com/app-store/") else { return }
         let activityVC = UIActivityViewController(activityItems: [urlShare], applicationActivities: nil)
         
         if #available(iOS 15.0, *) {
-            UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+            UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: nil)
         } else {
             UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
         }

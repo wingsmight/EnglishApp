@@ -51,6 +51,7 @@
 		CEB3E7A32825A48900D6B686 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB3E7A22825A48900D6B686 /* ArrayExt.swift */; };
 		CEBBED942838026500812DFC /* DictionaryTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBED932838026500812DFC /* DictionaryTabModel.swift */; };
 		CEC2CC0D282132D800824926 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = CEC2CC0C282132D800824926 /* WrappingHStack */; };
+		CEDBB1DB286D80F600BA009B /* UIApplicationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDBB1DA286D80F600BA009B /* UIApplicationExt.swift */; };
 		CEE90828281FB4CA00E4EC8B /* EnglishAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90827281FB4CA00E4EC8B /* EnglishAppApp.swift */; };
 		CEE9082A281FB4CA00E4EC8B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90829281FB4CA00E4EC8B /* ContentView.swift */; };
 		CEE9082C281FB4CF00E4EC8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE9082B281FB4CF00E4EC8B /* Assets.xcassets */; };
@@ -113,6 +114,7 @@
 		CEB3E79E2825A17700D6B686 /* UrlExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlExt.swift; sourceTree = "<group>"; };
 		CEB3E7A22825A48900D6B686 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		CEBBED932838026500812DFC /* DictionaryTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTabModel.swift; sourceTree = "<group>"; };
+		CEDBB1DA286D80F600BA009B /* UIApplicationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExt.swift; sourceTree = "<group>"; };
 		CEE90824281FB4CA00E4EC8B /* EnglishApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnglishApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE90827281FB4CA00E4EC8B /* EnglishAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishAppApp.swift; sourceTree = "<group>"; };
 		CEE90829281FB4CA00E4EC8B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		CE6D106228226175004B2769 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CEDBB1DA286D80F600BA009B /* UIApplicationExt.swift */,
 				CEB3E79E2825A17700D6B686 /* UrlExt.swift */,
 				CEB3E7A22825A48900D6B686 /* ArrayExt.swift */,
 				CE75D7852826B7EF00A6C2BD /* StringExt.swift */,
@@ -483,6 +486,7 @@
 				CEE9082A281FB4CA00E4EC8B /* ContentView.swift in Sources */,
 				CE42D93D284F8C0900F5F751 /* AnimatableModifierCGFloat.swift in Sources */,
 				CE05B11D282F9D45007AC708 /* ToggleLearningWordButton.swift in Sources */,
+				CEDBB1DB286D80F600BA009B /* UIApplicationExt.swift in Sources */,
 				CE13BD48283A384700F404B7 /* LocalNotificationManager.swift in Sources */,
 				CE96E8F9282A8B0000126B37 /* UrlError.swift in Sources */,
 				CE75468A2821047E0066917D /* WordCard.swift in Sources */,
