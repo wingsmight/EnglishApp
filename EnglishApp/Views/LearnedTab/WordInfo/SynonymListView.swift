@@ -9,10 +9,10 @@ import SwiftUI
 import WrappingHStack
 
 struct SynonymListView: View {
-    @StateObject private var api = SynonymsApi()
-    @State private var synonymPairLists: [SynonymPairList] = []
-    
     @Binding public var word: String
+    
+    @StateObject private var api = SynonymsApi()
+    @StateObject private var model = SynonymListModel()
     
     
     var body: some View {
@@ -20,19 +20,12 @@ struct SynonymListView: View {
             if api.isLoaded {
                 if !api.synonymLists.isEmpty {
                     VStack{
-                        ForEach(synonymPairLists.indices, id: \.self) { i in
-                            SynonymsRow(i + 1, wordPairs: synonymPairLists[i].wordPairs)
+                        ForEach(model.pairLists.indices, id: \.self) { i in
+                            SynonymsRow(i + 1, wordPairs: model.pairLists[i].wordPairs)
                         }
                     }
                     .onAppear() {
-                        self.synonymPairLists = api.synonymLists.map { (synonyms) -> SynonymPairList in
-                            var wordPairs: [WordPair] = []
-                            for synonym in synonyms {
-                                wordPairs.append(WordPair(synonym, synonym))
-                            }
-                            
-                            return SynonymPairList(wordPairs: wordPairs)
-                        }
+                        model.getSynonyms(synonymLists: api.synonymLists)
                     }
                 } else {
                     Text("Дополнительные переводы отсутствуют")
@@ -87,9 +80,5 @@ struct SynonymListView: View {
                 .padding(.leading)
             }
         }
-    }
-    
-    struct SynonymPairList: Decodable {
-        let wordPairs: [WordPair]
     }
 }

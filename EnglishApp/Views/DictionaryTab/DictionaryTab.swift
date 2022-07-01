@@ -12,11 +12,6 @@ import AVFoundation
 struct DictionaryTab: View {
     @ObservedObject public var model: DictionaryTabModel
     
-    @State private var inputWord: String = ""
-    @State private var translatedWord: String? = nil
-    @State private var gainedWordPair: WordPair? = nil
-    @State private var inputLanguage: Language = .english
-    @State private var outputLanguage: Language = .russian
     @EnvironmentObject private var wordPairStore: WordPairStore
     
     
@@ -25,13 +20,13 @@ struct DictionaryTab: View {
             ScrollView([]) {
                 Header()
                 
-                LanguagePair(inputLanguage: $inputLanguage, outputLanguage: $outputLanguage)
+                LanguagePair(inputLanguage: $model.inputLanguage, outputLanguage: $model.outputLanguage)
                     .padding()
                 
-                WordInput(word: $inputWord)
+                WordInput(word: $model.inputWord, model: model)
                     .padding()
                 
-                if inputWord.isEmpty {
+                if model.inputWord.isEmpty {
                     ForEach(model.categories, id: \.label.TitleText) { category in
                         CategoryView(data: category, wordPairs: $wordPairStore.wordPairs)
                             .padding(.vertical, 4.0)
@@ -40,7 +35,7 @@ struct DictionaryTab: View {
                 } else {
                     ZStack {
                         VStack {
-                            WordInfoView(word: /*TODO: Translate($inputWord)*/$inputWord, wordPair: .constant(WordPair(inputWord, inputWord)))
+                            WordInfoView(word: $model.outputWord, wordPair: .constant(WordPair(model.inputWord, model.inputWord)))
                             
                             Spacer()
                         }
@@ -49,9 +44,9 @@ struct DictionaryTab: View {
                             Spacer()
                             
                             VStack {
-                                WordControlPanel(wordPair: $gainedWordPair)
+                                WordControlPanel(wordPair: $model.gainedWordPair)
                                     .padding(.horizontal)
-                                    .disabled(gainedWordPair == nil)
+                                    .disabled(model.gainedWordPair == nil)
                                 
                                 Spacer()
                             }
@@ -115,10 +110,15 @@ struct DictionaryTab: View {
 
     struct WordInput: View {
         @Binding var word: String
+        @ObservedObject var model: DictionaryTabModel
         
         var body: some View {
             ZStack {
                 TextField("Текст", text: $word)
+                    .onChanged(of: word) { newValue in
+                        print(newValue)
+                        model.translate()
+                    }
                     .padding()
                     .frame(height: 110)
                     .background(Color(.systemGray5))

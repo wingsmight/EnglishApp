@@ -19,4 +19,10 @@ enum Language: String, CaseIterable, Equatable {
     var localizedName: LocalizedStringKey {
         LocalizedStringKey(rawValue)
     }
+    var short: String {
+        switch self {
+        case .english: return "en"
+        case .russian: return "ru"
+        }
+    }
 }

@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct ExampleListView: View {
-    @StateObject private var api = ExamplesApi()
-    
     @Binding public var word: String
+    
+    @StateObject private var api = ExamplesApi()
+    @StateObject private var model = ExampleListModel()
     
     
     var body: some View {
         VStack {
             if api.isLoaded {
                 if !api.examples.isEmpty {
-                    ForEach(api.examples.indices, id: \.self) { i in
-                        ExampleRow(i + 1, sentence: api.examples[i])
+                    VStack {
+                        ForEach(model.examplePairs.indices, id: \.self) { i in
+                            ExampleRow(number: i + 1, examplePair: model.examplePairs[i])
+                        }
+                    }
+                    .onAppear() {
+                        model.getExamplePairs(api.examples)
                     }
                 } else {
                     Text("Примеры отсутствуют")
@@ -37,26 +43,26 @@ struct ExampleListView: View {
     
     
     struct ExampleRow: View {
-        private var number: Int
-        private var sentence: String
-        
-        
-        internal init(_ number: Int, sentence: String) {
-            self.number = number
-            self.sentence = sentence
-        }
+        public var number: Int
+        public var examplePair: WordPair
         
         
         var body: some View {
-            HStack {
-                Text(number.description)
-                    .font(Font.body)
-                    .foregroundColor(.secondary)
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(number.description)
+                        .font(Font.body)
+                        .foregroundColor(.secondary)
 
-                Text(sentence)
-                    .padding(.trailing, 3)
+                    Text(examplePair.Original)
+                        .padding(.trailing, 3)
 
-                Spacer()
+                    Spacer()
+                }
+                .padding(.horizontal, 3)
+                
+                Text(examplePair.Translation)
+                    .padding(.leading, 20)
             }
             .padding()
         }

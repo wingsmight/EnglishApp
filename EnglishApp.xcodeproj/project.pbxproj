@@ -52,6 +52,10 @@
 		CEBBED942838026500812DFC /* DictionaryTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBED932838026500812DFC /* DictionaryTabModel.swift */; };
 		CEC2CC0D282132D800824926 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = CEC2CC0C282132D800824926 /* WrappingHStack */; };
 		CEDBB1DB286D80F600BA009B /* UIApplicationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDBB1DA286D80F600BA009B /* UIApplicationExt.swift */; };
+		CEDBB1DD286DCF6D00BA009B /* TranslationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDBB1DC286DCF6D00BA009B /* TranslationApi.swift */; };
+		CEDBB1E0286F152C00BA009B /* SynonymListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDBB1DF286F152C00BA009B /* SynonymListModel.swift */; };
+		CEDBB1E2286F167F00BA009B /* WordPairList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDBB1E1286F167F00BA009B /* WordPairList.swift */; };
+		CEDBB1E4286F564B00BA009B /* ExampleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDBB1E3286F564A00BA009B /* ExampleListModel.swift */; };
 		CEE90828281FB4CA00E4EC8B /* EnglishAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90827281FB4CA00E4EC8B /* EnglishAppApp.swift */; };
 		CEE9082A281FB4CA00E4EC8B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90829281FB4CA00E4EC8B /* ContentView.swift */; };
 		CEE9082C281FB4CF00E4EC8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE9082B281FB4CF00E4EC8B /* Assets.xcassets */; };
@@ -115,6 +119,10 @@
 		CEB3E7A22825A48900D6B686 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		CEBBED932838026500812DFC /* DictionaryTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTabModel.swift; sourceTree = "<group>"; };
 		CEDBB1DA286D80F600BA009B /* UIApplicationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExt.swift; sourceTree = "<group>"; };
+		CEDBB1DC286DCF6D00BA009B /* TranslationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationApi.swift; sourceTree = "<group>"; };
+		CEDBB1DF286F152C00BA009B /* SynonymListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymListModel.swift; sourceTree = "<group>"; };
+		CEDBB1E1286F167F00BA009B /* WordPairList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordPairList.swift; sourceTree = "<group>"; };
+		CEDBB1E3286F564A00BA009B /* ExampleListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleListModel.swift; sourceTree = "<group>"; };
 		CEE90824281FB4CA00E4EC8B /* EnglishApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnglishApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE90827281FB4CA00E4EC8B /* EnglishAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishAppApp.swift; sourceTree = "<group>"; };
 		CEE90829281FB4CA00E4EC8B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -180,6 +188,7 @@
 			children = (
 				CE96E8FA282A8DD400126B37 /* DictionaryApis */,
 				CE96E8F7282A8AE900126B37 /* Errors */,
+				CEDBB1DC286DCF6D00BA009B /* TranslationApi.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -225,6 +234,15 @@
 				CEEFFDA12843E3600025B3E4 /* DictionaryTab */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CEDBB1DE286F151200BA009B /* WordInfo */ = {
+			isa = PBXGroup;
+			children = (
+				CEDBB1DF286F152C00BA009B /* SynonymListModel.swift */,
+				CEDBB1E3286F564A00BA009B /* ExampleListModel.swift */,
+			);
+			path = WordInfo;
 			sourceTree = "<group>";
 		};
 		CEE9081B281FB4CA00E4EC8B = {
@@ -323,6 +341,7 @@
 				CE96E8F3282A6BE600126B37 /* Word.swift */,
 				CE2E847D282E5ED700E8D43A /* Language.swift */,
 				CE9235F22858763E00C8500F /* NotificationFrequency.swift */,
+				CEDBB1E1286F167F00BA009B /* WordPairList.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -370,6 +389,7 @@
 		CEEFFDA22843E3670025B3E4 /* LearnedTab */ = {
 			isa = PBXGroup;
 			children = (
+				CEDBB1DE286F151200BA009B /* WordInfo */,
 				CEEFFDA32843E3790025B3E4 /* TestModel.swift */,
 			);
 			path = LearnedTab;
@@ -466,9 +486,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEDBB1E2286F167F00BA009B /* WordPairList.swift in Sources */,
 				CE96E8F4282A6BE600126B37 /* Word.swift in Sources */,
 				CE239A86283378790094F624 /* ColorExt.swift in Sources */,
 				CE7066032822F40A00ACE3A5 /* ToggleCircleImage.swift in Sources */,
+				CEDBB1E0286F152C00BA009B /* SynonymListModel.swift in Sources */,
 				CE96E8F0282A670700126B37 /* ExamplesApi.swift in Sources */,
 				CEAAEBAF2821A3AA00FFA3B9 /* RepeatingFinish.swift in Sources */,
 				CE2E847E282E5ED700E8D43A /* Language.swift in Sources */,
@@ -484,6 +506,7 @@
 				CEB3E79F2825A17700D6B686 /* UrlExt.swift in Sources */,
 				CE96E8EE282A66F900126B37 /* SynonymsApi.swift in Sources */,
 				CEE9082A281FB4CA00E4EC8B /* ContentView.swift in Sources */,
+				CEDBB1E4286F564B00BA009B /* ExampleListModel.swift in Sources */,
 				CE42D93D284F8C0900F5F751 /* AnimatableModifierCGFloat.swift in Sources */,
 				CE05B11D282F9D45007AC708 /* ToggleLearningWordButton.swift in Sources */,
 				CEDBB1DB286D80F600BA009B /* UIApplicationExt.swift in Sources */,
@@ -514,6 +537,7 @@
 				CEE9083C281FB6A900E4EC8B /* Tab.swift in Sources */,
 				CE9235F928589B0300C8500F /* Time.swift in Sources */,
 				CE9235F52858998000C8500F /* TimeIntervalPickerView.swift in Sources */,
+				CEDBB1DD286DCF6D00BA009B /* TranslationApi.swift in Sources */,
 				CEE9084A281FFC4300E4EC8B /* LearnedTab.swift in Sources */,
 				CEE90840281FB89900E4EC8B /* DictionaryTab.swift in Sources */,
 				CE9235F728589A1300C8500F /* DateExt.swift in Sources */,

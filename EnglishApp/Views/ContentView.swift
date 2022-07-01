@@ -17,7 +17,7 @@ struct ContentView: View {
         TabBadge(count: 22, backgroundColor: Color("AppYellow")),
         TabBadge(count: 33, backgroundColor: Color("AppGreen")),
     ]
-    @StateObject private var dictionaryModel = DictionaryTabModel()
+    @StateObject private var dictionaryModel = DictionaryTab.DictionaryTabModel()
     
     
     var body: some View {
