@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ToggleLearningWordButton: View {
+    @Binding public var wordPair: WordPair?
+    
     @AppStorage("notificationWordCount") private var notificationWordCount: Int = 4
     @EnvironmentObject private var wordPairStore: WordPairStore
     @State private var isEnabled: Bool = false
-
-    @Binding public var wordPair: WordPair?
     
     
     var body: some View {
@@ -23,6 +23,10 @@ struct ToggleLearningWordButton: View {
                 }
                 
                 self.wordPair!.State = .learning
+                
+                if !wordPairStore.wordPairs.contains(self.wordPair!) {
+                    wordPairStore.wordPairs.append(self.wordPair!)
+                }
             } else {
                 self.wordPair!.State = .none
             }

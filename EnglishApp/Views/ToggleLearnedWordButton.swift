@@ -10,6 +10,7 @@ import SwiftUI
 struct ToggleLearnedWordButton: View {
     @Binding public var wordPair: WordPair?
     
+    @EnvironmentObject private var wordPairStore: WordPairStore
     @State private var isEnabled: Bool = false
     
     
@@ -21,6 +22,10 @@ struct ToggleLearnedWordButton: View {
                 self.wordPair!.State = .none
             }
             self.wordPair!.IsPushed = false
+            
+            if !wordPairStore.wordPairs.contains(self.wordPair!) {
+                wordPairStore.wordPairs.append(self.wordPair!)
+            }
         })
             .onChanged(of: wordPair?.State, perform: { newState in
                 isEnabled = newState == .learned
