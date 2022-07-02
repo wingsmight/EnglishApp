@@ -10,9 +10,12 @@ import WrappingHStack
 
 struct SynonymListView: View {
     @Binding public var word: String
+    @Binding public var originalLanguage: Language
     
-    @StateObject private var api = SynonymsApi()
+    @StateObject private var englishApi = EnglishSynonymsApi()
+    @StateObject private var russianApi = RussianSynonymsApi()
     @StateObject private var model = SynonymListModel()
+    @State private var api: ISynonymsApi = EnglishSynonymsApi()
     
     
     var body: some View {
@@ -25,7 +28,7 @@ struct SynonymListView: View {
                         }
                     }
                     .onAppear() {
-                        model.getSynonyms(synonymLists: api.synonymLists)
+                        model.getSynonyms(synonymLists: api.synonymLists, translationLanguage: originalLanguage.opposite)
                     }
                 } else {
                     Text("Дополнительные переводы отсутствуют")
@@ -38,6 +41,13 @@ struct SynonymListView: View {
             }
         }
         .task(id: word) {
+            switch originalLanguage {
+            case .english:
+                api = englishApi
+            case .russian:
+                api = russianApi
+            }
+            
             await api.loadSynonyms(word: word)
         }
     }

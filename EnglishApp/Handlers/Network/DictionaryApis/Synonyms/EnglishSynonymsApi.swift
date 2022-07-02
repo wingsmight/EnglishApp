@@ -8,8 +8,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor
-class SynonymsApi: ObservableObject {
+class EnglishSynonymsApi: ObservableObject, ISynonymsApi {
     private let baseUrl = "https://www.wordreference.com/synonyms/"
     
     @Published public var synonymLists: [[String]] = []

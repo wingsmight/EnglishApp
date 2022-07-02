@@ -126,7 +126,7 @@ struct RepeatCard: View {
             VStack {
                 WordPreview(word: isOriginalWordShowing ? $wordPair.Original : $wordPair.Translation)
                 
-                WordInfoView(word: isOriginalWordShowing ? $wordPair.Translation : $wordPair.Original, wordPair: $wordPair)
+                WordInfoView(word: isOriginalWordShowing ? $wordPair.Translation : $wordPair.Original, wordLanguage: .constant(isOriginalWordShowing ? .english : .russian), wordPair: $wordPair)
                     .foregroundColor(.black)
                 
                 Spacer()

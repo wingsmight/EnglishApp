@@ -22,7 +22,7 @@ struct WordCard: View {
             VStack {
                 OriginalWordBlock(wordPair: $wordPair)
                     .padding(.top, 100)
-                WordInfoView(word: $wordPair.Translation, wordPair: $wordPair)
+                WordInfoView(word: $wordPair.Translation, wordLanguage: .constant(.english), wordPair: $wordPair)
                 Spacer()
             }
         }
@@ -60,10 +60,10 @@ struct WordCard: View {
         }
     }
 }
-//
-//struct WordCard_Previews: PreviewProvider {
-//    private static let wordPair = WordPair("Bag", "Сумка")
-//    static var previews: some View {
-//        WordCard(wordPair: wordPair)
-//    }
-//}
+
+struct WordCard_Previews: PreviewProvider {
+    private static let wordPair = WordPair("Bag", "Сумка")
+    static var previews: some View {
+        WordCard(wordPair: .constant(wordPair))
+    }
+}

@@ -9,9 +9,12 @@ import SwiftUI
 
 struct ExampleListView: View {
     @Binding public var word: String
+    @Binding public var originalLanguage: Language
     
-    @StateObject private var api = ExamplesApi()
+    @StateObject private var englishApi = EnglishExamplesApi()
+    @StateObject private var russianApi = RussianExamplesApi()
     @StateObject private var model = ExampleListModel()
+    @State private var api: IExamplesApi = EnglishExamplesApi()
     
     
     var body: some View {
@@ -24,7 +27,7 @@ struct ExampleListView: View {
                         }
                     }
                     .onAppear() {
-                        model.getExamplePairs(api.examples)
+                        model.getExamplePairs(api.examples, translationLanguage: originalLanguage.opposite)
                     }
                 } else {
                     Text("Примеры отсутствуют")
@@ -37,6 +40,15 @@ struct ExampleListView: View {
             }
         }
         .task(id: word) {
+            switch originalLanguage {
+            case .english:
+                api = englishApi
+            case .russian:
+                api = russianApi
+            }
+            
+            print(api)
+            
             await api.loadExamples(word: word)
         }
     }

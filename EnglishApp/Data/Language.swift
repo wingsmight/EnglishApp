@@ -25,4 +25,12 @@ enum Language: String, CaseIterable, Equatable {
         case .russian: return "ru"
         }
     }
+    var opposite: Language {
+        switch self {
+        case .english:
+            return .russian
+        case .russian:
+            return .english
+        }
+    }
 }

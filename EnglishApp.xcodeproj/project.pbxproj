@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CE003D5028700F140030E46F /* LanguageDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE003D4F28700F140030E46F /* LanguageDetection.swift */; };
+		CE003D54287022BE0030E46F /* RussianExamplesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE003D53287022BE0030E46F /* RussianExamplesApi.swift */; };
+		CE003D56287047980030E46F /* RussianSynonymsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE003D55287047980030E46F /* RussianSynonymsApi.swift */; };
+		CE003D58287086B80030E46F /* ISynonymsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE003D57287086B80030E46F /* ISynonymsApi.swift */; };
+		CE003D5A287089DA0030E46F /* IExamplesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE003D59287089DA0030E46F /* IExamplesApi.swift */; };
 		CE05B117282F6966007AC708 /* WordControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B116282F6966007AC708 /* WordControlPanel.swift */; };
 		CE05B119282F8755007AC708 /* WordSpeakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B118282F8755007AC708 /* WordSpeakerView.swift */; };
 		CE05B11B282F9ABB007AC708 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B11A282F9ABB007AC708 /* ViewExt.swift */; };
@@ -35,8 +39,8 @@
 		CE9235F52858998000C8500F /* TimeIntervalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9235F42858998000C8500F /* TimeIntervalPickerView.swift */; };
 		CE9235F728589A1300C8500F /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9235F628589A1300C8500F /* DateExt.swift */; };
 		CE9235F928589B0300C8500F /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9235F828589B0300C8500F /* Time.swift */; };
-		CE96E8EE282A66F900126B37 /* SynonymsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8ED282A66F900126B37 /* SynonymsApi.swift */; };
-		CE96E8F0282A670700126B37 /* ExamplesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8EF282A670700126B37 /* ExamplesApi.swift */; };
+		CE96E8EE282A66F900126B37 /* EnglishSynonymsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8ED282A66F900126B37 /* EnglishSynonymsApi.swift */; };
+		CE96E8F0282A670700126B37 /* EnglishExamplesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8EF282A670700126B37 /* EnglishExamplesApi.swift */; };
 		CE96E8F2282A67D000126B37 /* HtmlRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8F1282A67D000126B37 /* HtmlRequestError.swift */; };
 		CE96E8F4282A6BE600126B37 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8F3282A6BE600126B37 /* Word.swift */; };
 		CE96E8F6282A862500126B37 /* URLSessionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96E8F5282A862500126B37 /* URLSessionExt.swift */; };
@@ -79,6 +83,10 @@
 
 /* Begin PBXFileReference section */
 		CE003D4F28700F140030E46F /* LanguageDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDetection.swift; sourceTree = "<group>"; };
+		CE003D53287022BE0030E46F /* RussianExamplesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianExamplesApi.swift; sourceTree = "<group>"; };
+		CE003D55287047980030E46F /* RussianSynonymsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianSynonymsApi.swift; sourceTree = "<group>"; };
+		CE003D57287086B80030E46F /* ISynonymsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISynonymsApi.swift; sourceTree = "<group>"; };
+		CE003D59287089DA0030E46F /* IExamplesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IExamplesApi.swift; sourceTree = "<group>"; };
 		CE05B116282F6966007AC708 /* WordControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordControlPanel.swift; sourceTree = "<group>"; };
 		CE05B118282F8755007AC708 /* WordSpeakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSpeakerView.swift; sourceTree = "<group>"; };
 		CE05B11A282F9ABB007AC708 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
@@ -104,8 +112,8 @@
 		CE9235F42858998000C8500F /* TimeIntervalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalPickerView.swift; sourceTree = "<group>"; };
 		CE9235F628589A1300C8500F /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		CE9235F828589B0300C8500F /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
-		CE96E8ED282A66F900126B37 /* SynonymsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymsApi.swift; sourceTree = "<group>"; };
-		CE96E8EF282A670700126B37 /* ExamplesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesApi.swift; sourceTree = "<group>"; };
+		CE96E8ED282A66F900126B37 /* EnglishSynonymsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishSynonymsApi.swift; sourceTree = "<group>"; };
+		CE96E8EF282A670700126B37 /* EnglishExamplesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishExamplesApi.swift; sourceTree = "<group>"; };
 		CE96E8F1282A67D000126B37 /* HtmlRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlRequestError.swift; sourceTree = "<group>"; };
 		CE96E8F3282A6BE600126B37 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		CE96E8F5282A862500126B37 /* URLSessionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExt.swift; sourceTree = "<group>"; };
@@ -160,6 +168,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE003D512870207E0030E46F /* Synonyms */ = {
+			isa = PBXGroup;
+			children = (
+				CE96E8ED282A66F900126B37 /* EnglishSynonymsApi.swift */,
+				CE003D55287047980030E46F /* RussianSynonymsApi.swift */,
+				CE003D57287086B80030E46F /* ISynonymsApi.swift */,
+			);
+			path = Synonyms;
+			sourceTree = "<group>";
+		};
+		CE003D522870208E0030E46F /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				CE96E8EF282A670700126B37 /* EnglishExamplesApi.swift */,
+				CE003D53287022BE0030E46F /* RussianExamplesApi.swift */,
+				CE003D59287089DA0030E46F /* IExamplesApi.swift */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
 		CE239A82283363960094F624 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,8 +243,8 @@
 		CE96E8FA282A8DD400126B37 /* DictionaryApis */ = {
 			isa = PBXGroup;
 			children = (
-				CE96E8ED282A66F900126B37 /* SynonymsApi.swift */,
-				CE96E8EF282A670700126B37 /* ExamplesApi.swift */,
+				CE003D522870208E0030E46F /* Examples */,
+				CE003D512870207E0030E46F /* Synonyms */,
 			);
 			path = DictionaryApis;
 			sourceTree = "<group>";
@@ -494,7 +522,7 @@
 				CE239A86283378790094F624 /* ColorExt.swift in Sources */,
 				CE7066032822F40A00ACE3A5 /* ToggleCircleImage.swift in Sources */,
 				CEDBB1E0286F152C00BA009B /* SynonymListModel.swift in Sources */,
-				CE96E8F0282A670700126B37 /* ExamplesApi.swift in Sources */,
+				CE96E8F0282A670700126B37 /* EnglishExamplesApi.swift in Sources */,
 				CEAAEBAF2821A3AA00FFA3B9 /* RepeatingFinish.swift in Sources */,
 				CE2E847E282E5ED700E8D43A /* Language.swift in Sources */,
 				CEE90838281FB65600E4EC8B /* Theme.swift in Sources */,
@@ -504,16 +532,18 @@
 				CEE9084E2820017600E4EC8B /* WordPair.swift in Sources */,
 				CEF31926282BE1BF00C8287C /* ExampleListView.swift in Sources */,
 				CEAAEBB12821A48E00FFA3B9 /* TestSettingsTab.swift in Sources */,
+				CE003D56287047980030E46F /* RussianSynonymsApi.swift in Sources */,
 				CE87C079282C1F2D00B43572 /* BindingExt.swift in Sources */,
 				CEAAEBA928216DF300FFA3B9 /* VerticalLabelStyle.swift in Sources */,
 				CEB3E79F2825A17700D6B686 /* UrlExt.swift in Sources */,
-				CE96E8EE282A66F900126B37 /* SynonymsApi.swift in Sources */,
+				CE96E8EE282A66F900126B37 /* EnglishSynonymsApi.swift in Sources */,
 				CEE9082A281FB4CA00E4EC8B /* ContentView.swift in Sources */,
 				CEDBB1E4286F564B00BA009B /* ExampleListModel.swift in Sources */,
 				CE42D93D284F8C0900F5F751 /* AnimatableModifierCGFloat.swift in Sources */,
 				CE05B11D282F9D45007AC708 /* ToggleLearningWordButton.swift in Sources */,
 				CEDBB1DB286D80F600BA009B /* UIApplicationExt.swift in Sources */,
 				CE13BD48283A384700F404B7 /* LocalNotificationManager.swift in Sources */,
+				CE003D58287086B80030E46F /* ISynonymsApi.swift in Sources */,
 				CE96E8F9282A8B0000126B37 /* UrlError.swift in Sources */,
 				CE75468A2821047E0066917D /* WordCard.swift in Sources */,
 				CE75D7862826B7EF00A6C2BD /* StringExt.swift in Sources */,
@@ -538,12 +568,14 @@
 				CE4138152858B11A00A85D25 /* NotificationToggle.swift in Sources */,
 				CE96E8F2282A67D000126B37 /* HtmlRequestError.swift in Sources */,
 				CEE9083C281FB6A900E4EC8B /* Tab.swift in Sources */,
+				CE003D54287022BE0030E46F /* RussianExamplesApi.swift in Sources */,
 				CE9235F928589B0300C8500F /* Time.swift in Sources */,
 				CE9235F52858998000C8500F /* TimeIntervalPickerView.swift in Sources */,
 				CEDBB1DD286DCF6D00BA009B /* TranslationApi.swift in Sources */,
 				CEE9084A281FFC4300E4EC8B /* LearnedTab.swift in Sources */,
 				CEE90840281FB89900E4EC8B /* DictionaryTab.swift in Sources */,
 				CE003D5028700F140030E46F /* LanguageDetection.swift in Sources */,
+				CE003D5A287089DA0030E46F /* IExamplesApi.swift in Sources */,
 				CE9235F728589A1300C8500F /* DateExt.swift in Sources */,
 				CE96E8F6282A862500126B37 /* URLSessionExt.swift in Sources */,
 				CEF31928282BE1E200C8287C /* SynonymListView.swift in Sources */,

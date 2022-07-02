@@ -9,7 +9,7 @@ import Foundation
 import NaturalLanguage
 
 public final class LanguageDetection {
-    public static func detectLanguage(for string: String) -> String? {
+    static func detectLanguageCode(for string: String) -> String? {
         let recognizer = NLLanguageRecognizer()
         recognizer.processString(string)
         guard var languageCode = recognizer.dominantLanguage?.rawValue else { return nil }
@@ -17,5 +17,12 @@ public final class LanguageDetection {
             languageCode = "ru"
         }
         return languageCode
+    }
+    static func detectLanguage(for string: String) -> Language {
+        let languageCode = detectLanguageCode(for: string)
+        switch languageCode {
+        case "ru", "uk": return .russian
+        default: return .english
+        }
     }
 }

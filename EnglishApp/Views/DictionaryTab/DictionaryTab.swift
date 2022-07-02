@@ -35,7 +35,7 @@ struct DictionaryTab: View {
                 } else if !model.outputWord.isEmpty {
                     ZStack {
                         VStack {
-                            WordInfoView(word: $model.outputWord, wordPair: $model.gainedWordPair)
+                            WordInfoView(word: $model.outputWord, wordLanguage: $model.inputLanguage, wordPair: $model.gainedWordPair)
                             
                             Spacer()
                         }

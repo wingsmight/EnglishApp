@@ -13,7 +13,7 @@ extension SynonymListView {
         @Published public var pairLists: [WordPairList] = []
         
 
-        public func getSynonyms(synonymLists: [[String]]) {
+        public func getSynonyms(synonymLists: [[String]], translationLanguage: Language) {
             pairLists = synonymLists.map { (synonyms) -> WordPairList in
                 var wordPairs: [WordPair] = []
                 for synonym in synonyms {
@@ -25,7 +25,7 @@ extension SynonymListView {
             
             for pairListIndex in 0..<pairLists.count {
                 for wordPairIndex in 0..<pairLists[pairListIndex].wordPairs.count {
-                    TranslationApi.translate(pairLists[pairListIndex].wordPairs[wordPairIndex].Original, to: .russian) { translatedSynonym in
+                    TranslationApi.translate(pairLists[pairListIndex].wordPairs[wordPairIndex].Original, to: translationLanguage) { translatedSynonym in
                         DispatchQueue.main.async {
                             self.pairLists[pairListIndex].wordPairs[wordPairIndex].Translation = translatedSynonym
                         }

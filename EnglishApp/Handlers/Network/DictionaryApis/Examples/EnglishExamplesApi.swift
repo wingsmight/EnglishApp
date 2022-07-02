@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @MainActor
-final class ExamplesApi: ObservableObject {
+final class EnglishExamplesApi: ObservableObject, IExamplesApi {
     private let baseUrl = "https://www.wordreference.com/definition/"
     
     @Published public var examples: [String] = []
@@ -64,6 +64,7 @@ final class ExamplesApi: ObservableObject {
         }
         
         examples = gainedExamples
+        print("\(examples) for \(word)")
         isLoaded = true
     }
 }
