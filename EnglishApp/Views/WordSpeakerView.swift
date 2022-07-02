@@ -26,7 +26,7 @@ struct WordSpeakerView: View {
     
     func speak(word: String) {
         let utterance = AVSpeechUtterance(string: word)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.voice = AVSpeechSynthesisVoice(language: LanguageDetection.detectLanguage(for: word))
 
         let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(utterance)

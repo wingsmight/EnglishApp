@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE003D5028700F140030E46F /* LanguageDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE003D4F28700F140030E46F /* LanguageDetection.swift */; };
 		CE05B117282F6966007AC708 /* WordControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B116282F6966007AC708 /* WordControlPanel.swift */; };
 		CE05B119282F8755007AC708 /* WordSpeakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B118282F8755007AC708 /* WordSpeakerView.swift */; };
 		CE05B11B282F9ABB007AC708 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05B11A282F9ABB007AC708 /* ViewExt.swift */; };
@@ -77,6 +78,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE003D4F28700F140030E46F /* LanguageDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDetection.swift; sourceTree = "<group>"; };
 		CE05B116282F6966007AC708 /* WordControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordControlPanel.swift; sourceTree = "<group>"; };
 		CE05B118282F8755007AC708 /* WordSpeakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSpeakerView.swift; sourceTree = "<group>"; };
 		CE05B11A282F9ABB007AC708 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				CEE90837281FB65600E4EC8B /* Theme.swift */,
 				CE13BD47283A384700F404B7 /* LocalNotificationManager.swift */,
 				CE9235F828589B0300C8500F /* Time.swift */,
+				CE003D4F28700F140030E46F /* LanguageDetection.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				CEDBB1DD286DCF6D00BA009B /* TranslationApi.swift in Sources */,
 				CEE9084A281FFC4300E4EC8B /* LearnedTab.swift in Sources */,
 				CEE90840281FB89900E4EC8B /* DictionaryTab.swift in Sources */,
+				CE003D5028700F140030E46F /* LanguageDetection.swift in Sources */,
 				CE9235F728589A1300C8500F /* DateExt.swift in Sources */,
 				CE96E8F6282A862500126B37 /* URLSessionExt.swift in Sources */,
 				CEF31928282BE1E200C8287C /* SynonymListView.swift in Sources */,

@@ -32,10 +32,10 @@ struct DictionaryTab: View {
                             .padding(.vertical, 4.0)
                             .padding(.horizontal)
                     }
-                } else {
+                } else if !model.outputWord.isEmpty {
                     ZStack {
                         VStack {
-                            WordInfoView(word: $model.outputWord, wordPair: .constant(WordPair(model.inputWord, model.inputWord)))
+                            WordInfoView(word: $model.outputWord, wordPair: $model.gainedWordPair)
                             
                             Spacer()
                         }
@@ -44,9 +44,8 @@ struct DictionaryTab: View {
                             Spacer()
                             
                             VStack {
-                                WordControlPanel(wordPair: $model.gainedWordPair)
+                                WordControlPanel(wordPair: Binding<WordPair?>($model.gainedWordPair), wordToSpeak: $model.outputWord)
                                     .padding(.horizontal)
-                                    .disabled(model.gainedWordPair == nil)
                                 
                                 Spacer()
                             }

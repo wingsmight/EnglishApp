@@ -43,7 +43,7 @@ struct WordCard: View {
                 
                 Spacer()
                 
-                WordControlPanel(wordPair: Binding<WordPair?>($wordPair))
+                WordControlPanel(wordPair: Binding<WordPair?>($wordPair), wordToSpeak: $wordPair.Original)
                     .padding()
             }
         }
