@@ -17,8 +17,11 @@ struct SettingsTab: View {
     @AppStorage("notificationStartTime") private var notificationStartTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
     @AppStorage("notificationFinishTime") private var notificationFinishTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
     
+    @EnvironmentObject private var appAuth: AppAuth
+    
     @State private var selectedNotificationWordCountIndex = 0
     @State private var isNotificationPeriodShowing = false
+    @State private var isSignOutConfirmationShowing = false
     
     
     var body: some View {
@@ -61,6 +64,24 @@ struct SettingsTab: View {
                     shareApp()
                 } label: {
                     Text("Поделиться")
+                }
+                
+                
+                Button {
+                    isSignOutConfirmationShowing = true
+                } label: {
+                    Text("Выйти")
+                        .foregroundColor(Color("AppRed"))
+                }
+                .alert(isPresented: $isSignOutConfirmationShowing) {
+                    Alert(title: Text("Выйти из аккаунта"), message: Text("Вы уверены?"),
+                          primaryButton: .default(Text("Нет"), action: {
+                        
+                    }),
+                          secondaryButton: .destructive(Text("Да"), action: {
+                            appAuth.signOut()
+                    })
+                    )
                 }
             }
             .padding()
@@ -122,6 +143,10 @@ struct SettingsTab: View {
         } else {
             UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
         }
+    }
+    
+    private func logOut() {
+        
     }
     
     
