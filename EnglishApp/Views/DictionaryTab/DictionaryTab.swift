@@ -44,8 +44,15 @@ struct DictionaryTab: View {
                             Spacer()
                             
                             VStack {
-                                WordControlPanel(wordPair: Binding<WordPair?>($model.gainedWordPair), wordToSpeak: $model.outputWord)
-                                    .padding(.horizontal)
+                                if wordPairStore.wordPairs.contains(model.gainedWordPair), let existedWordPair = $wordPairStore.wordPairs.first(where: { wordPair in
+                                    wordPair.wrappedValue == $model.gainedWordPair.wrappedValue
+                                }) {
+                                    WordControlPanel(wordPair: Binding<WordPair?>(existedWordPair)n, wordToSpeak: $model.outputWord)
+                                        .padding(.horizontal)
+                                } else {
+                                    WordControlPanel(wordPair: Binding<WordPair?>($model.gainedWordPair), wordToSpeak: $model.outputWord)
+                                        .padding(.horizontal)
+                                }
                                 
                                 Spacer()
                             }
