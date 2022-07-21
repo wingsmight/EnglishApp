@@ -29,14 +29,14 @@ class LearningCategory: ObservableObject, Hashable, Equatable {
     
     
     struct Label: Hashable, Equatable {
-        private var iconName: String
+        private var iconPath: String
         private var titleText: String
         private var headlineText: String
         private var backgroundColor: Color
         
         
-        internal init(iconName: String, titleText: String, headlineText: String, backgroundColor: Color) {
-            self.iconName = iconName
+        internal init(iconPath: String, titleText: String, headlineText: String, backgroundColor: Color) {
+            self.iconPath = iconPath
             self.titleText = titleText
             self.headlineText = headlineText
             self.backgroundColor = backgroundColor
@@ -48,8 +48,8 @@ class LearningCategory: ObservableObject, Hashable, Equatable {
         }
         
         
-        public var IconName: String {
-            iconName
+        public var IconPath: String {
+            iconPath
         }
         public var TitleText: String {
             titleText

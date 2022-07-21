@@ -158,15 +158,28 @@ struct DictionaryTab: View {
         @ObservedObject public var data: LearningCategory
         @Binding public var wordPairs: [WordPair]
         
+        @ObservedObject private var iconImageLoader: ImageLoader
+        @State private var iconImage: UIImage = UIImage()
+        
+        
+        init(data: LearningCategory, wordPairs: Binding<[WordPair]>) {
+            self.data = data
+            self._wordPairs = wordPairs
+            self.iconImageLoader = ImageLoader(urlString: data.label.IconPath)
+        }
+        
         
         var body: some View {
             NavigationLink(destination: CategoryWordsTab(categoryLabel: data.label.TitleText, categoryWordPairs: $data.wordPairs, wordPairs: $wordPairs)) {
                 ZStack {
                     HStack {
-                        Image(data.label.IconName)
+                        Image(uiImage: iconImage)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 80.0, height: 80.0)
+                            .onReceive(iconImageLoader.didChange) { data in
+                                self.iconImage = UIImage(data: data) ?? UIImage()
+                            }
                         Spacer()
                     }
                     HStack {

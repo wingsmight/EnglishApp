@@ -28,7 +28,7 @@ class ExcelParser {
                 
                     // TODO handle errors
                     let label = LearningCategory.Label(
-                        iconName: worksheet.cells(atColumns: [ColumnReference("D")!])[1].stringValue(sharedStrings)!,
+                        iconPath: worksheet.cells(atColumns: [ColumnReference("D")!])[1].stringValue(sharedStrings)!,
                         titleText: worksheet.cells(atColumns: [ColumnReference("E")!])[1].stringValue(sharedStrings)!,
                         headlineText: worksheet.cells(atColumns: [ColumnReference("F")!])[1].stringValue(sharedStrings)!,
                         backgroundColor: Color(UIColor(hexString: worksheet.cells(atColumns: [ColumnReference("G")!])[1].stringValue(sharedStrings)!))
