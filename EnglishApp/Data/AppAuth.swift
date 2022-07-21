@@ -82,7 +82,7 @@ class AppAuth: ObservableObject {
             case .weakPassword:
                 return "Слишком слабый пароль. Пароль должен содержать как минимум 6 символов!"
             case .wrongPassword:
-                return "Некорректный пароль. Пожалуйста, повторите снова или нажмите на 'Сбросить пароль'"
+                return "Некорректный пароль!"
             default:
                 return "Произошла неизвестная ошибка. Свяжитесь с поддержкой. Код ошибки: \(errorCode.errorCode)"
             }

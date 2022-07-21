@@ -65,36 +65,36 @@ func calcOffset(_ badgeIndex: Int, _ viewWidth: CGFloat, _ tabCount: Int) -> CGF
     4.0 + ((2.0 * CGFloat(badgeIndex)) + 1.0) * (viewWidth / (2.0 * CGFloat(tabCount)))
 }
 
-//struct ColorfulBadge_Previews: PreviewProvider {
-//    private static let tabBadges: [TabBadge] = [
-//        TabBadge(count: 11, backgroundColor: Color("AppCyan")),
-//        TabBadge(count: 22, backgroundColor: Color("AppYellow")),
-//        TabBadge(count: 33, backgroundColor: Color("AppGreen")),
-//    ]
-//    
-//    
-//    static var previews: some View {
-//        GeometryReader { geometry in
-//            ZStack(alignment: .bottomLeading) {
-//                TabView {
-//                    DictionaryTab()
-//                        .tabItem {
-//                            Label("Словарь", image: "CategoryTabIcon")
-//                        }
-//                    
-//                    LearningTab()
-//                        .tabItem {
-//                            Label("На изучении", image: "LearningTabIcon")
-//                        }
-//                    
-//                    LearnedTab()
-//                        .tabItem {
-//                            Label("Выученные", image: "LearnedTabIcon")
-//                        }
-//                }
-//                
-//                ColorfulBadgeList(tabBadges: tabBadges, geometry: geometry)
-//            }
-//        }
-//    }
-//}
+struct ColorfulBadge_Previews: PreviewProvider {
+    private static let tabBadges: [TabBadge] = [
+        TabBadge(count: 11, backgroundColor: Color("AppCyan")),
+        TabBadge(count: 22, backgroundColor: Color("AppYellow")),
+        TabBadge(count: 33, backgroundColor: Color("AppGreen")),
+    ]
+    
+    
+    static var previews: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .bottomLeading) {
+                TabView {
+                    EmptyView()
+                        .tabItem {
+                            Label("Словарь", image: "CategoryTabIcon")
+                        }
+                    
+                    EmptyView()
+                        .tabItem {
+                            Label("На изучении", image: "LearningTabIcon")
+                        }
+                    
+                    EmptyView()
+                        .tabItem {
+                            Label("Выученные", image: "LearnedTabIcon")
+                        }
+                }
+                
+                ColorfulBadgeList(tabBadges: tabBadges, geometry: geometry)
+            }
+        }
+    }
+}

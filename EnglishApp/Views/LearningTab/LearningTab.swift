@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LearningTab: View {
+    @Binding public var badge: TabBadge
+    
     @EnvironmentObject private var wordPairStore: WordPairStore
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var localNotificationManager = LocalNotificationManager()
@@ -65,6 +67,9 @@ struct LearningTab: View {
             } else if newPhase == .background {
                 scheduleNotifications()
             }
+        }
+        .onChanged(of: wordPairStore.wordPairs.learningOnly) { words in
+            badge.count = words.count
         }
     }
     

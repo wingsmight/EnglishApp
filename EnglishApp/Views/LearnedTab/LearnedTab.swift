@@ -9,6 +9,8 @@ import SwiftUI
 
 
 struct LearnedTab: View {
+    @Binding public var badge: TabBadge
+    
     @EnvironmentObject private var wordPairStore: WordPairStore
     
     
@@ -46,6 +48,9 @@ struct LearnedTab: View {
             .navigationBarHidden(true)
         }
         .navigationViewStyle(.stack)
+        .onChanged(of: wordPairStore.wordPairs.learnedOnly) { words in
+            badge.count = words.count
+        }
     }
     
     

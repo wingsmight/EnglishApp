@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    private let dictionaryTabIndex = 0
+    private let learningTabIndex = 1
+    private let learnedTabIndex = 2
+    
     @State private var colorScheme = Theme.colorScheme
     @State private var selectedTabIndex = 0
     @StateObject private var wordPairStore = WordPairStore()
     @Environment(\.scenePhase) private var scenePhase
-    private let tabBadges: [TabBadge] = [
+    @State private var tabBadges: [TabBadge] = [
         TabBadge(count: 0, backgroundColor: Color("AppCyan")),
-        TabBadge(count: 22, backgroundColor: Color("AppYellow")),
-        TabBadge(count: 33, backgroundColor: Color("AppGreen")),
+        TabBadge(count: 0, backgroundColor: Color("AppYellow")),
+        TabBadge(count: 0, backgroundColor: Color("AppGreen")),
     ]
     @StateObject private var dictionaryModel = DictionaryTab.DictionaryTabModel()
     
@@ -28,19 +32,19 @@ struct ContentView: View {
                         .tabItem {
                             Label("Словарь", image: "CategoryTabIcon")
                         }
-                        .tag(0)
+                        .tag(dictionaryTabIndex)
                     
-                    LearningTab()
+                    LearningTab(badge: $tabBadges[learningTabIndex])
                         .tabItem {
                             Label("На изучении", image: "LearningTabIcon")
                         }
-                        .tag(1)
+                        .tag(learningTabIndex)
                     
-                    LearnedTab()
+                    LearnedTab(badge: $tabBadges[learnedTabIndex])
                         .tabItem {
                             Label("Выученные", image: "LearnedTabIcon")
                         }
-                        .tag(2)
+                        .tag(learnedTabIndex)
                 }
                 
                 ColorfulBadgeList(tabBadges: tabBadges, geometry: geometry)

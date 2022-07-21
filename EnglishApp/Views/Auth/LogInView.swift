@@ -92,6 +92,9 @@ struct LogInView: View {
                     }
                     .padding(.top, 12)
                     
+                    GoogleSignInButton(action: model.logInViaGoogle)
+                        .padding()
+                    
                     Text("Нет аккаунта?")
                         .padding(.top, 18)
                     NavigationLink("Создать", destination: SignUpView())

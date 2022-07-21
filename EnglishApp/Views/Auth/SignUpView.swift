@@ -7,6 +7,8 @@
 
 import SwiftUI
 import FirebaseFirestore
+import GoogleSignIn
+import Firebase
 
 struct SignUpView: View {
     @StateObject private var model = ViewModel()
@@ -61,12 +63,6 @@ struct SignUpView: View {
                 .disableAutocorrection(true)
                 .textContentType(.newPassword)
                 
-                Text(errorMessage)
-                    .foregroundColor(Color("AuthAlert"))
-                    .padding(.top, 3)
-                    .frame(height: 50, alignment: .top)
-                    .minimumScaleFactor(0.5)
-                
                 Button {
                     if model.password != model.repeatedPassword {
                         errorMessage = "Пароли не совпадают!"
@@ -98,7 +94,18 @@ struct SignUpView: View {
                         .background(Color("AppGreen"))
                         .cornerRadius(15.0)
                 }
-                .padding(.top, 12)
+                .padding(.vertical, 6)
+                
+                Text(errorMessage)
+                    .foregroundColor(Color("AuthAlert"))
+                    .padding(.top, 3)
+                    .frame(height: 50, alignment: .top)
+                    .minimumScaleFactor(0.5)
+                
+                Divider()
+                
+                GoogleSignInButton(action: model.signUpViaGoogle)
+                    .padding()
                 
                 Spacer()
             }
