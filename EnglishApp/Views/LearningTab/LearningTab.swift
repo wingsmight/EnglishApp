@@ -61,7 +61,6 @@ struct LearningTab: View {
         }
         .navigationViewStyle(.stack)
         .onChange(of: scenePhase) { newPhase in
-            print(newPhase)
             if newPhase == .active {
                 loadLearnedWordsFromNotification()
             } else if newPhase == .background {

@@ -9,13 +9,18 @@ import Foundation
 import SwiftUI
 
 class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
+    private let repeatWordsIdentifier: String = "repeatWords"
+    private let remindAboutTestIdentifier: String = "remindAboutTest"
+    private let remindAboutTestLearnedWordCount = 10
+    private let remindAboutTestSeconds: TimeInterval = 5 * 24 * 60 * 60 // 5 days
+    
+    
     @Published public var pushedWordPairs: [WordPair] = []
     
     @AppStorage("notificationFrequency") private var notificationFrequency: NotificationFrequency = .everyHour
     @AppStorage("notificationStartTime") private var notificationStartTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
     @AppStorage("notificationFinishTime") private var notificationFinishTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
     private let center = UNUserNotificationCenter.current()
-    private let repeatWordsIdentifier: String = "repeatWords"
     //private var repeatWordsIdentifiers: [String] = []
     
     
@@ -58,6 +63,11 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
             sendRepeatWordsNotification(at: notificationDate)
         }
     }
+    public func remindAboutTest(learnedWordCount: Int) {
+        if learnedWordCount >= remindAboutTestLearnedWordCount {
+            sendRemindAboutTestNotification()
+        }
+    }
     
     private func cancelRepeatWordsNotifications() {
         center.removePendingNotificationRequests(withIdentifiers: [repeatWordsIdentifier])
@@ -95,6 +105,26 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         let category = UNNotificationCategory(identifier: identifier/* + date.getTimeString()*/, actions: [markAsCompleted, dontSendToday], intentIdentifiers: []) // // Same Identifier in schedulNotification()
         
         self.center.setNotificationCategories([category])
+        
+        self.center.add(request) { (error : Error?) in
+            if error != nil {
+                // TODO: Handle any errors
+            }
+        }
+    }
+    private func sendRemindAboutTestNotification() {
+        let content = UNMutableNotificationContent()
+        content.body = "Повторите выученные слова, это займет всего пару минут"
+        content.interruptionLevel = .timeSensitive
+        
+        let identifier = remindAboutTestIdentifier
+        content.categoryIdentifier = "category" + identifier
+        content.sound = UNNotificationSound.default
+        
+        let taskIdentifier = identifier
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: remindAboutTestSeconds, repeats: false)
+        let request = UNNotificationRequest(identifier: taskIdentifier, content: content, trigger: trigger)
         
         self.center.add(request) { (error : Error?) in
             if error != nil {

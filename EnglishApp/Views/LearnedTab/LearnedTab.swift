@@ -12,6 +12,8 @@ struct LearnedTab: View {
     @Binding public var badge: TabBadge
     
     @EnvironmentObject private var wordPairStore: WordPairStore
+    @Environment(\.scenePhase) private var scenePhase
+    @StateObject private var localNotificationManager = LocalNotificationManager()
     
     
     var body: some View {
@@ -51,12 +53,25 @@ struct LearnedTab: View {
         .onChanged(of: wordPairStore.wordPairs.learnedOnly) { words in
             badge.count = words.count
         }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background {
+                scheduleNotifications()
+            }
+        }
     }
     
     
     func moveWordToLearingList(at offsets: IndexSet) {
         offsets.forEach { (i) in
             wordPairStore.wordPairs[i].State = .learning
+        }
+    }
+    func scheduleNotifications() {
+        localNotificationManager.pushedWordPairs = wordPairStore.wordPairs.pushedOnly
+        localNotificationManager.askUserPermission() { (granted, error) in
+            if granted == true && error == nil {
+                localNotificationManager.remindAboutTest(learnedWordCount: wordPairStore.learnedWordPairs.count)
+            } else { }
         }
     }
     
