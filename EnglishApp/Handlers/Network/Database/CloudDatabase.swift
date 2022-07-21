@@ -13,6 +13,10 @@ import SwiftUI
 
 
 class CloudDatabase {
+    private static let learningCategoriesFileName = "LearningCategories.xlsx"
+    private static let learningCategoriesFileMaxSize: Int64 = 1024 * 1024
+    
+    
     public static func addData(user: User) {
         // Get a reference to the database
         let database = Firestore.firestore()
@@ -71,14 +75,19 @@ class CloudDatabase {
             }
         }
     }
+    public static func loadLearningCategories(completion: @escaping (Result<Data, Error>) -> Void) {
+        let ref = Storage.storage().reference().child(learningCategoriesFileName)
+        
+        ref.getData(maxSize: learningCategoriesFileMaxSize, completion: completion)
+    }
 }
 
 extension User {
     init(from data: QueryDocumentSnapshot) {
         self.init(email: data["email"] as! String,
-                  signUpDate: data["signUpDate"] as! Date,
+                  signUpDate: (data["signUpDate"] as! Timestamp).dateValue(),
                   platform: data["platform"] as! String,
-                  lastOpeningDate: data["lastOpeningDate"] as! Date,
+                  lastOpeningDate: (data["lastOpeningDate"] as! Timestamp).dateValue(),
                   isSubscribed: (data["isSubscribed"] != nil),
                   overallLearnedWordCount: data["overallLearnedWordCount"] as! Int,
                   weeklyLearnedWordCount: data["weeklyLearnedWordCount"] as! Int)

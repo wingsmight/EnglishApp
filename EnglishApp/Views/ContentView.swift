@@ -81,19 +81,23 @@ struct ContentView: View {
     }
     
     func loadLearningCategories() {
-        if let asset = NSDataAsset(name: "TestLearningCategories") {
-            let data = asset.data
-            
-            dictionaryModel.categories = (try? ExcelParser.getLearningCategories(data: data)) ?? []
-            
-            print("before: \(wordPairStore.wordPairs)")
-            for category in dictionaryModel.categories {
-                for wordPair in category.wordPairs {
-                    wordPairStore.wordPairs.appendIfNotContains(wordPair)
+        CloudDatabase.loadLearningCategories { result in
+            switch result {
+            case .failure(let error):
+                //fatalError(error.localizedDescription)
+                print(error.localizedDescription)
+            case .success(let data):
+                dictionaryModel.categories = (try? ExcelParser.getLearningCategories(data: data)) ?? []
+                
+                print("before: \(wordPairStore.wordPairs)")
+                for category in dictionaryModel.categories {
+                    for wordPair in category.wordPairs {
+                        wordPairStore.wordPairs.appendIfNotContains(wordPair)
+                    }
                 }
+                print("after: \(wordPairStore.wordPairs)")
+                print("after categories[0]: \(dictionaryModel.categories[0].wordPairs)")
             }
-            print("after: \(wordPairStore.wordPairs)")
-            print("after categories[0]: \(dictionaryModel.categories[0].wordPairs)")
         }
     }
 }

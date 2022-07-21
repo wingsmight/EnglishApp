@@ -11,7 +11,6 @@ import SwiftUI
 public enum NotificationFrequency: String, CaseIterable, Equatable {
     case everyHour = "Каждый час"
     case everyDay = "Каждый день"
-    case every5Minutes = "Каждые 5 минут"
     
     
     public var description: String {
@@ -26,8 +25,6 @@ public enum NotificationFrequency: String, CaseIterable, Equatable {
             return 60 * 60
         case .everyDay:
             return 24 * 60 * 60
-        case .every5Minutes:
-            return 5 * 60
         }
     }
 }
