@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import GoogleSignIn
 import Firebase
 
@@ -16,10 +17,10 @@ extension LogInView {
         @Published public var repeatedPassword: String = ""
         
         
-        public func logIn(){
-            
+        public func logIn(email: String, userStore: UserStore) {
+            CloudDatabase.getData(email: email, userStore: userStore)
         }
-        public func logInViaGoogle(for user: GIDGoogleUser?, with error: Error?) {
+        public func logInViaGoogle(for user: GIDGoogleUser?, with error: Error?, userStore: UserStore) {
             if let error = error {
                 print("error: \(error.localizedDescription)")
             }
@@ -33,10 +34,7 @@ extension LogInView {
                     if let error = error {
                         print(error.localizedDescription)
                     } else if let profile = user.profile {
-                        let user = User(email: profile.email)
-                        
-                        CloudDatabase.addData(user: user)
-                        User.save(user)
+                        self.logIn(email: profile.email, userStore: userStore)
                     }
                 }
             }

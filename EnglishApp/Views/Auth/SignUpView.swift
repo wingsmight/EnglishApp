@@ -17,6 +17,7 @@ struct SignUpView: View {
     @State private var backgroundColor: Color = Color(UIColor.systemBackground)
 
     @EnvironmentObject private var appAuth: AppAuth
+    @EnvironmentObject private var userStore: UserStore
     
     
     var body: some View {
@@ -79,10 +80,7 @@ struct SignUpView: View {
                             alertBackground()
                         },
                         handleSuccess: {
-                            let user = User(email: model.email)
-                            
-                            CloudDatabase.addData(user: user)
-                            User.save(user)
+                            model.signUp(email: model.email, userStore: userStore)
                         })
                 } label: {
                     Text("Войти")
@@ -104,7 +102,9 @@ struct SignUpView: View {
                 
                 Divider()
                 
-                GoogleSignInButton(action: model.signUpViaGoogle)
+                GoogleSignInButton(action: { user, error in
+                    model.signUpViaGoogle(for: user, with: error, userStore: userStore)
+                })
                     .padding()
                 
                 Spacer()

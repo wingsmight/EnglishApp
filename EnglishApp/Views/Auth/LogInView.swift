@@ -16,6 +16,7 @@ struct LogInView: View {
     @State private var backgroundColor: Color = Color(UIColor.systemBackground)
     
     @EnvironmentObject private var appAuth: AppAuth
+    @EnvironmentObject private var userStore: UserStore
     
     
     var body: some View {
@@ -78,7 +79,7 @@ struct LogInView: View {
                                 alertBackground()
                             },
                             handleSuccess: {
-                                CloudDatabase.getData(email: model.email)
+                                model.logIn(email: model.email, userStore: userStore)
                             })
                     } label: {
                         Text("Войти")
@@ -92,7 +93,9 @@ struct LogInView: View {
                     }
                     .padding(.top, 12)
                     
-                    GoogleSignInButton(action: model.logInViaGoogle)
+                    GoogleSignInButton(action: { user, error in
+                        model.logInViaGoogle(for: user, with: error, userStore: userStore)
+                    })
                         .padding()
                     
                     Text("Нет аккаунта?")

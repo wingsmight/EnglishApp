@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import GoogleSignIn
 
 class AppAuth: ObservableObject {
     let auth = Auth.auth()
@@ -58,6 +59,7 @@ class AppAuth: ObservableObject {
         }
     }
     func signOut() {
+        GIDSignIn.sharedInstance.signOut()
         try? auth.signOut()
             
         self.signedIn = false

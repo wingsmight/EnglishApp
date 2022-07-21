@@ -27,7 +27,6 @@ struct SignOutButton: View {
                 
             }),
                   secondaryButton: .destructive(Text("Да"), action: {
-                GIDSignIn.sharedInstance.signOut()
                 appAuth.signOut()
             }))
         }

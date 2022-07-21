@@ -8,10 +8,13 @@
 import SwiftUI
 //import SwiftyStoreKit
 import Firebase
+import GoogleSignIn
 
 @main
 struct EnglishAppApp: App {
-    @EnvironmentObject var appAuth: AppAuth
+    @EnvironmentObject private var appAuth: AppAuth
+    @StateObject private var userStore = UserStore()
+    @Environment(\.scenePhase) private var scenePhase
     
     
     public init() {
@@ -24,6 +27,7 @@ struct EnglishAppApp: App {
         
         WindowGroup {
             AuthGateView()
+                .environmentObject(userStore)
                 .environmentObject(appAuth)
                 .onAppear {
                     // color scheme
@@ -68,6 +72,24 @@ struct EnglishAppApp: App {
                     } else {
                         print("The app has been launched before. Loading UserDefaults...")
                         // Run code here for every other launch but the first
+                    }
+                    
+                    UserStore.load { result in
+                        switch result {
+                        case .failure(let error):
+                            fatalError(error.localizedDescription)
+                        case .success(let user):
+                            userStore.user = user
+                        }
+                    }
+                }
+                .onChange(of: scenePhase) { phase in
+                    if phase == .inactive {
+                        UserStore.save(user: userStore.user) { result in
+                            if case .failure(let error) = result {
+                                fatalError(error.localizedDescription)
+                            }
+                        }
                     }
                 }
         }

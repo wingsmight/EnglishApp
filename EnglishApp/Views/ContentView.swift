@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var colorScheme = Theme.colorScheme
     @State private var selectedTabIndex = 0
     @StateObject private var wordPairStore = WordPairStore()
+    @EnvironmentObject var userStore: UserStore
     @Environment(\.scenePhase) private var scenePhase
     @State private var tabBadges: [TabBadge] = [
         TabBadge(count: 0, backgroundColor: Color("AppCyan")),
@@ -52,6 +53,8 @@ struct ContentView: View {
         }
         .ignoresSafeArea(.keyboard)
         .onAppear {
+            userStore.user.lastOpeningDate = Date.now
+            
             WordPairStore.load { result in
                 switch result {
                 case .failure(let error):
@@ -65,6 +68,8 @@ struct ContentView: View {
         }
         .onChange(of: scenePhase) { phase in
             if phase == .inactive {
+                CloudDatabase.addData(user: userStore.user)
+                
                 WordPairStore.save(wordPairs: wordPairStore.wordPairs) { result in
                     if case .failure(let error) = result {
                         fatalError(error.localizedDescription)
